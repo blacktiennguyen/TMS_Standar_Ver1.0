@@ -1,0 +1,67 @@
+﻿@model TMS.WebAPP.Models.GroupModel
+
+@Html.HiddenFor(model => model.Id)
+
+<div class="row margin-top-10px">
+    <div class="col-xs-12">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#groupinfo" class="font-weight-bold" data-toggle="tab"> @MessageManager.GetCaptionValueByKey("lblTabInfo")</a></li>
+                <li><a href="#usergoup" class="font-weight-bold" data-toggle="tab">@MessageManager.GetCaptionValueByKey("lblTabUser")</a></li>
+            </ul>
+            <div class="tab-content">
+                <!-- Font Awesome Icons -->
+                <div class="tab-pane active" id="groupinfo">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblUserGroup") <span class="star">(*)</span>
+                                </label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblUserGroup") })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblRemark")
+                                </label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(m => m.Remark, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblRemark") })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblActive")
+                                </label>
+                                <div class="col-md-8 margin-top-8px">
+                                    @Html.EditorFor(m => m.IsActive, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblActive") })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /#fa-icons -->
+                <!-- glyphicons-->
+                <div class="tab-pane" id="usergoup">
+                </div>
+                <!-- /#ion-icons -->
+            </div>
+            <!-- /.tab-content -->
+        </div>
+        <!-- /.nav-tabs-custom -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

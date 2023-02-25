@@ -1,0 +1,330 @@
+﻿@model TMS.WebAPP.Models.OrderModel
+@using Kendo.Mvc.UI
+@using TMS.WebAPP.HtmlExtension
+
+<div class="row">
+    <!-- Modal -->
+    <div class="modal fade" id="chooseCustomer" role="dialog">
+        <div class="modal-dialog modal-lg width70percen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">@MessageManager.GetCaptionValueByKey("lblCustomer")</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- Main content -->
+                    <section class="content">
+                        <!-- Search -->
+                        <div class="row row-margin-15px margin-top-8px">
+                            <div class="col-xs-12">
+                                <!-- Search -->
+                                <div class="box box-solid">
+                                    <div class="box-header">
+                                        <i class="fa fa-search"></i>
+                                        <h3 class="box-title">@MessageManager.GetCaptionValueByKey("lblSearch")</h3>
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-default btn-sm" data-widget="collapse">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="row filter-status">
+                                            <div class="form-group col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-md-4 control-label margin-top-8px">
+                                                        @MessageManager.GetCaptionValueByKey("lblCustomerCode")
+                                                    </label>
+                                                    <div class="col-md-8">
+                                                        <input id="search_customercode" class="form-control" placeholder="@MessageManager.GetCaptionValueByKey("lblCustomerCode")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-md-4 control-label margin-top-8px">
+                                                        @MessageManager.GetCaptionValueByKey("lblCustomerName")
+                                                    </label>
+                                                    <div class="col-md-8">
+                                                        <input id="search_customername" class="form-control" placeholder="@MessageManager.GetCaptionValueByKey("lblCustomerName")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row filter-status">
+                                            <div class="form-group col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-md-4 control-label margin-top-8px">
+                                                        @MessageManager.GetCaptionValueByKey("lblCustomerPhone1")
+                                                    </label>
+                                                    <div class="col-md-8">
+                                                        <input id="search_customerphone1" class="form-control" placeholder="@MessageManager.GetCaptionValueByKey("lblCustomerPhone1")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-md-4 control-label margin-top-8px">
+                                                        @MessageManager.GetCaptionValueByKey("lblCustomerPhone2")
+                                                    </label>
+                                                    <div class="col-md-8">
+                                                        <input id="search_customerphone2" class="form-control" placeholder="@MessageManager.GetCaptionValueByKey("lblCustomerPhone2")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row filter-status">
+                                            <div class="form-group col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-md-4 control-label margin-top-8px">
+                                                        @MessageManager.GetCaptionValueByKey("lblCustomerTaxCode")
+                                                    </label>
+                                                    <div class="col-md-8">
+                                                        <input id="search_customertaxcode" class="form-control" placeholder="@MessageManager.GetCaptionValueByKey("lblCustomerTaxCode")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-md-4 control-label margin-top-8px">
+                                                        @MessageManager.GetCaptionValueByKey("lblCustomerEmail")
+                                                    </label>
+                                                    <div class="col-md-8">
+                                                        <input id="search_customeremail" class="form-control" placeholder="@MessageManager.GetCaptionValueByKey("lblCustomerEmail")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row filter-status">
+                                            <div class="form-group col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-md-4 control-label margin-top-8px">
+                                                        @MessageManager.GetCaptionValueByKey("lblIdentityCardNumber")
+                                                    </label>
+                                                    <div class="col-md-8">
+                                                        <input id="search_identitycardnumber" class="form-control" placeholder="@MessageManager.GetCaptionValueByKey("lblIdentityCardNumber")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <div class="form-group row">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row  text-center">
+                                            <button type="button" id="btnSearch" class="btn btn-primary margin-top-8px">
+                                                <i class="fa fa-search"></i>
+                                                @MessageManager.GetCaptionValueByKey("lblSearch")
+                                            </button>
+                                        </div>
+
+                                        <p></p>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                        <!-- Grid Data-->
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div id="choosecustomer-grid" class="row margin-left-0px margin-right-0px">
+                                </div>
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#choosecustomer-grid").kendoGrid({
+                                            dataSource: {
+                                                type: "json",
+                                                transport: {
+                                                    read: {
+                                                        url: "@Html.Raw(Url.Action("ChooseCustomer", "Customer"))",
+                                                        type: "POST",
+                                                        dataType: "json",
+                                                        data: additionalData
+                                                    }
+                                                },
+                                                schema: {
+                                                    data: "Data",
+                                                    total: "Total",
+                                                    errors: "Errors"
+                                                },
+                                                error: function (e) {
+                                                    display_kendoui_grid_error(e);
+                                                    // Cancel the changes
+                                                    this.cancelChanges();
+                                                },
+                                                pageSize: 10,
+                                                serverPaging: true,
+                                                serverFiltering: true,
+                                                serverSorting: true
+
+                                            },
+                                            pageable: {
+                                                refresh: true,
+                                                pageSizes: [10, 15, 20, 50, 100, 200, 500, 2000, 5000, 100000]
+                                            },
+                                            editable: {
+                                                confirmation: false,
+                                                mode: "inline"
+                                            },
+
+                                            columnMenu: true,
+                                            scrollable: true,
+                                            resizable: true,
+                                            columns: [
+
+                                                {
+                                                    field: "Id",
+                                                    title: "@MessageManager.GetCaptionValueByKey("lblChoose")",
+                                                    width: 100,
+                                                    headerAttributes: { style: "text-align:center" },
+                                                    attributes: { style: "text-align:center" },
+                                                    template: '<button onClick="chooseCustomer(#=Id#)" type="button" class="btn btn-primary cursor-pointer">@MessageManager.GetCaptionValueByKey("lblChoose")</button>'
+                                                },
+                                                {
+                                                    field: "CustomerCode",
+                                                    headerAttributes: { style: "text-align:center" },
+                                                    title: "@MessageManager.GetCaptionValueByKey("lblCustomerCode")",
+                                                    width: 200
+                                                },
+                                                {
+                                                    field: "CustomerName",
+                                                    headerAttributes: { style: "text-align:center" },
+                                                    title: "@MessageManager.GetCaptionValueByKey("lblCustomerName")",
+                                                    width: 350
+                                                },
+                                                {
+                                                    field: "Phone1",
+                                                    headerAttributes: { style: "text-align:center" },
+                                                    title: "@MessageManager.GetCaptionValueByKey("lblCustomerPhone1")",
+                                                    width: 200
+                                                },
+                                                {
+                                                    field: "Phone2",
+                                                    headerAttributes: { style: "text-align:center" },
+                                                    title: "@MessageManager.GetCaptionValueByKey("lblCustomerPhone2")",
+                                                    width: 200
+                                                },
+                                                {
+                                                    field: "TaxCode",
+                                                    headerAttributes: { style: "text-align:center" },
+                                                    title: "@MessageManager.GetCaptionValueByKey("lblCustomerTaxCode")",
+                                                    width: 200
+                                                },
+                                                {
+                                                    field: "IdentityCardNumber",
+                                                    headerAttributes: { style: "text-align:center" },
+                                                    title: "@MessageManager.GetCaptionValueByKey("lblIdentityCardNumber")",
+                                                    width: 200
+                                                },
+                                                {
+                                                    field: "Email",
+                                                    headerAttributes: { style: "text-align:center" },
+                                                    title: "@MessageManager.GetCaptionValueByKey("lblCustomerEmail")",
+                                                    width: 200
+                                                }
+                                            ]
+                                        });
+
+                                    });
+                                </script>
+
+                                <script type="text/javascript">
+
+                                    $(document).ready(function () {
+
+                                        //search button
+                                        $('#btnSearchChooseCustomer').click(function () {
+                                            //search
+                                            var grid = $('#choosecustomer-grid').data('kendoGrid');
+                                            grid.dataSource.page(1); //new search. Set page size to 1
+                                            return false;
+                                        });
+
+                                        $("#search_customercode").keydown(function (event) {
+                                            if (event.keyCode === 13) {
+                                                $("#btnSearchChooseCustomer").click();
+                                                return false;
+                                            }
+                                        });
+
+                                    });
+
+                                    function additionalData() {
+                                        return {
+                                            CustomerCode: $('#search_customercode').val(),
+                                        };
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@MessageManager.GetCaptionValueByKey("lblClose")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function chooseCustomer(id) {
+        var typeId = $("#chooseCustomerType").val(); // 1: CustomerFrom, 2: CustomerTo
+
+        var postData = {
+            customerId: id,
+            typeId: typeId
+        };
+        //alert($("#chooseCustomerType").val());
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "@(Url.Action("CustomerSelected", "Order"))",
+            data: postData,
+            complete: function (result) {
+                // bindata
+                if (typeId == 1) { // Is choose CustomerFrom
+                    binDataCustomerFrom(result.responseJSON.result);
+                }
+
+                if (typeId == 2) { // Is choose CustomerTo
+                    binDataCustomerTo(result.responseJSON.result);
+                }
+                //console.log(result.responseJSON.result.CustomerName);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError);
+            },
+            traditional: true
+        });
+
+        $('#chooseCustomer').modal('hide');
+    }
+
+    function binDataCustomerFrom(result) {
+        $("#CustomerFromCode").val(result.CustomerCode);
+        $("#CustomerFromName").val(result.CustomerName);
+        $("#CustomerFromIdentityCardNumber").val(result.IdentityCardNumber);
+        $("#CustomerFromPhone1").val(result.Phone1);
+        $("#CustomerFromPhone2").val(result.Phone2);
+        $("#CustomerFromTaxCode").val(result.TaxCode);
+        $("#CustomerFromFullAddress").val(result.FullAddress);
+    }
+
+    function binDataCustomerTo(result) {
+        $("#CustomerToCode").val(result.CustomerCode);
+        $("#CustomerToName").val(result.CustomerName);
+        $("#CustomerToIdentityCardNumber").val(result.IdentityCardNumber);
+        $("#CustomerToPhone1").val(result.Phone1);
+        $("#CustomerToPhone2").val(result.Phone2);
+        $("#CustomerToTaxCode").val(result.TaxCode);
+        $("#CustomerToFullAddress").val(result.FullAddress);
+    }
+</script>

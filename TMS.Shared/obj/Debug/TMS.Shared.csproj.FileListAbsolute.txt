@@ -1,0 +1,10 @@
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Shared\bin\Debug\TMS.Shared.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Shared\bin\Debug\TMS.Shared.pdb
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Shared\obj\Debug\TMS.Shared.csprojResolveAssemblyReference.cache
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Shared\obj\Debug\TMS.Shared.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Shared\obj\Debug\TMS.Shared.pdb
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Shared\bin\Debug\TMS.Shared.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Shared\bin\Debug\TMS.Shared.pdb
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Shared\obj\Debug\TMS.Shared.csprojResolveAssemblyReference.cache
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Shared\obj\Debug\TMS.Shared.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Shared\obj\Debug\TMS.Shared.pdb

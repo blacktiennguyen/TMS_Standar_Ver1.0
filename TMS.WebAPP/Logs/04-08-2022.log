@@ -1,0 +1,6 @@
+2022-08-04 21:17:59,639 ERROR: The 'TransporterId' property on 'Order' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Int32'. 
+2022-08-04 21:17:59,644 ERROR: The 'TransporterId' property on 'Order' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Int32'. 
+2022-08-04 21:46:09,268 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2022-08-04 21:46:10,398 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2022-08-04 21:46:11,316 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2022-08-04 21:46:12,313 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 

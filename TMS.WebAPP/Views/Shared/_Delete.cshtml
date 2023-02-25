@@ -1,0 +1,43 @@
+﻿<!-- Modal Poup Delete Multiple -->
+<div id="delete-selected-action-confirmation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-selected-action-confirmation-title">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="delete-selected-action-confirmation-title">@MessageManager.GetCaptionValueByKey("lblDeleteConfirm")</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                @MessageManager.GetCaptionValueByKey("lblAreYouSure")
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="delete-selected-action-confirmation-submit-button" class="btn btn-primary">
+                    @MessageManager.GetCaptionValueByKey("btnYes")
+                </button>
+                <span id="canceldelete" class="btn btn-default float-right margin-r-5" data-dismiss="modal">@MessageManager.GetCaptionValueByKey("btnCancel")</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Poup Delete One -->
+<div class="modal fade" id="modalDelete" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@MessageManager.GetCaptionValueByKey("lblDeleteConfirm")</h4>
+            </div>
+            <div class="modal-body">
+                <p>@MessageManager.GetCaptionValueByKey("lblAreYouSure")</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnConfirmDeleteYes" class="btn btn-primary">
+                    @MessageManager.GetCaptionValueByKey("btnYes")
+                </button>
+                <button id="btnConfirmDeleteCancel" type="button" class="btn btn-default" data-dismiss="modal">@MessageManager.GetCaptionValueByKey("btnCancel")</button>
+            </div>
+        </div>
+    </div>
+</div>

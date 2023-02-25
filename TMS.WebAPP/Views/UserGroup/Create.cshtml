@@ -1,0 +1,27 @@
+﻿@model TMS.WebAPP.Models.GroupModel
+
+@{
+    //page title
+    ViewBag.Title = @MessageManager.GetCaptionValueByKey("lblUserGroup");
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "group-form" }))
+{
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @MessageManager.GetCaptionValueByKey("btnAddnew") (@MessageManager.GetCaptionValueByKey("lblUserGroup"))
+            <small><i class="fa fa-arrow-circle-left"></i>@Html.ActionLink(MessageManager.GetCaptionValueByKey("btnBackToList"), "GroupList")</small>
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @MessageManager.GetCaptionValueByKey("btnSave")
+            </button>
+            <button type="submit" name="save-continue" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @MessageManager.GetCaptionValueByKey("btnSaveAndContinue")
+            </button>
+        </div>
+    </div>
+    @Html.Partial("_CreateOrUpdate", Model)
+}

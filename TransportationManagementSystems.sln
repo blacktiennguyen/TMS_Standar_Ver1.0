@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.WebAPP", "TMS.WebAPP\TMS.WebAPP.csproj", "{E8747B2C-3A94-4FC4-AFE4-8E4F7041BB86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Core", "TMS.Core\TMS.Core.csproj", "{765A7DD6-40BC-4347-9470-6BF860A97D59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Service", "TMS.Service\TMS.Service.csproj", "{F811DE9C-E89E-4A0D-A2F4-2F5CAFBE5A8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Library", "TMS.Library\TMS.Library.csproj", "{BA5CFE46-729C-4777-8E86-DAF082E87033}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.WebAPP.Framework", "TMS.WebAPP.Framework\TMS.WebAPP.Framework.csproj", "{7DCB7570-1889-4355-AAD3-F87F3D9E4BD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dlls", "Dlls", "{7DC2DAEF-E62A-4AE5-8547-177543A76899}"
+	ProjectSection(SolutionItems) = preProject
+		TMS.WebAPP\bin\Antlr3.Runtime.dll = TMS.WebAPP\bin\Antlr3.Runtime.dll
+		TMS.WebAPP\bin\EntityFramework.dll = TMS.WebAPP\bin\EntityFramework.dll
+		TMS.WebAPP\bin\EntityFramework.SqlServer.dll = TMS.WebAPP\bin\EntityFramework.SqlServer.dll
+		TMS.WebAPP\bin\Kendo.Mvc.dll = TMS.WebAPP\bin\Kendo.Mvc.dll
+		TMS.WebAPP\bin\log4net.dll = TMS.WebAPP\bin\log4net.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Shared", "TMS.Shared\TMS.Shared.csproj", "{294057FC-316F-44D8-953B-7B029B7F9CD4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{7620A5EB-0D45-42D0-86F0-264A00DE52DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8747B2C-3A94-4FC4-AFE4-8E4F7041BB86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8747B2C-3A94-4FC4-AFE4-8E4F7041BB86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8747B2C-3A94-4FC4-AFE4-8E4F7041BB86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8747B2C-3A94-4FC4-AFE4-8E4F7041BB86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{765A7DD6-40BC-4347-9470-6BF860A97D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{765A7DD6-40BC-4347-9470-6BF860A97D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{765A7DD6-40BC-4347-9470-6BF860A97D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{765A7DD6-40BC-4347-9470-6BF860A97D59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F811DE9C-E89E-4A0D-A2F4-2F5CAFBE5A8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F811DE9C-E89E-4A0D-A2F4-2F5CAFBE5A8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F811DE9C-E89E-4A0D-A2F4-2F5CAFBE5A8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F811DE9C-E89E-4A0D-A2F4-2F5CAFBE5A8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA5CFE46-729C-4777-8E86-DAF082E87033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA5CFE46-729C-4777-8E86-DAF082E87033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA5CFE46-729C-4777-8E86-DAF082E87033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA5CFE46-729C-4777-8E86-DAF082E87033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DCB7570-1889-4355-AAD3-F87F3D9E4BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DCB7570-1889-4355-AAD3-F87F3D9E4BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DCB7570-1889-4355-AAD3-F87F3D9E4BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DCB7570-1889-4355-AAD3-F87F3D9E4BD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{294057FC-316F-44D8-953B-7B029B7F9CD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{294057FC-316F-44D8-953B-7B029B7F9CD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{294057FC-316F-44D8-953B-7B029B7F9CD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{294057FC-316F-44D8-953B-7B029B7F9CD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,10 @@
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Library\bin\Debug\TMS.Library.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Library\bin\Debug\TMS.Library.pdb
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Library\obj\Debug\TMS.Library.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Library\obj\Debug\TMS.Library.pdb
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Library\bin\Debug\TMS.Library.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Library\bin\Debug\TMS.Library.pdb
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Library\obj\Debug\TMS.Library.csprojResolveAssemblyReference.cache
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Library\obj\Debug\TMS.Library.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Library\obj\Debug\TMS.Library.pdb
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Library\obj\Debug\TMS.Library.csprojResolveAssemblyReference.cache

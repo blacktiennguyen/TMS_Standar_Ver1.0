@@ -1,0 +1,1646 @@
+﻿@model TMS.WebAPP.Models.OrderModel
+@using TMS.WebAPP.HtmlExtension
+@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = @MessageManager.GetCaptionValueByKey("lblOrderManagement");
+}
+
+<link href="~/Content/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="~/Scripts/bootstrap4-toggle.min.js"></script>
+
+@Html.AntiForgeryToken()
+<!-- Content Header (Page header) -->
+<section class="content-header margin-bottom-10px heigh-30px">
+    <h1 class="float-left">
+        @MessageManager.GetCaptionValueByKey("lblOrderManagement")
+    </h1>
+
+    <div class="float-right">
+        <a class="btn btn-primary margin-bottom-5px" href="@Url.Action("Create")">
+            <i class="fa fa-plus-square"></i>
+            @MessageManager.GetCaptionValueByKey("btnAddnew")
+        </a>
+        <button type="submit" name="download-catalog-pdf" class="btn bg-purple margin-bottom-5px" formaction="/Admin/Product/DownloadCatalogPDF">
+            <i class="fa fa-file-pdf-o"></i>
+            @MessageManager.GetCaptionValueByKey("btnDownloadPDF")
+        </button>
+        <div class="btn-group">
+            <button type="button" class="btn btn-success margin-bottom-5px">
+                <i class="fa fa-download"></i>
+                @MessageManager.GetCaptionValueByKey("btnExport")
+            </button>
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">&nbsp;</span>
+            </button>
+
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-file-code-o"></i>
+                        @MessageManager.GetCaptionValueByKey("btnExportXML") (@MessageManager.GetCaptionValueByKey("lblAll"))
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-file-code-o"></i>
+                        @MessageManager.GetCaptionValueByKey("btnExportXML") (@MessageManager.GetCaptionValueByKey("lblSelected"))
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-file-excel-o"></i>
+                        @MessageManager.GetCaptionValueByKey("btnExportExcel") (@MessageManager.GetCaptionValueByKey("lblAll"))
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-file-excel-o"></i>
+                        @MessageManager.GetCaptionValueByKey("btnExportExcel") (@MessageManager.GetCaptionValueByKey("lblSelected"))
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <button type="button" name="importexcel" class="btn bg-olive margin-bottom-5px" data-toggle="modal" data-target="#importexcel-window">
+            <i class="fa fa-upload"></i>
+            @MessageManager.GetCaptionValueByKey("btnImport")
+        </button>
+        <button type="button" disabled id="delete-selected" class="btn btn-danger margin-bottom-5px" data-toggle="modal" data-target="#delete-selected-action-confirmation" name="">
+            <i class="fa fa-trash"></i>
+
+            @MessageManager.GetCaptionValueByKey("btnDelete") (@MessageManager.GetCaptionValueByKey("lblSelected"))
+        </button>
+
+        @Html.Partial("_Delete")
+    </div>
+</section>
+
+<!-- Modal Poup Order Status TimeLine -->
+<section>
+    <div class="modal fade" id="modalOrderStatus" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">@MessageManager.GetCaptionValueByKey("lblDeleteConfirm")</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- The time line -->
+                            <ul class="timeline">
+                                <!-- timeline time label -->
+                                <li class="time-label">
+                                    <span class="bg-red">
+                                        10 Feb. 2014
+                                    </span>
+                                </li>
+                                <!-- /.timeline-label -->
+                                <!-- timeline item -->
+                                <li>
+                                    <i class="fa fa-envelope bg-blue"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                                        <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                                        <div class="timeline-body">
+                                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                                            quora plaxo ideeli hulu weebly balihoo...
+                                        </div>
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-primary btn-xs">Read more</a>
+                                            <a class="btn btn-danger btn-xs">Delete</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END timeline item -->
+                                <!-- timeline item -->
+                                <li>
+                                    <i class="fa fa-user bg-aqua"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+                                        <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
+                                    </div>
+                                </li>
+                                <!-- END timeline item -->
+                                <!-- timeline item -->
+                                <li>
+                                    <i class="fa fa-comments bg-yellow"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+                                        <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+                                        <div class="timeline-body">
+                                            Take me to your leader!
+                                            Switzerland is small and neutral!
+                                            We are more like Germany, ambitious and misunderstood!
+                                        </div>
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-warning btn-flat btn-xs">View comment</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END timeline item -->
+                                <!-- timeline time label -->
+                                <li class="time-label">
+                                    <span class="bg-green">
+                                        3 Jan. 2014
+                                    </span>
+                                </li>
+                                <!-- /.timeline-label -->
+
+                                <li>
+                                    <i class="fa fa-clock-o bg-gray"></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Search -->
+    <div class="row row-margin-15px margin-top-8px">
+        <div class="col-xs-12">
+            <!-- Search -->
+            <div class="box box-solid">
+                <div class="box-header">
+
+                    <div class="col-md-2 margin-top-10px">
+                        <i class="fa fa-search"></i>
+                        <h3 class="box-title">@MessageManager.GetCaptionValueByKey("lblSearch")</h3>
+                    </div>
+
+                    <div class="col-md-1" id="searchmode">
+                        <input type="checkbox" checked data-toggle="toggle" data-on="@MessageManager.GetCaptionValueByKey("lblSearchBasic")" data-off="@MessageManager.GetCaptionValueByKey("lblAdvanced")" da data-onstyle="success" data-offstyle="primary">
+                    </div>
+
+                    <div class="col-md-9 padding-top-3px">
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-default btn-sm" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row filter-status">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblOrderCode")
+                                </label>
+                                <div class="col-md-7">
+                                    @Html.TextBoxFor(m => m.OrderCode, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblOrderCode") })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblBillOfLadingCode")
+                                </label>
+                                <div class="col-md-7">
+                                    @Html.TextBoxFor(m => m.BillOfLadingCode, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblBillOfLadingCode") })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row searchadvanced display-none filter-status">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblExpectedDeliveryDate") @MessageManager.GetCaptionValueByKey("lblFrom")
+                                </label>
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DatePickerFor(m => m.SearchExpectedDeliveryDateFrom)
+                                        .Format(Model.SystemFormatDateTime)
+                                        .Name("SearchExpectedDeliveryDateFrom")
+                                        .Value(Model.SearchExpectedDeliveryDateFrom)
+                                        .HtmlAttributes(new { @type = "text" })
+                                        .Min(new DateTime(1900, 1, 1, 0, 0, 0)) //Set min time of the datetimepicker
+                                    )
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblExpectedDeliveryDate") @MessageManager.GetCaptionValueByKey("lblTo")
+                                </label>
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DatePickerFor(m => m.SearchExpectedDeliveryDateTo)
+                                        .Format(Model.SystemFormatDateTime)
+                                        .Name("SearchExpectedDeliveryDateTo")
+                                        .Value(Model.SearchExpectedDeliveryDateTo)
+                                        .HtmlAttributes(new { @type = "text" })
+                                        .Min(new DateTime(1900, 1, 1, 0, 0, 0)) //Set min time of the datetimepicker
+                                    )
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row searchadvanced display-none filter-status">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblEstimatedDeliveryStartDate") @MessageManager.GetCaptionValueByKey("lblFrom")
+                                </label>
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DatePickerFor(m => m.SearchEstimatedDeliveryStartDateFrom)
+                                        .Format(Model.SystemFormatDateTime)
+                                        .Name("SearchEstimatedDeliveryStartDateFrom")
+                                        .Value(Model.SearchEstimatedDeliveryStartDateFrom)
+                                        .HtmlAttributes(new { @type = "text" })
+                                        .Min(new DateTime(1900, 1, 1, 0, 0, 0)) //Set min time of the datetimepicker
+                                    )
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblEstimatedDeliveryStartDate") @MessageManager.GetCaptionValueByKey("lblTo")
+                                </label>
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DatePickerFor(m => m.SearchEstimatedDeliveryStartDateTo)
+                                        .Format(Model.SystemFormatDateTime)
+                                        .Name("SearchEstimatedDeliveryStartDateTo")
+                                        .Value(Model.SearchEstimatedDeliveryStartDateTo)
+                                        .HtmlAttributes(new { @type = "text" })
+                                        .Min(new DateTime(1900, 1, 1, 0, 0, 0)) //Set min time of the datetimepicker
+                                    )
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row searchadvanced display-none filter-status">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblEstimatedDeliveryEndDate") @MessageManager.GetCaptionValueByKey("lblFrom")
+                                </label>
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DatePickerFor(m => m.SearchEstimatedDeliveryEndDateFrom)
+                                        .Format(Model.SystemFormatDateTime)
+                                        .Name("SearchEstimatedDeliveryEndDateFrom")
+                                        .Value(Model.SearchEstimatedDeliveryEndDateFrom)
+                                        .HtmlAttributes(new { @type = "text" })
+                                        .Min(new DateTime(1900, 1, 1, 0, 0, 0)) //Set min time of the datetimepicker
+                                    )
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblEstimatedDeliveryEndDate") @MessageManager.GetCaptionValueByKey("lblTo")
+                                </label>
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DatePickerFor(m => m.SearchEstimatedDeliveryEndDateTo)
+                                        .Format(Model.SystemFormatDateTime)
+                                        .Name("SearchEstimatedDeliveryEndDateTo")
+                                        .Value(Model.SearchEstimatedDeliveryEndDateTo)
+                                        .HtmlAttributes(new { @type = "text" })
+                                        .Min(new DateTime(1900, 1, 1, 0, 0, 0)) //Set min time of the datetimepicker
+                                    )
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row searchadvanced display-none display-none">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblVehicleType")
+                                </label>
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(x => x.VehicleTypeId)
+                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblVehicleType"))
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadVehicleTypeForDropDownList", "VehicleType"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                    )
+                                    @*<input id="employees" style="width: 100%;" />*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblTransporter")
+                                </label>
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(x => x.TransporterId)
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadTransporterForDropDownList", "Transporter"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                    )
+                                    @*<input id="employees" style="width: 100%;" />*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row searchadvanced display-none display-none">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblRoute")
+                                </label>
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(x => x.RouteId)
+                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblVehicleType"))
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadRouteForDropDownList", "Route"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                    )
+                                    @*<input id="employees" style="width: 100%;" />*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <!-- Customer From -->
+                            <div class="box box-solid box-border-customer-order">
+                                <div class="box-header background-block">
+                                    <i class="fa fa-user"></i>
+                                    <h3 class="box-title">@MessageManager.GetCaptionValueByKey("lblCustomerFrom")</h3>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-default btn-sm" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblCustomerCode")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.CustomerFromCode, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCustomerCode") })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblCustomerName")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.CustomerFromName, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCustomerName") })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row searchadvanced display-none">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblIdentityCardNumber")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.CustomerFromIdentityCardNumber, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblIdentityCardNumber") })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblPhone")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.CustomerFromPhone1, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblPhone") })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row searchadvanced display-none">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblTaxCode")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.CustomerFromTaxCode, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblTaxCode") })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <!-- Customer From -->
+                            <div class="box box-solid box-border-customer-order">
+                                <div class="box-header background-block">
+                                    <i class="fa fa-user"></i>
+                                    <h3 class="box-title">@MessageManager.GetCaptionValueByKey("lblCustomerTo")</h3>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-default btn-sm" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblCustomerCode")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.CustomerToCode, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCustomerCode") })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblCustomerName")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.CustomerToName, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCustomerName") })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row searchadvanced display-none">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblIdentityCardNumber")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.CustomerToIdentityCardNumber, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblIdentityCardNumber") })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblPhone")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.CustomerToPhone1, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblPhone") })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row searchadvanced display-none">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblTaxCode")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.CustomerToTaxCode, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblTaxCode") })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+
+                    <div class="row searchadvanced display-none">
+                        <div class="form-group col-md-6">
+                            <!-- Address From -->
+                            <div class="box box-solid box-border-customer-order">
+                                <div class="box-header background-block">
+                                    <i class="fa fa-map-marker"></i>
+                                    <h3 class="box-title">@MessageManager.GetCaptionValueByKey("lblAddressFrom")</h3>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-default btn-sm" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblCountry")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @(Html.Kendo().DropDownListFor(model => model.CountryFromId)
+                                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblCountry"))
+                                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                                    .Filter(FilterType.Contains)
+                                                    .HtmlAttributes(new { style = "width:100%;" })
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(read =>
+                                                        {
+                                                            read.Action("LoadCountryForDropDownList", "Country"); //Set the Action and Controller name
+                                                        })
+                                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                                    })
+                                                    //.SelectedIndex(0) //Select first item.
+                                                    //.AutoBind(false)
+                                                    .Events(e =>
+                                                    {
+                                                        e.Change("CountryFromOnchange");
+                                                    })
+                                                    )
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblProvince")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @(Html.Kendo().DropDownListFor(model => model.ProvinceFromId)
+                                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblProvince"))
+                                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                                    .Filter(FilterType.Contains)
+                                                    .HtmlAttributes(new { style = "width:100%;" })
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(read =>
+                                                        {
+                                                            read.Action("LoadProvinceForDropDownList", "Province").Data("DataProvinceFrom"); //Set the Action and Controller name
+                                                        })
+                                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                                    })
+                                                //.SelectedIndex(0) //Select first item.
+                                                //.AutoBind(false)
+                                                .Events(e =>
+                                                {
+                                                    e.Change("ProvinceFromOnchange");
+                                                })
+                                                    )
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblDistrict")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @(Html.Kendo().DropDownListFor(model => model.DistrictFromId)
+                                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblDistrict"))
+                                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                                    .Filter(FilterType.Contains)
+                                                    .HtmlAttributes(new { style = "width:100%;" })
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(read =>
+                                                        {
+                                                            read.Action("LoadDistrictForDropDownList", "District").Data("DataDistrictFrom"); //Set the Action and Controller name
+                                                        })
+                                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                                    })
+                                                //.SelectedIndex(0) //Select first item.
+                                                .Events(e =>
+                                                {
+                                                    e.Change("DistrictFromOnchange");
+                                                })
+                                                    )
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblWard")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @(Html.Kendo().DropDownListFor(model => model.WardFromId)
+                                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblWard"))
+                                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                                    .Filter(FilterType.Contains)
+                                                    .HtmlAttributes(new { style = "width:100%;" })
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(read =>
+                                                        {
+                                                            read.Action("LoadWardForDropDownList", "Ward").Data("DataWardFrom"); //Set the Action and Controller name
+                                                        })
+                                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                                    })
+                                                //.SelectedIndex(0) //Select first item.
+                                                .Events(e =>
+                                                {
+                                                    e.Change("WardFromOnchange");
+                                                })
+                                                    )
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <!-- Address From -->
+                            <div class="box box-solid box-border-customer-order">
+                                <div class="box-header background-block">
+                                    <i class="fa fa-map-marker"></i>
+                                    <h3 class="box-title">@MessageManager.GetCaptionValueByKey("lblAddressTo")</h3>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-default btn-sm" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblCountry")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @(Html.Kendo().DropDownListFor(model => model.CountryToId)
+                                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblCountry"))
+                                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                                    .Filter(FilterType.Contains)
+                                                    .HtmlAttributes(new { style = "width:100%;" })
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(read =>
+                                                        {
+                                                            read.Action("LoadCountryForDropDownList", "Country"); //Set the Action and Controller name
+                                                        })
+                                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                                    })
+                                                    .SelectedIndex(0) //Select first item.
+                                                    .Events(e =>
+                                                    {
+                                                        e.Change("CountryToOnchange");
+                                                    })
+                                                    )
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblProvince")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @(Html.Kendo().DropDownListFor(model => model.ProvinceToId)
+                                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblProvince"))
+                                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                                    .Filter(FilterType.Contains)
+                                                    .HtmlAttributes(new { style = "width:100%;" })
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(read =>
+                                                        {
+                                                            read.Action("LoadProvinceForDropDownList", "Province").Data("DataProvinceTo"); //Set the Action and Controller name
+                                                        })
+                                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                                    })
+                                                //.SelectedIndex(0) //Select first item.
+                                                .Events(e =>
+                                                {
+                                                    e.Change("ProvinceToOnchange");
+                                                })
+                                                    )
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblDistrict")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @(Html.Kendo().DropDownListFor(model => model.DistrictToId)
+                                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblDistrict"))
+                                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                                    .Filter(FilterType.Contains)
+                                                    .HtmlAttributes(new { style = "width:100%;" })
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(read =>
+                                                        {
+                                                            read.Action("LoadDistrictForDropDownList", "District").Data("DataDistrictTo"); //Set the Action and Controller name
+                                                        })
+                                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                                    })
+                                                //.SelectedIndex(0) //Select first item.
+                                                .Events(e =>
+                                                {
+                                                    e.Change("DistrictToOnchange");
+                                                })
+                                                    )
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-5 control-label margin-top-8px">
+                                                    @MessageManager.GetCaptionValueByKey("lblWard")
+                                                </label>
+                                                <div class="col-md-7">
+                                                    @(Html.Kendo().DropDownListFor(model => model.WardToId)
+                                                        //.Placeholder(MessageManager.GetCaptionValueByKey("lblWard"))
+                                                        .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                                        .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                                        .Filter(FilterType.Contains)
+                                                        .HtmlAttributes(new { style = "width:100%;" })
+                                                        .DataSource(source =>
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("LoadWardForDropDownList", "Ward").Data("DataWardTo"); //Set the Action and Controller name
+                                                            })
+                                                            .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                                        })
+                                                     //.SelectedIndex(0) //Select first item.
+                                                     .Events(e =>
+                                                     {
+                                                         e.Change("WardToOnchange");
+                                                     })
+                                                    )
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+                    </div>
+
+                    <div class="row  text-center">
+                        <button type="button" id="btnSearch" class="btn btn-primary margin-top-8px">
+                            <i class="fa fa-search"></i>
+                            @MessageManager.GetCaptionValueByKey("lblSearch")
+                        </button>
+                        <button type="button" id="btnClear" class="btn btn-default margin-top-8px">
+                            <i class="fa fa-refresh"></i>
+                            @MessageManager.GetCaptionValueByKey("lblClear")
+                        </button>
+                    </div>
+
+                    <p></p>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    <!-- /.row -->
+    <!-- Grid Data-->
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div id="order-grid" class="row margin-left-0px margin-right-0px">
+            </div>
+            <script>
+                $(document).ready(function () {
+                    $("#order-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("List", "Order"))",
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: additionalData
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors"
+                            },
+                            error: function (e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            group: {
+                                field: "AddressToGroup",
+                                //dir: "desc"     // asc: ascending on ..., desc: descending
+                                //aggregates: [
+                                //        { field: "TotalOrderValue", aggregate: "sum" }//,
+                                //        //{ field: "QuantityPOCreated", aggregate: "sum" }
+                                //]
+                            },
+                            pageSize: 15,
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+
+                        },
+                        pageable: {
+                            refresh: true,
+                            pageSizes: [10, 15, 20, 50, 100, 200, 500, 2000, 5000, 100000]
+                        },
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        detailInit: detailInit,
+                        columnMenu: true,
+                        scrollable: true,
+                        resizable: true,
+                        dataBound: onDataBound,
+                        columns: [
+                            {
+                                field: "Id",
+                                headerTemplate: "<input id='mastercheckbox' type='checkbox' />",
+                                headerAttributes: { style: "text-align:center" },
+                                attributes: { style: "text-align:center;" },
+                                template: "<input type='checkbox' value='#=Id#' class='checkboxGroups' />",
+                                width: 70
+                            },
+                            {
+                                field: "Id",
+                                title: "@MessageManager.GetCaptionValueByKey("btnDelete")",
+                                width: 100,
+                                headerAttributes: { style: "text-align:center" },
+                                attributes: { style: "text-align:center" },
+                                template: '<button onClick="removeItem(#=Id#)" type="button" class="btn btn-danger cursor-pointer"><i class="fa fa-trash"></i></button>'
+                            },
+                            {
+                                field: "Id",
+                                title: "@MessageManager.GetCaptionValueByKey("btnEdit")",
+                                width: 125,
+                                headerAttributes: { style: "text-align:center" },
+                                attributes: { style: "text-align:center" },
+                                template: '<a class="btn btn-info cursor-pointer" href="../../Order/Edit?OrderCode=#=OrderCode#"><i class="fa fa-pencil"></i></a>'
+                                //template: "<a onclick=\"javascript:OpenWindow('../../Order/Edit?OrderCode=#=OrderCode#', 800, 320, true); return false;\"><i class=\"fa fa-pencil\"></i></a>"
+                            },
+                            {
+                                field: "OrderCode",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblOrderCode")",
+                                template: '<a href="../../Order/Edit?OrderCode=#=OrderCode#">#=OrderCode#</a>',
+                                width: 250
+                            },
+                            {
+                                field: "BillOfLadingCode",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblBillOfLadingCode")",
+                                width: 250
+                            },
+                            {
+                                field: "OrderCreateDateFormat",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblOrderCreateDate")",
+                                width: 250,
+                                attributes: { style: "text-align:center" },
+                            },
+                            {
+                                field: "OrderStatusName",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblOrderStatus")",
+                                width: 250,
+                                attributes: { style: "text-align:center" },
+                                template: '<span onClick="viewOrderStatus(#=Id#)" class="order-status-#=OrderStatusId#">#=OrderStatusName#</span>',
+                            },
+                            {
+                                field: "OrderShippingStatusName",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblOrderShippingStatus")",
+                                width: 250,
+                                attributes: { style: "text-align:center" },
+                                template: '<span class="order-shipping-status-#=OrderShippingStatusId#">#=OrderShippingStatusName#</span>',
+                            },
+                            {
+                                field: "ExpectedDeliveryDateFormat",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblExpectedDeliveryDate")",
+                                width: 300,
+                                attributes: { style: "text-align:center" },
+                            },
+                            {
+                                field: "EstimatedDeliveryStartDateFormat",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblEstimatedDeliveryStartDate")",
+                                width: 300,
+                                attributes: { style: "text-align:center" },
+                            },
+                            {
+                                field: "EstimatedDeliveryEndDateFormat",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblEstimatedDeliveryEndDate")",
+                                width: 300,
+                                attributes: { style: "text-align:center" },
+                            },
+                            {
+                                field: "EstimatedNumberDaysDelivery",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblEstimatedNumberDaysDelivery")",
+                                width: 250,
+                                attributes: { style: "text-align:center" },
+                            },
+                            {
+                                field: "CustomerFrom",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblCustomerFrom")",
+                                width: 350
+                            },
+                             {
+                                 field: "CustomerTo",
+                                 headerAttributes: { style: "text-align:center" },
+                                 title: "@MessageManager.GetCaptionValueByKey("lblCustomerTo")",
+                                 width: 350
+                             },
+                            {
+                                field: "AddressFrom",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblAddressFrom")",
+                                width: 350
+                            },
+                             {
+                                 field: "AddressTo",
+                                 headerAttributes: { style: "text-align:center" },
+                                 title: "@MessageManager.GetCaptionValueByKey("lblAddressTo")",
+                                 width: 350
+                             },
+                             {
+                                 field: "TransporterName",
+                                 headerAttributes: { style: "text-align:center" },
+                                 title: "@MessageManager.GetCaptionValueByKey("lblTransporter")",
+                                 width: 350
+                             },
+                             {
+                                 field: "VehicleTypeName",
+                                 headerAttributes: { style: "text-align:center" },
+                                 title: "@MessageManager.GetCaptionValueByKey("lblVehicleType")",
+                                 width: 350
+                             },
+                             {
+                                 field: "RouteName",
+                                 headerAttributes: { style: "text-align:center" },
+                                 title: "@MessageManager.GetCaptionValueByKey("lblRoute")",
+                                 width: 350
+                             },
+                             @*{
+                                 field: "TotalOrderValue",
+                                 title: "@MessageManager.GetCaptionValueByKey("lblTotalOrderValue")",
+                                 format: "{0:N0}",
+                                 width: "200px",
+                                 attributes: { style: "text-align:right" },
+                                 footerTemplate: "<div style='float: right'>#= sum #</div>",   //#=kendo.toString(sum, 'N0')#
+                                 groupFooterTemplate: "<div style='float: right'>#= sum #</div>"   //#=kendo.toString(sum, 'N0') #
+                             },*@
+                             {
+                                 field: "AddressToGroup",
+                                 headerAttributes: { style: "text-align:center; display: none" },
+                                 title: "@MessageManager.GetCaptionValueByKey("lblAddressToGroup")",
+                                 hidden: true,
+                                 show: true
+                             },
+                            {
+                                field: "Remark",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblRemark")",
+                                width: 250,
+                                attributes: { style: "text-align:left" },
+                            },
+                            {
+                                field: "CreatedBy",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblCreatedBy")",
+                                width: 150,
+                                attributes: { style: "text-align:left" },
+                            }
+                        ]
+                    });
+
+                });
+
+                //details grid
+                function detailInit(e) {
+                    $("<div />").appendTo(e.detailCell).kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("OrderDetailsByOrderId", "Order"))?orderId=" + e.data.Id,
+                                    type: "POST",
+                                    dataType: "json",
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors"
+                            },
+                            error: function (e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        scrollable: false,
+                        sortable: true,
+                        pageable: {
+                            refresh: true,
+                            numeric: false,
+                            previousNext: false,
+                            info: false
+                        },
+                        columns: [
+                            {
+                                field: "STT",
+                                title: "#",
+                                headerAttributes: { style: "text-align:center" },
+                                width: 50,
+                                attributes: { style: "text-align:center" },
+                            },
+                            {
+                                field: "ItemName",
+                                title: "@MessageManager.GetCaptionValueByKey("lblItemName")",
+                                headerAttributes: { style: "text-align:center" },
+                                width: 300
+                            },
+                            {
+                                field: "ItemType",
+                                title: "@MessageManager.GetCaptionValueByKey("lblItemType")",
+                                headerAttributes: { style: "text-align:center" },
+                                width: 150
+                            },
+                            {
+                                field: "ItemLength",
+                                title: "@MessageManager.GetCaptionValueByKey("lblItemLength")",
+                                headerAttributes: { style: "text-align:center" },
+                                width: 150
+                            },
+                            {
+                                field: "ItemWidth",
+                                title: "@MessageManager.GetCaptionValueByKey("lblItemWidth")",
+                                headerAttributes: { style: "text-align:center" },
+                                width: 150
+                            },
+                            {
+                                field: "ItemHeight",
+                                title: "@MessageManager.GetCaptionValueByKey("lblItemHeight")",
+                                headerAttributes: { style: "text-align:center" },
+                                width: 150
+                            },
+                            {
+                                field: "Amount",
+                                title: "@MessageManager.GetCaptionValueByKey("lblAmount")",
+                                headerAttributes: { style: "text-align:center" },
+                                width: 70,
+                                attributes: { style: "text-align:center" },
+                            },
+                            {
+                                field: "ItemUnit",
+                                title: "@MessageManager.GetCaptionValueByKey("lblItemUnit")",
+                                headerAttributes: { style: "text-align:center" },
+                                width: 100
+                            },
+                            {
+                                field: "Weight",
+                                title: "@MessageManager.GetCaptionValueByKey("lblWeight")",
+                                headerAttributes: { style: "text-align:center" },
+                                width: 70,
+                                attributes: { style: "text-align:center" },
+                            },
+                            {
+                                field: "WeightType",
+                                title: "@MessageManager.GetCaptionValueByKey("lblWeightType")",
+                                headerAttributes: { style: "text-align:center" },
+                                width: 100
+                            },
+                        ]
+                    });
+                }
+            </script>
+
+            <script type="text/javascript">
+                var selectedIds = [];
+
+                $(document).ready(function () {
+
+                    //search button
+                    $('#btnSearch').click(function () {
+                        //search
+                        var grid = $('#order-grid').data('kendoGrid');
+                        grid.dataSource.page(1); //new search. Set page size to 1
+                        //grid.dataSource.read(); we already loaded the grid above using "page" function
+                        //clear selected checkboxes
+                        $('.checkboxGroups').attr('checked', false).change();
+                        selectedIds = [];
+                        return false;
+                    });
+
+                    $("#OrderCode").keydown(function (event) {
+                        if (event.keyCode === 13) {
+                            $("#btnSearch").click();
+                            return false;
+                        }
+                    });
+
+                    $("#BillOfLadingCode").keydown(function (event) {
+                        if (event.keyCode === 13) {
+                            $("#btnSearch").click();
+                            return false;
+                        }
+                    });
+
+                    $("#delete-selected-action-confirmation-submit-button").click(function () {
+                        var postData = {
+                            selectedIds: selectedIds
+                        };
+                        addAntiForgeryToken(postData);
+
+                        $.ajax({
+                            cache: false,
+                            type: "POST",
+                            url: "@(Url.Action("DeleteSelected", "Order"))",
+                            data: postData,
+                            beforeSend: function () {
+                                waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
+                            },
+                            success: function (result) {
+                                show(true, "@MessageManager.GetMessageInfoByMessageCode("MS007")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                                //reload grid
+                                var grid = $('#order-grid').data('kendoGrid');
+                                grid.dataSource.read();
+
+                                waitingDialog.hide();
+
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                show(false, "@MessageManager.GetMessageInfoByMessageCode("MS005")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+
+                                waitingDialog.hide();
+                            },
+                            traditional: true
+                        });
+                        $("#canceldelete").trigger("click");
+                    })
+
+                    //$('#mastercheckbox').click(function () {
+                    //    $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+                    //});
+
+                    $('#mastercheckbox').change(function (ev) {
+                        if ($(this).is(':checked')) {
+                            $('.checkboxGroups').each(function (idx, item) {
+                                if (!($(item).closest('tr').is('.k-state-selected'))) {
+                                    $(item).click();
+                                }
+                                // $(item).click();
+
+                            });
+                        }
+                        else {
+                            $('.checkboxGroups').each(function (idx, item) {
+                                if (($(item).closest('tr').is('.k-state-selected'))) {
+                                    $(item).click();
+                                }
+                                // $(item).click();
+
+                            });
+                        }
+                        //var checked = ev.target.checked;
+
+                    });
+
+                    //wire up checkboxes.
+                    $('#order-grid').on('change', 'input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]', function (e) {
+                        var $check = $(this);
+                        if ($check.is(":checked") == true) {
+                            var checked = jQuery.inArray($check.val(), selectedIds);
+                            if (checked == -1) {
+                                //add id to selectedIds.
+                                selectedIds.push($check.val());
+                            }
+                        } else {
+                            var checked = jQuery.inArray($check.val(), selectedIds);
+                            if (checked > -1) {
+                                //remove id from selectedIds.
+                                selectedIds = $.grep(selectedIds, function (item, index) {
+                                    return item != $check.val();
+                                });
+                            }
+                        }
+                        updateMasterCheckbox();
+                    });
+                });
+
+                function onDataBound(e) {
+                    $('#order-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').each(function () {
+                        var currentId = $(this).val();
+                        var checked = jQuery.inArray(currentId, selectedIds);
+                        //set checked based on if current checkbox's value is in selectedIds.
+                        $(this).attr('checked', checked > -1);
+                    });
+
+                    updateMasterCheckbox();
+                }
+
+                function updateMasterCheckbox() {
+                    var numChkBoxes = $('#order-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').length;
+                    var numChkBoxesChecked = $('#order-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
+                    $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+
+                    console.log(selectedIds);
+
+                    if (selectedIds.length > 0)
+                        $("#delete-selected").removeAttr("disabled");
+                    else
+                        $("#delete-selected").attr("disabled", true);
+                }
+
+                function additionalData() {
+
+                    var data = {
+                        OrderCode: $('#@Html.FieldIdFor(m => m.OrderCode)').val(),
+                        BillOfLadingCode: $('#@Html.FieldIdFor(m => m.BillOfLadingCode)').val(),
+                        SearchExpectedDeliveryDateFrom: $('#@Html.FieldIdFor(m => m.SearchExpectedDeliveryDateFrom)').val(),
+                        SearchExpectedDeliveryDateTo: $('#@Html.FieldIdFor(m => m.SearchExpectedDeliveryDateTo)').val(),
+                        SearchEstimatedDeliveryStartDateFrom: $('#@Html.FieldIdFor(m => m.SearchEstimatedDeliveryStartDateFrom)').val(),
+                        SearchEstimatedDeliveryStartDateTo: $('#@Html.FieldIdFor(m => m.SearchEstimatedDeliveryStartDateTo)').val(),
+                        SearchEstimatedDeliveryEndDateFrom: $('#@Html.FieldIdFor(m => m.SearchEstimatedDeliveryEndDateFrom)').val(),
+                        SearchEstimatedDeliveryEndDateTo: $('#@Html.FieldIdFor(m => m.SearchEstimatedDeliveryEndDateTo)').val(),
+                        VehicleTypeId: $('#@Html.FieldIdFor(m => m.VehicleTypeId)').val(),
+                        TransporterId: $('#@Html.FieldIdFor(m => m.TransporterId)').val(),
+                        CustomerFromCode: $('#@Html.FieldIdFor(m => m.CustomerFromCode)').val(),
+                        CustomerFromName: $('#@Html.FieldIdFor(m => m.CustomerFromName)').val(),
+                        CustomerFromIdentityCardNumber: $('#@Html.FieldIdFor(m => m.CustomerFromIdentityCardNumber)').val(),
+                        CustomerFromPhone1: $('#@Html.FieldIdFor(m => m.CustomerFromPhone1)').val(),
+                        CustomerFromTaxCode: $('#@Html.FieldIdFor(m => m.CustomerFromTaxCode)').val(),
+                        CustomerToCode: $('#@Html.FieldIdFor(m => m.CustomerToCode)').val(),
+                        CustomerToName: $('#@Html.FieldIdFor(m => m.CustomerToName)').val(),
+                        CustomerToIdentityCardNumber: $('#@Html.FieldIdFor(m => m.CustomerToIdentityCardNumber)').val(),
+                        CustomerToPhone1: $('#@Html.FieldIdFor(m => m.CustomerToPhone1)').val(),
+                        CustomerToTaxCode: $('#@Html.FieldIdFor(m => m.CustomerToTaxCode)').val(),
+                        CountryFromId: $('#@Html.FieldIdFor(m => m.CountryFromId)').val(),
+                        ProvinceFromId: $('#@Html.FieldIdFor(m => m.ProvinceFromId)').val(),
+                        DistrictFromId: $('#@Html.FieldIdFor(m => m.DistrictFromId)').val(),
+                        WardFromId: $('#@Html.FieldIdFor(m => m.WardFromId)').val(),
+                        CountryToId: $('#@Html.FieldIdFor(m => m.CountryToId)').val(),
+                        ProvinceToId: $('#@Html.FieldIdFor(m => m.ProvinceToId)').val(),
+                        DistrictToId: $('#@Html.FieldIdFor(m => m.DistrictToId)').val(),
+                        WardToId: $('#@Html.FieldIdFor(m => m.WardToId)').val(),
+                    };
+
+                    addAntiForgeryToken(data);
+                    return data;
+                }
+            </script>
+
+            <script type="text/javascript">
+
+                var _id = 0;
+
+                function removeItem(id) {
+                    _id = id;
+                    $('#modalDelete').modal('show');
+                }
+
+                $("#btnConfirmDeleteYes").click(function () {
+                    var postData = {
+                        id: _id
+                    };
+                    addAntiForgeryToken(postData);
+
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        url: "@(Url.Action("Delete", "Order"))",
+                        data: postData,
+                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                        beforeSend: function () {
+                            waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
+                        },
+                        success: function (result) {
+                            show(true, "@MessageManager.GetMessageInfoByMessageCode("MS007")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                            //reload grid
+                            var grid = $('#order-grid').data('kendoGrid');
+                            grid.dataSource.read();
+
+                            waitingDialog.hide();
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            show(false, "@MessageManager.GetMessageInfoByMessageCode("MS005")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+
+                            waitingDialog.hide();
+                        },
+                        traditional: true
+                    });
+
+                    _id = 0;
+                    $('#modalDelete').modal('hide');
+                });
+
+                $("#btnConfirmDeleteCancel").click(function () {
+                    _id = 0;
+                    $('#modalDelete').modal('hide');
+                })
+            </script>
+
+            <script type="text/javascript">
+                function viewOrderStatus(id) {
+                    //alert();
+                    $('#modalOrderStatus').modal('show');
+                };
+            </script>
+        </div>
+    </div>
+</section>
+
+<!-- On change combobox Address From-->
+<script type="text/javascript">
+
+    function CountryFromOnchange() {
+
+        var countryFrom = $('#CountryFromId').data('kendoDropDownList');
+        var provinceFrom = $('#ProvinceFromId').data('kendoDropDownList');
+        var districtFrom = $('#DistrictFromId').data('kendoDropDownList');
+        var wardFrom = $('#WardFromId').data('kendoDropDownList');
+
+        provinceFrom.text("");
+        provinceFrom.dataSource.read();
+
+        districtFrom.text("");
+        districtFrom.value("");
+        districtFrom.dataSource.data([]);
+
+        wardFrom.text("");
+        wardFrom.value("");
+        wardFrom.dataSource.data([]);
+
+    }
+
+    function DataProvinceFrom() {
+        var countryId = $('#@Html.FieldIdFor(m=>m.CountryFromId)').val();
+        if (countryId == "")
+            countryId = 0;
+
+        return {
+            countryId: countryId,
+
+        };
+    }
+
+    function ProvinceFromOnchange() {
+        var countryFrom = $('#CountryFromId').data('kendoDropDownList');
+        var provinceFrom = $('#ProvinceFromId').data('kendoDropDownList');
+        var districtFrom = $('#DistrictFromId').data('kendoDropDownList');
+        var wardFrom = $('#WardFromId').data('kendoDropDownList');
+
+        districtFrom.text("");
+        districtFrom.dataSource.read();
+
+        wardFrom.text("");
+        wardFrom.value("");
+        wardFrom.dataSource.data([]);
+
+    }
+
+    function DataDistrictFrom() {
+        var provinceId = $('#@Html.FieldIdFor(m=>m.ProvinceFromId)').val();
+
+        if (provinceId == "") {
+            provinceId = 0;
+        }
+
+        return {
+            provinceId: provinceId,
+        };
+    }
+
+    function DistrictFromOnchange() {
+        var countryFrom = $('#CountryFromId').data('kendoDropDownList');
+        var provinceFrom = $('#ProvinceFromId').data('kendoDropDownList');
+        var districtFrom = $('#DistrictFromId').data('kendoDropDownList');
+        var wardFrom = $('#WardFromId').data('kendoDropDownList');
+
+        wardFrom.text("");
+        wardFrom.dataSource.read();
+
+    }
+
+    function DataWardFrom() {
+        var districtId = $('#@Html.FieldIdFor(m=>m.DistrictFromId)').val();
+
+        if (districtId == "")
+            districtId = 0;
+
+        return {
+            districtId: districtId,
+
+        };
+    }
+
+    function WardFromOnchange() {
+        var countryFrom = $('#CountryFromId').data('kendoDropDownList');
+        var provinceFrom = $('#ProvinceFromId').data('kendoDropDownList');
+        var districtFrom = $('#DistrictFromId').data('kendoDropDownList');
+        var wardFrom = $('#WardFromId').data('kendoDropDownList');
+
+    }
+</script>
+
+<!-- On change combobox Address To-->
+<script type="text/javascript">
+
+    function CountryToOnchange() {
+
+        var countryTo = $('#CountryToId').data('kendoDropDownList');
+        var provinceTo = $('#ProvinceToId').data('kendoDropDownList');
+        var districtTo = $('#DistrictToId').data('kendoDropDownList');
+        var wardTo = $('#WardToId').data('kendoDropDownList');
+
+        provinceTo.text("");
+        provinceTo.dataSource.read();
+
+        districtTo.text("");
+        districtTo.value("");
+        districtTo.dataSource.data([]);
+
+        wardTo.text("");
+        wardTo.value("");
+        wardTo.dataSource.data([]);
+
+    }
+
+    function DataProvinceTo() {
+        var countryId = $('#@Html.FieldIdFor(m=>m.CountryToId)').val();
+        if (countryId == "")
+            countryId = 0;
+
+        return {
+            countryId: countryId,
+
+        };
+    }
+
+    function ProvinceToOnchange() {
+
+        var countryTo = $('#CountryToId').data('kendoDropDownList');
+        var provinceTo = $('#ProvinceToId').data('kendoDropDownList');
+        var districtTo = $('#DistrictToId').data('kendoDropDownList');
+        var wardTo = $('#WardToId').data('kendoDropDownList');
+
+        districtTo.text("");
+        districtTo.dataSource.read();
+
+        wardTo.text("");
+        wardTo.value("");
+        wardTo.dataSource.data([]);
+
+    }
+
+    function DataDistrictTo() {
+        var provinceId = $('#@Html.FieldIdFor(m=>m.ProvinceToId)').val();
+        if (provinceId == "")
+            provinceId = 0;
+
+        return {
+            provinceId: provinceId,
+
+        };
+    }
+
+    function DistrictToOnchange() {
+
+        var countryTo = $('#CountryToId').data('kendoDropDownList');
+        var provinceTo = $('#ProvinceToId').data('kendoDropDownList');
+        var districtTo = $('#DistrictToId').data('kendoDropDownList');
+        var wardTo = $('#WardToId').data('kendoDropDownList');
+
+        wardTo.text("");
+        wardTo.dataSource.read();
+
+    }
+
+    function DataWardTo() {
+        var districtId = $('#@Html.FieldIdFor(m=>m.DistrictToId)').val();
+        if (districtId == "")
+            districtId = 0;
+
+        return {
+            districtId: districtId,
+
+        };
+    }
+
+    function WardToOnchange() {
+        var countryTo = $('#CountryToId').data('kendoDropDownList');
+        var provinceTo = $('#ProvinceToId').data('kendoDropDownList');
+        var districtTo = $('#DistrictToId').data('kendoDropDownList');
+        var wardTo = $('#WardToId').data('kendoDropDownList');
+
+    }
+</script>
+
+<script type="text/javascript">
+    $("#searchmode").click(function () {
+        $(".searchadvanced").toggleClass("display-none");
+    });
+</script>

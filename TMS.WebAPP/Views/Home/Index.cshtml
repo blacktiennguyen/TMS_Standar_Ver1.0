@@ -1,0 +1,169 @@
+﻿@{
+    Layout = "~/Views/Shared/_TSMMasterLayout.cshtml";
+}
+<!-- Content Header (Page header) -->
+<section class="content-header margin-bottom-10px header-border-bottom">
+    <h1>
+        @MessageManager.GetCaptionValueByKey("lblDashboard")
+        @*<small>Preview page</small>*@
+    </h1>
+    @*<ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> @MessageManager.GetCaptionValueByKey("lblHomePage")</a></li>
+            <li class="active">Widgets</li>
+        </ol>*@
+</section>
+<!-- Main content -->
+<!-- ORDER =========================================================== -->
+<div class="row margin-left-0px margin-right-0px">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-aqua">
+            <span class="info-box-icon"><i class="fa fa-file-text-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">@MessageManager.GetCaptionValueByKey("lblOrder")</span>
+                <span class="info-box-number">41,410</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    @MessageManager.GetCaptionValueByKey("lbl30DayCaption")
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-file-text-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">@MessageManager.GetCaptionValueByKey("lblOrderApproved")</span>
+                <span class="info-box-number">41,410</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    @MessageManager.GetCaptionValueByKey("lbl30DayCaption")
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-file-text-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">@MessageManager.GetCaptionValueByKey("lblOrderPendding")</span>
+                <span class="info-box-number">41,410</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    @MessageManager.GetCaptionValueByKey("lbl30DayCaption")
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="fa fa-file-text-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">@MessageManager.GetCaptionValueByKey("lblOrderRejected")</span>
+                <span class="info-box-number">41,410</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    @MessageManager.GetCaptionValueByKey("lbl30DayCaption")
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<!-- =========================================================== -->
+<!-- PLAN =========================================================== -->
+<div class="row margin-left-0px margin-right-0px">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-aqua">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">@MessageManager.GetCaptionValueByKey("lblPlanOrder")</span>
+                <span class="info-box-number">41,410</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    @MessageManager.GetCaptionValueByKey("lbl30DayCaption")
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">@MessageManager.GetCaptionValueByKey("lblPlanOrderApproved")</span>
+                <span class="info-box-number">41,410</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    @MessageManager.GetCaptionValueByKey("lbl30DayCaption")
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">@MessageManager.GetCaptionValueByKey("lblPlanOrderPendding")</span>
+                <span class="info-box-number">41,410</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    @MessageManager.GetCaptionValueByKey("lbl30DayCaption")
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">@MessageManager.GetCaptionValueByKey("lblPlanOrderRejected")</span>
+                <span class="info-box-number">41,410</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    @MessageManager.GetCaptionValueByKey("lbl30DayCaption")
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<!-- =========================================================== -->

@@ -1,0 +1,262 @@
+﻿@model TMS.WebAPP.Models.OrderModel
+@using Kendo.Mvc.UI
+
+@Html.Partial("_OrderInfo.ChooseCustomer", Model)
+
+<input type="hidden" id="chooseCustomerType" value="" />
+
+<div class="row">
+    <div class="form-group col-md-6">
+        <!-- Customer From -->
+        <div class="box box-solid box-border-customer-order">
+            <div class="box-header background-block">
+                <i class="fa fa-user"></i>
+                <h3 class="box-title">@MessageManager.GetCaptionValueByKey("lblCustomerFrom")</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-default btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                            </label>
+                            <div class="col-md-8">
+                                <button type="button" id="chooseCustomerFrom" class="btn btn-success" data-toggle="modal" data-target="#chooseCustomer">@MessageManager.GetCaptionValueByKey("lblChooseCustomerFrom")</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblCustomerCode") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.CustomerFromCode, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCustomerCode") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblCustomerName") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.CustomerFromName, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCustomerName") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblIdentityCardNumber")
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.CustomerFromIdentityCardNumber, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblIdentityCardNumber") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblCustomerPhone1")
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.CustomerFromPhone1, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCustomerPhone1") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblCustomerPhone2")
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.CustomerFromPhone2, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCustomerPhone2") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblTaxCode")
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.CustomerFromTaxCode, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblTaxCode") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblAddress")
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(m => m.CustomerFromFullAddress, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblAddress") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    <div class="form-group col-md-6">
+        <!-- Customer From -->
+        <div class="box box-solid box-border-customer-order">
+            <div class="box-header background-block">
+                <i class="fa fa-user"></i>
+                <h3 class="box-title">@MessageManager.GetCaptionValueByKey("lblCustomerTo")</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-default btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                            </label>
+                            <div class="col-md-8">
+                                <button type="button" id="chooseCustomerTo" class="btn btn-success" data-toggle="modal" data-target="#chooseCustomer">@MessageManager.GetCaptionValueByKey("lblChooseCustomerTo")</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblCustomerCode") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.CustomerToCode, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCustomerCode") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblCustomerName") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.CustomerToName, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCustomerName") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblIdentityCardNumber")
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.CustomerToIdentityCardNumber, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblIdentityCardNumber") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblCustomerPhone1")
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.CustomerToPhone1, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCustomerPhone1") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblCustomerPhone2")
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.CustomerToPhone2, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCustomerPhone2") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblTaxCode")
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.CustomerToTaxCode, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblTaxCode") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblAddress")
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(m => m.CustomerToFullAddress, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblAddress") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#chooseCustomerFrom").click(function () {
+        $("#chooseCustomerType").val(1);
+    });
+
+    $("#chooseCustomerTo").click(function () {
+        $("#chooseCustomerType").val(2);
+    });
+</script>

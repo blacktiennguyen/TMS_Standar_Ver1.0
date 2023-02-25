@@ -1,0 +1,19 @@
+﻿@model TMS.WebAPP.Framework.Mvc.ActionConfirmationModel
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="@(Model.WindowId)-title">@MessageManager.GetCaptionValueByKey("lblDeleteConfirm")</h4>
+        </div>
+        <div class="modal-body">
+            @MessageManager.GetCaptionValueByKey("lblAreYouSure")
+        </div>
+        <div class="modal-footer">
+            <button type="submit" id="@(Model.WindowId)-submit-button" class="btn btn-primary pull-right">
+                @MessageManager.GetCaptionValueByKey("btnYes")
+            </button>
+            <span class="btn btn-default pull-right margin-r-5" data-dismiss="modal">@MessageManager.GetCaptionValueByKey("btnCancel")</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿<!-- Main content -->
+<section class="content margin-left-0px padding-left-0px">
+    <div class="row">
+        @Html.Action("ShowFunctionDataSetupAndReport", "Function", new { url = "/" + ViewContext.Controller.ControllerContext.RouteData.Values["controller"] + "/" + ViewContext.Controller.ControllerContext.RouteData.Values["action"] })
+
+        <!-- /.col -->
+        <div class="col-md-9 padding-0px ">
+            <div class="box box-primary">
+                @RenderBody()
+            </div>
+            <!-- /. box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>

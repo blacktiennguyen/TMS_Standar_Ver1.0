@@ -1,0 +1,76 @@
+﻿@model TMS.WebAPP.Models.OrderModel
+@using TMS.WebAPP.Framework
+@{
+    //page title
+    ViewBag.Title = @MessageManager.GetCaptionValueByKey("lblOrderManagement");
+
+}
+
+@Html.AntiForgeryToken()
+
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        @MessageManager.GetCaptionValueByKey("btnEdit") (@MessageManager.GetCaptionValueByKey("lblOrderManagement"))
+        @*<small><i class="fa fa-arrow-circle-left"></i>@Html.ActionLink(MessageManager.GetCaptionValueByKey("btnBackToList"), "List")</small>*@
+        <button type="button" class="btn btn-success backlist"><i class="fa fa-arrow-circle-left"></i> @Html.ActionLink(MessageManager.GetCaptionValueByKey("btnBackToList"), "List")</button>
+    </h1>
+    <div class="pull-right">
+        <button type="button" id="buttonUpdate" name="save" class="btn bg-blue">
+            <i class="fa fa-floppy-o"></i>
+            @MessageManager.GetCaptionValueByKey("btnSave")
+        </button>
+        <span id="btnDeleteOrder" class="btn bg-red">
+            <i class="fa fa-trash-o"></i>
+            @MessageManager.GetCaptionValueByKey("btnDelete")
+        </span>
+    </div>
+</div>
+@Html.Partial("_Delete")
+@Html.Partial("_CreateOrUpdate", Model)
+
+@*@Html.DeleteConfirmation("group-delete")*@
+
+<script type="text/javascript">
+
+    $("#btnDeleteOrder").click(function () {
+
+        var _id = @Model.Id;
+        $('#modalDelete').modal('show');
+
+        $("#btnConfirmDeleteYes").click(function () {
+            var postData = {
+                id: _id
+            };
+            addAntiForgeryToken(postData);
+
+            console.log(postData);
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "@(Url.Action("Delete", "Order"))",
+                data: postData,
+                contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                beforeSend: function () {
+                    waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
+                },
+                success: function (result) {
+                    waitingDialog.hide();
+                    _id = 0;
+                    $('#modalDelete').modal('hide');
+                    window.location.href = '../../Order/List';
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    show(false, "@MessageManager.GetMessageInfoByMessageCode("MS005")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+
+                    waitingDialog.hide();
+                },
+                traditional: true
+            });
+        });
+
+        $("#btnConfirmDeleteCancel").click(function () {
+            _id = 0;
+            $('#modalDelete').modal('hide');
+        })
+    });
+</script>

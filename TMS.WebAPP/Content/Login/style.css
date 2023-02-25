@@ -1,0 +1,89 @@
+﻿.login-page ul.languageLogin {
+    list-style: none;
+    margin: 10px -37px;
+}
+
+.login-page .languageLogin ul.menu {
+    list-style: none;
+    margin-left: -25px;
+}
+
+    .login-page .languageLogin ul.menu li:hover {
+        cursor: pointer;
+        background: #ccc;
+    }
+
+.login-page .languageLogin li.itemlanguage {
+    margin-left: -12px;
+    height: 35px;
+    line-height: 35px;
+}
+
+.login-page .login-box-msg {
+    text-align: left;
+    font-weight: bold;
+    padding: 0 0px 10px 0px !important;
+    font-size: 18px;
+}
+
+.login-page .validation-summary-errors {
+    color: #ff0000;
+}
+
+.input-validation-error {
+    border-color: #ff0000;
+}
+
+.field-validation-error {
+    color: #ff0000;
+    display: none;
+}
+
+/*.login-page .login-box, .register-box {
+    width: 500px;
+}*/
+
+.login-page .login-box .login-logo {
+    background: #3C8DBD;
+    height: 70px;
+    margin-bottom: 10px;
+    line-height: 70px;
+    color: #ffffff !important;
+}
+
+.login-page .login-box-body {
+    border: 1px solid #00acd6;
+    margin-top: 15px;
+}
+
+.login-page, .register-page {
+    background: #ffffff;
+}
+
+    .login-page .languageLogin .dropdown-menu {
+        border: 1px solid #3C8DBD;
+    }
+
+    .login-page .border-supportteam {
+        color: #3C8DBD !important;
+    }
+
+.font-weigh-bold {
+    font-weight: bold;
+}
+
+.font-size-12px {
+    font-size: 12px;
+}
+
+/* Login */
+
+.btn-login {
+    line-height: 2;
+    float: right;
+    min-width: 109px;
+}
+
+.login-box-body .login-box-body-border-right {
+    border-right: 1px solid #00acd6;
+}

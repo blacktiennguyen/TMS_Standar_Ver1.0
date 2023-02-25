@@ -1,0 +1,1017 @@
+﻿@model TMS.WebAPP.Models.OrderModel
+@using Kendo.Mvc.UI
+@using TMS.WebAPP.HtmlExtension
+
+@Html.HiddenFor(model => model.Id)
+
+@*<div class="row">
+        <div>
+            <input id="comboList" placeholder="Enter Name" />
+            <div id="grid" style="width:800px; z-index:10;"></div>
+        </div>
+    </div>*@
+
+<div class="row margin-top-10px">
+    <div class="col-xs-12">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#orderinfo" class="font-weight-bold" data-toggle="tab"> @MessageManager.GetCaptionValueByKey("lblTabOrderInfo")</a></li>
+                <li><a href="#orderitemdetail" class="font-weight-bold" data-toggle="tab">@MessageManager.GetCaptionValueByKey("lblTabOrderItemDetail")</a></li>
+                <li><a href="#orderserviceandfee" class="font-weight-bold" data-toggle="tab">@MessageManager.GetCaptionValueByKey("lblTabOrderServiceAndFee")</a></li>
+                <li><a href="#orderdocument" class="font-weight-bold" data-toggle="tab">@MessageManager.GetCaptionValueByKey("lblTabOrderDocument")</a></li>
+                <li><a href="#ordershippinghistory" class="font-weight-bold" data-toggle="tab">@MessageManager.GetCaptionValueByKey("lblTabOrderShippingHistory")</a></li>
+            </ul>
+            <div class="tab-content">
+                <!-- Font Awesome Icons -->
+                <div class="tab-pane active" id="orderinfo">
+                    <!-- Order Info -->
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblOrderStatus")
+                                </label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(m => m.OrderStatusName, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblOrderStatus") })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblOrderShippingStatus")
+                                </label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(m => m.OrderShippingStatusName, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblOrderShippingStatus") })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblOrderCode") <span class="star">(*)</span>
+                                </label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(m => m.OrderCode, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblOrderCode") })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblBillOfLadingCode")
+                                </label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(m => m.BillOfLadingCode, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblBillOfLadingCode") })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblOrderCreateDate") <span class="star">(*)</span>
+                                </label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(m => m.OrderCreateDateFormat, new { @readonly = "readonly", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblOrderCreateDate") })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblExpectedDeliveryDate") <span class="star">(*)</span>
+                                </label>
+                                <div class="col-md-4">
+                                    @(Html.Kendo().DatePickerFor(m => m.ExpectedDeliveryDate)
+                                    .Format(Model.SystemFormatDateTime)
+                                    .Name("ExpectedDeliveryDate")
+                                    .Value(Model.ExpectedDeliveryDate)
+                                    .HtmlAttributes(new { @type = "text" })
+                                    .Min(new DateTime(1900, 1, 1, 0, 0, 0)) //Set min time of the datetimepicker
+                                    )
+                                </div>
+                                <label class="col-md-2 control-label margin-top-8px">
+                                    (@Model.SystemFormatDateTime)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblEstimatedDeliveryStartDate") <span class="star">(*)</span>
+                                </label>
+                                <div class="col-md-4">
+                                    @(Html.Kendo().DatePickerFor(x => x.EstimatedDeliveryStartDate)
+                                    .Format(Model.SystemFormatDateTime)
+                                    .Name("EstimatedDeliveryStartDate")
+                                    .Value(Model.EstimatedDeliveryStartDate)
+                                    .HtmlAttributes(new { @type = "text" })
+                                    .Min(new DateTime(1900, 1, 1, 0, 0, 0)) //Set min time of the datetimepicker
+                                    )
+                                </div>
+                                <label class="col-md-2 control-label margin-top-8px">
+                                    (@Model.SystemFormatDateTime)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblEstimatedDeliveryEndDate") <span class="star">(*)</span>
+                                </label>
+                                <div class="col-md-4">
+                                    @(Html.Kendo().DatePickerFor(x => x.EstimatedDeliveryEndDate)
+                                    .Format(Model.SystemFormatDateTime)
+                                    .Name("EstimatedDeliveryEndDate")
+                                    .Value(Model.EstimatedDeliveryEndDate)
+                                    .HtmlAttributes(new { @type = "text" })
+                                    .Min(new DateTime(1900, 1, 1, 0, 0, 0)) //Set min time of the datetimepicker
+                                    )
+                                </div>
+                                <label class="col-md-2 control-label margin-top-8px">
+                                    (@Model.SystemFormatDateTime)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblEstimatedNumberDaysDelivery") <span class="star">(*)</span>
+                                </label>
+                                <div class="col-md-3">
+                                    @Html.Kendo().NumericTextBoxFor(model => model.EstimatedNumberDaysDelivery).Min(0).Max(9999).HtmlAttributes(new { maxlength = 4 }).Format("0,0")
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblEstimatedLeadTimeDay")
+                                </label>
+                                <div class="col-md-3">
+                                    @Html.Kendo().NumericTextBoxFor(model => model.EstimatedLeadTimeDay).Min(0).Max(9999).HtmlAttributes(new { maxlength = 4 }).Format("0,0")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblTransporter") <span class="star">(*)</span>
+                                </label>
+                                <div class="col-md-8">
+                                    @(Html.Kendo().DropDownListFor(x => x.TransporterId)
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadTransporterForDropDownList", "Transporter"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                    )
+                                    @*<input id="employees" style="width: 100%;" />*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+
+                            <div class="form-group row line-height-5px">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblIsBillOfExchange")
+                                </label>
+                                <div class="col-md-1">
+                                    @Html.EditorFor(m => m.IsBillOfExchange, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblIsBillOfExchange") })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblRoute") <span class="star">(*)</span>
+                                </label>
+                                <div class="col-md-8">
+                                    @(Html.Kendo().DropDownListFor(x => x.RouteId)
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadRouteForDropDownList", "Route"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                    )
+                                    @*<input id="employees" style="width: 100%;" />*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblVehicleType") <span class="star">(*)</span>
+                                </label>
+                                <div class="col-md-8">
+                                    @(Html.Kendo().DropDownListFor(x => x.VehicleTypeId)
+                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblVehicleType"))
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadVehicleTypeForDropDownList", "VehicleType"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                    )
+                                    @*<input id="employees" style="width: 100%;" />*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblWorkflow") <span class="star">(*)</span>
+                                </label>
+                                <div class="col-md-8">
+                                    @(Html.Kendo().DropDownListFor(x => x.WorkflowId)
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadWorkflowSettingByOrderFunctionForDropDownList", "WorkflowSetting"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                    )
+                                    @*<input id="employees" style="width: 100%;" />*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                </label>
+                                <div class="col-md-8">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- End Order Info -->
+                    <!-- Customer From - To-->
+                    @Html.Partial("_OrderInfo.CustomerFromTo", Model)
+                    <!-- End Customer From - To-->
+                    <!-- Address From - To-->
+                    @Html.Partial("_OrderInfo.AddressFromTo", Model)
+                    <!-- End Address From - To-->
+                    <!-- Remark -->
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="form-group row">
+                                <label class="col-md-2 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblRemark")
+                                </label>
+
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(m => m.Remark, new { @rows = "3", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblRemark") })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Remark-->
+                    <!-- Total Weight-->
+                    @Html.Partial("_OrderInfo.OrderSummaryTotal", Model)
+                    <!-- End Total Weigh-->
+                </div>
+                <!-- /#fa-icons -->
+                <!-- glyphicons-->
+                <div class="tab-pane" id="orderitemdetail">
+                </div>
+
+                <div class="tab-pane" id="orderserviceandfee">
+                </div>
+
+                <div class="tab-pane" id="orderdocument">
+                </div>
+
+                <div class="tab-pane" id="ordershippinghistory">
+                </div>
+
+                <!-- /#ion-icons -->
+            </div>
+            <!-- /.tab-content -->
+        </div>
+        <!-- /.nav-tabs-custom -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<!-- /.row -->
+@*<script>
+        $(document).ready(function () {
+            dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "/VehicleType/LoadVehicleTypeForDropDownList",
+                        dataType: "json",
+                    }
+                },
+            });
+            $("#employees").kendoMultiColumnComboBox({
+                dataTextField: "Name",
+                dataValueField: "Id",
+                height: 400,
+                columns: [{
+                    field: "Code",
+                    title: "Code",
+                    width: 150
+                },
+                    { field: "Name", title: "Name", width: 250 },
+                ],
+                footerTemplate: 'Total #: instance.dataSource.total() # items found',
+                filter: "contains",
+                filterFields: ["Code", "Name"],
+                dataSource: dataSource,
+                Page
+            });
+        });
+    </script>*@
+
+@*https://stackoverflow.com/questions/27933006/kendo-ui-combobox-with-filterable-multi-columns*@
+
+@*<script>
+        var rootElement;
+        var grid;
+        var comboBox;
+
+        $(document).ready(function () {
+            comboBox = $('#comboList').kendoComboBox({
+                dataTextField: "name",
+                dataValueField: "id",
+                filter: "contains",
+                open: function (e) {
+                    var selectedValue = $('#comboList').closest("span").children("span").children("input").val(); // comboBox.value();
+
+                    if (!$(grid.element).hasClass("k-custom-visible")) {
+                        $(grid.element).slideToggle("fast", function () {
+                            comboBox.close();
+                            var selectedValue = $('#comboList').closest("span").children("span").children("input").val(); // comboBox.value();
+
+                            if (selectedValue.length > 0) {
+                                var filter = new Array();
+                                if (!isNaN(selectedValue)) {
+                                    filter.push({ field: "id", operator: "contains", value: selectedValue });
+                                } else {
+                                    filter.push({ field: "name", operator: "contains", value: selectedValue });
+                                }
+                                grid.dataSource.filter(filter);
+                            } else {
+                                grid.dataSource.filter([]);
+                            }
+
+                            $(grid.element).addClass("k-custom-visible");
+                        });
+                    }
+                },
+                change: function (e) {
+                    if ($(grid.element).hasClass("k-custom-visible")) {
+                        var selectedValue = $('#comboList').closest("span").children("span").children("input").val(); // comboBox.value();
+
+                        if (selectedValue.length > 0) {
+                            var filter = new Array();
+                            if (!isNaN(selectedValue)) {
+                                filter.push({ field: "id", operator: "contains", value: selectedValue });
+                            } else {
+                                filter.push({ field: "name", operator: "contains", value: selectedValue });
+                            }
+                            grid.dataSource.filter(filter);
+                        } else {
+                            grid.dataSource.filter([]);
+                        }
+
+                        $(grid.element).addClass("k-custom-visible");
+                    }
+                },
+                dataSource: [
+                    { name: "Cotton", id: "1" },
+                    { name: "Polyester", id: "2" },
+                    { name: "Cotton/Polyester", id: "3" },
+                    { name: "Rib Knit", id: "4" }
+                ]
+            }).data("kendoComboBox");
+
+            rootElement = $(comboBox.rootElement);
+
+            grid = $("#grid").kendoGrid({
+                dataSource: {
+                    data: [
+                        { name: "Cotton", id: "1" },
+                        { name: "Polyester", id: "2" },
+                        { name: "Cotton/Polyester", id: "3" },
+                        { name: "Rib Knit", id: "4" }
+                    ]
+                },
+                columns: [
+                    {
+                        title: "Id",
+                        field: "id"
+                    },
+                    {
+                        title: "Name",
+                        field: "name"
+                    }
+                ],
+                selectable: true,
+                pageable: true,
+                filterable: {
+                    mode: "row"
+                },
+                change: function (e) {
+                    var selected = $.map(this.select(), function (item) {
+                        return $(item)[0].cells[0].innerHTML;
+                    });
+
+                    comboBox.value(selected[0]);
+
+                    $(grid.element).slideToggle('fast', function () {
+                        $(grid.element).removeClass("k-custom-visible");
+                    });
+                }
+            }).data("kendoGrid");
+
+            $(grid.element).css({ "border": "1px solid grey", "display": "none", "position": "absolute" });
+
+            //$(grid.element).css({ "top": rootElement.position().top + rootElement.height(), "left": rootElement.position().left });
+        });
+
+        $(document).click(function (e) {
+
+            // Ignore clicks on the grid.
+            if (!$(e.target).hasClass("k-button") && !$(e.target).hasClass("k-textbox")) {
+                if ($(e.target).closest("div.k-grid").length == 0 && $(e.target).closest(".k-grid-edit").length == 0 && $(e.target).closest(".k-grid-edit-row").length == 0) {
+                    // If visible, then close the grid.
+                    if ($(grid.element).hasClass("k-custom-visible")) {
+                        $(grid.element).slideToggle('fast', function () {
+                            $(grid.element).removeClass("k-custom-visible");
+                        });
+                    }
+                }
+            }
+        });
+    </script>*@
+
+<script type="text/javascript">
+
+    $("#buttonCreate").click(function () {
+        var isValid = true;
+        isValid = validFormRequired();
+
+        if (isValid == false) {
+            show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS009"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+        } else {
+
+            function OrderModel() {
+                return {
+                    OrderCode: $('#@Html.FieldIdFor(model => model.OrderCode)').val(),
+                };
+            }
+            var postDataCreate = JSON.stringify({
+                model: OrderModel()
+            });
+
+            $.ajax({
+                url: '@(Url.Action("Create", "Order"))',
+                type: 'POST',
+                dataType: 'json',
+                data: postDataCreate,
+                contentType: 'application/json; charset=utf-8',
+                beforeSend: function () {
+                    waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
+                },
+                success: function (result) {
+
+                    if (result.saveSuccess) {
+                        var a = result.messageId;
+                        //window.location.href = '../../Order/Edit?OrderCode=' + result.orderCode; // call method GET: Creat (Reload Form Data)
+                        show(false, "@MessageManager.GetMessageInfoByMessageCode("result.messageId")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                    } else { // show message check valid on server
+
+                    }
+                    waitingDialog.hide();
+                },
+                error: function (msg) {
+                    show(false, "@MessageManager.GetMessageInfoByMessageCode("MS005")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                    waitingDialog.hide();
+                }
+            });
+        }
+    });
+
+    $("#buttonUpdate").click(function () {
+        var isValid = true;
+
+        isValid = validFormRequired();
+
+        if (isValid == false) {
+            show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS009"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+        } else {
+
+            function OrderModel() {
+                return {
+                    Id: $('#@Html.FieldIdFor(model => model.Id)').val(),
+                    OrderCode: $('#@Html.FieldIdFor(model => model.OrderCode)').val(),
+                };
+            }
+
+            var postDataEdit = {
+                model: OrderModel()
+            };
+            addAntiForgeryToken(postDataEdit);
+
+            $.ajax({
+                url: '@(Url.Action("Edit", "Order"))',
+                type: 'POST',
+                dataType: 'json',
+                data: postDataEdit,
+                contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                beforeSend: function () {
+                    waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
+                },
+                success: function (result) {
+
+                    if (result.saveSuccess) {
+                        var a = result.messageId;
+                        //window.location.href = '../../Order/Edit?OrderCode=' + result.orderCode; // call method GET: Creat (Reload Form Data)
+                        show(false, "@MessageManager.GetMessageInfoByMessageCode("MS003")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                    } else { // show message check valid on server
+
+                    }
+                    waitingDialog.hide();
+                },
+                error: function (msg) {
+                    show(false, "@MessageManager.GetMessageInfoByMessageCode("MS005")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                    waitingDialog.hide();
+                }
+            });
+        }
+
+    });
+
+    function validFormRequired() {
+        var isValid = true;
+
+        var ExpectedDeliveryDate = $('#@Html.FieldIdFor(m => m.ExpectedDeliveryDate)').val();
+        if (isNullOrEmpty(ExpectedDeliveryDate)) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.ExpectedDeliveryDate)').addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.ExpectedDeliveryDate)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblExpectedDeliveryDate"))");
+        }
+        else {
+            if (!isDate(ExpectedDeliveryDate)) {
+                $('#@Html.FieldIdFor(m => m.ExpectedDeliveryDate)').addClass("borderError");
+
+                setError('@Html.FieldIdFor(m => m.ExpectedDeliveryDate)', true, '@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR008"))');
+                isValid = false;
+            } else {
+                $('#@Html.FieldIdFor(m => m.ExpectedDeliveryDate)').removeClass("borderError");
+                setError('@Html.FieldIdFor(model => model.ExpectedDeliveryDate)', false, '');
+            }
+
+        }
+
+        var EstimatedDeliveryStartDate = $('#@Html.FieldIdFor(m => m.EstimatedDeliveryStartDate)').val();
+        if (isNullOrEmpty(EstimatedDeliveryStartDate)) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.EstimatedDeliveryStartDate)').addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.EstimatedDeliveryStartDate)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblEstimatedDeliveryStartDate"))");
+        }
+        else {
+            if (!isDate(EstimatedDeliveryStartDate)) {
+                $('#@Html.FieldIdFor(m => m.EstimatedDeliveryStartDate)').addClass("borderError");
+
+                setError('@Html.FieldIdFor(m => m.EstimatedDeliveryStartDate)', true, '@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR008"))');
+                isValid = false;
+            } else {
+                $('#@Html.FieldIdFor(m => m.EstimatedDeliveryStartDate)').removeClass("borderError");
+                setError('@Html.FieldIdFor(model => model.EstimatedDeliveryStartDate)', false, '');
+            }
+        }
+
+        var EstimatedDeliveryEndDate = $('#@Html.FieldIdFor(m => m.EstimatedDeliveryEndDate)').val();
+        if (isNullOrEmpty(EstimatedDeliveryEndDate)) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.EstimatedDeliveryEndDate)').addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.EstimatedDeliveryEndDate)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblEstimatedDeliveryEndDate"))");
+        }
+        else {
+            if (!isDate(EstimatedDeliveryEndDate)) {
+                $('#@Html.FieldIdFor(m => m.EstimatedDeliveryEndDate)').addClass("borderError");
+
+                setError('@Html.FieldIdFor(m => m.EstimatedDeliveryEndDate)', true, '@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR008"))');
+                isValid = false;
+            } else {
+                $('#@Html.FieldIdFor(m => m.EstimatedDeliveryEndDate)').removeClass("borderError");
+                setError('@Html.FieldIdFor(model => model.EstimatedDeliveryEndDate)', false, '');
+            }
+        }
+        //Check ExpectedDeliveryDate < = EstimatedDeliveryStartDate
+
+        if (!isNullOrEmpty(ExpectedDeliveryDate) && !isNullOrEmpty(EstimatedDeliveryStartDate) &&
+            isDate(ExpectedDeliveryDate) && isDate(EstimatedDeliveryStartDate)) {
+            if (CompareDates(ExpectedDeliveryDate, EstimatedDeliveryStartDate) == false) {
+                $('#@Html.FieldIdFor(m => m.EstimatedDeliveryStartDate)').addClass("borderError");
+
+                setError('@Html.FieldIdFor(m => m.EstimatedDeliveryStartDate)', true, '@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR007", "lblEstimatedDeliveryStartDate", "lblExpectedDeliveryDate"))');
+                isValid = false;
+            }
+            else {
+                $('#@Html.FieldIdFor(m => m.EstimatedDeliveryStartDate)').removeClass("borderError");
+                setError('@Html.FieldIdFor(model => model.EstimatedDeliveryStartDate)', false, '');
+            }
+        }
+
+        // Check EstimatedDeliveryStartDate <= EstimatedDeliveryEndDate
+
+        if (!isNullOrEmpty(EstimatedDeliveryStartDate) && !isNullOrEmpty(EstimatedDeliveryEndDate) &&
+            isDate(EstimatedDeliveryStartDate) && isDate(EstimatedDeliveryEndDate)) {
+            if (CompareDates(EstimatedDeliveryStartDate, EstimatedDeliveryEndDate) == false) {
+                $('#@Html.FieldIdFor(m => m.EstimatedDeliveryEndDate)').addClass("borderError");
+
+                setError('@Html.FieldIdFor(m => m.EstimatedDeliveryEndDate)', true, '@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR007", "lblEstimatedDeliveryEndDate", "lblEstimatedDeliveryStartDate"))');
+                isValid = false;
+            }
+            else {
+                $('#@Html.FieldIdFor(m => m.EstimatedDeliveryEndDate)').removeClass("borderError");
+                setError('@Html.FieldIdFor(model => model.EstimatedDeliveryEndDate)', false, '');
+            }
+        }
+
+        var EstimatedNumberDaysDelivery = $('#@Html.FieldIdFor(m => m.EstimatedNumberDaysDelivery)').val();
+        if (EstimatedNumberDaysDelivery == "") {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.EstimatedNumberDaysDelivery)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.EstimatedNumberDaysDelivery)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblEstimatedNumberDaysDelivery"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.EstimatedNumberDaysDelivery)').parent().removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.EstimatedNumberDaysDelivery)', false, '');
+        }
+
+        var VehicleTypeId = $('#@Html.FieldIdFor(m => m.VehicleTypeId)').val();
+        if (isNullOrEmpty(VehicleTypeId) || VehicleTypeId == 0) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.VehicleTypeId)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.VehicleTypeId)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblVehicleType"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.VehicleTypeId)').parent().removeClass("borderError");
+            setError('@Html.FieldIdFor(m => m.VehicleTypeId)', false, '');
+        }
+
+        var WorkflowId = $('#@Html.FieldIdFor(m => m.WorkflowId)').val();
+        if (isNullOrEmpty(WorkflowId) || WorkflowId == 0) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.WorkflowId)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.WorkflowId)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblWorkflow"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.WorkflowId)').parent().removeClass("borderError");
+            setError('@Html.FieldIdFor(m => m.WorkflowId)', false, '');
+        }
+
+        var TransporterId = $('#@Html.FieldIdFor(m => m.TransporterId)').val();
+        if (isNullOrEmpty(TransporterId) || TransporterId == 0) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.TransporterId)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.TransporterId)', true, '@Html.Raw(@MessageManager.GetMessageInfoByMessageCode("VR006", "lblTransporter"))');
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.TransporterId)').parent().removeClass("borderError");
+            setError('@Html.FieldIdFor(m => m.TransporterId)', false, '');
+        }
+
+        /* Customer From To */
+        var CustomerFromCode = $("#CustomerFromCode").val();
+        if (isNullOrEmpty(CustomerFromCode)) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.CustomerFromCode)').addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.CustomerFromCode)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblCustomerFromCode"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.CustomerFromCode)').removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.CustomerFromCode)', false, '');
+        }
+
+        var CustomerFromName = $("#CustomerFromName").val();
+        if (isNullOrEmpty(CustomerFromName)) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.CustomerFromName)').addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.CustomerFromName)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblCustomerFromName"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.CustomerFromName)').removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.CustomerFromName)', false, '');
+        }
+
+        var CustomerToCode = $("#CustomerToCode").val();
+        //alert(CustomerToCode);
+        if (isNullOrEmpty(CustomerToCode)) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.CustomerToCode)').addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.CustomerToCode)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblCustomerToCode"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.CustomerToCode)').removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.CustomerToCode)', false, '');
+        }
+
+        var CustomerToName = $("#CustomerToName").val();
+        if (isNullOrEmpty(CustomerToName)) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.CustomerToName)').addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.CustomerToName)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblCustomerToName"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.CustomerToName)').removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.CustomerToName)', false, '');
+        }
+
+        /* End Customer From To */
+        /*Address From*/
+        var CountryFromId = $('#@Html.FieldIdFor(m => m.CountryFromId)').val();
+        if (isNullOrEmpty(CountryFromId) || CountryFromId == 0) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.CountryFromId)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.CountryFromId)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblCountry"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.CountryFromId)').parent().removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.CountryFromId)', false, '');
+        }
+
+        var ProvinceFromId = $('#@Html.FieldIdFor(m => m.ProvinceFromId)').val();
+        if (isNullOrEmpty(ProvinceFromId) || ProvinceFromId == 0) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.ProvinceFromId)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.ProvinceFromId)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblProvince"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.ProvinceFromId)').parent().removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.ProvinceFromId)', false, '');
+        }
+
+        var DistrictFromId = $('#@Html.FieldIdFor(m => m.DistrictFromId)').val();
+        if (isNullOrEmpty(DistrictFromId) || DistrictFromId == 0) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.DistrictFromId)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.DistrictFromId)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblDistrict"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.DistrictFromId)').parent().removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.DistrictFromId)', false, '');
+        }
+
+        var WardFromId = $('#@Html.FieldIdFor(m => m.WardFromId)').val();
+        if (isNullOrEmpty(WardFromId) || WardFromId == 0) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.WardFromId)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.WardFromId)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblWard"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.WardFromId)').parent().removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.WardFromId)', false, '');
+        }
+
+        var AddressFrom = $('#@Html.FieldIdFor(m => m.AddressFrom)').val();
+        if (isNullOrEmpty(AddressFrom)) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.AddressFrom)').addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.AddressFrom)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblAddress"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.AddressFrom)').removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.AddressFrom)', false, '');
+        }
+        /*End Address From*/
+
+        /*Address To*/
+        var CountryToId = $('#@Html.FieldIdFor(m => m.CountryToId)').val();
+        if (isNullOrEmpty(CountryToId) || CountryToId == 0) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.CountryToId)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.CountryToId)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblCountry"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.CountryToId)').parent().removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.CountryToId)', false, '');
+        }
+
+        var ProvinceToId = $('#@Html.FieldIdFor(m => m.ProvinceToId)').val();
+        if (isNullOrEmpty(ProvinceToId) || ProvinceToId == 0) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.ProvinceToId)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.ProvinceToId)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblProvince"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.ProvinceToId)').parent().removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.ProvinceToId)', false, '');
+        }
+
+        var DistrictToId = $('#@Html.FieldIdFor(m => m.DistrictToId)').val();
+        if (isNullOrEmpty(DistrictToId) || DistrictToId == 0) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.DistrictToId)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.DistrictToId)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblDistrict"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.DistrictToId)').parent().removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.DistrictToId)', false, '');
+        }
+
+        var WardToId = $('#@Html.FieldIdFor(m => m.WardToId)').val();
+        if (isNullOrEmpty(WardToId) || WardToId == 0) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.WardToId)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.WardToId)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblWard"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.WardToId)').parent().removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.WardToId)', false, '');
+        }
+
+        var AddressTo = $('#@Html.FieldIdFor(m => m.AddressTo)').val();
+        if (isNullOrEmpty(AddressTo)) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.AddressTo)').addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.AddressTo)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblAddress"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.AddressTo)').removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.AddressTo)', false, '');
+        }
+        /*End Address To*/
+
+        /*Order Summary*/
+        var TotalWeight = $('#@Html.FieldIdFor(m => m.TotalWeight)').val();
+        if (isNullOrEmpty(TotalWeight)) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.TotalWeight)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.TotalWeight)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblTotalWeight"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.TotalWeight)').parent().removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.TotalWeight)', false, '');
+        }
+
+        var TotalOrderValue = $('#@Html.FieldIdFor(m => m.TotalOrderValue)').val();
+        if (isNullOrEmpty(TotalOrderValue)) {
+            isValid = false;
+            $('#@Html.FieldIdFor(m => m.TotalOrderValue)').parent().addClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.TotalOrderValue)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblTotalOrderValue"))");
+        }
+        else {
+            $('#@Html.FieldIdFor(m => m.TotalOrderValue)').parent().removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.TotalOrderValue)', false, '');
+        }
+
+        var isChecked = $("#IsCollectingMoney").is(":checked");
+
+        if (isChecked == true) {
+
+            var TotalCollectingMoney = $('#@Html.FieldIdFor(m => m.TotalCollectingMoney)').val();
+            if (isNullOrEmpty(TotalCollectingMoney)) {
+                isValid = false;
+                $('#@Html.FieldIdFor(m => m.TotalCollectingMoney)').parent().addClass("borderError");
+
+                setError('@Html.FieldIdFor(m => m.TotalCollectingMoney)', true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("VR006", "lblTotalCollectingMoney"))");
+            }
+            else {
+                $('#@Html.FieldIdFor(m => m.TotalCollectingMoney)').parent().removeClass("borderError");
+
+                setError('@Html.FieldIdFor(m => m.TotalCollectingMoney)', false, '');
+            }
+        } else {
+            $('#@Html.FieldIdFor(m => m.TotalCollectingMoney)').parent().removeClass("borderError");
+
+            setError('@Html.FieldIdFor(m => m.TotalCollectingMoney)', false, '');
+        }
+
+        /*End Order Summary */
+        return isValid;
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var isChecked = $("#IsCollectingMoney").is(":checked");
+
+        if (isChecked == false) {
+            var TotalCollectingMoney = $("#TotalCollectingMoney").data("kendoNumericTextBox");
+
+            TotalCollectingMoney.enable();
+            TotalCollectingMoney.value(0);
+            TotalCollectingMoney.enable(false);
+        }
+
+        $("#IsCollectingMoney").click(function () {
+
+            if ($(this).is(":checked")) {
+                var TotalCollectingMoney = $("#TotalCollectingMoney").data("kendoNumericTextBox");
+
+                TotalCollectingMoney.enable();
+                TotalCollectingMoney.value(0);
+                TotalCollectingMoney.enable(true);
+
+            } else {
+                var TotalCollectingMoney = $("#TotalCollectingMoney").data("kendoNumericTextBox");
+
+                TotalCollectingMoney.enable();
+                TotalCollectingMoney.value(0);
+                TotalCollectingMoney.enable(false);
+            }
+
+        });
+
+    });
+</script>

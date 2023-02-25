@@ -1,0 +1,133 @@
+﻿@using TMS.WebAPP.Controllers
+@model TMS.WebAPP.Models.AccountModel.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*MessageManager.GetMessage("lblTitleLogin")*@
+    <title>TMS | @MessageManager.GetCaptionValueByKey("lblTitleLogin")</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="~/Content/AdminTemplateV2/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/AdminTemplateV2/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="~/Content/AdminTemplateV2/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/AdminTemplateV2/dist/css/AdminLTE.min.css">
+
+    <link rel="stylesheet" href="~/Content/Login/style.css">
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+
+        <div class="row login-logo">
+            <a href="/"><b>TMS</b>System</a>
+        </div>
+        <div class="row login-box-body">
+            <div class="col-md-8 login-box-body-border-right">
+                <p class="login-box-msg">@MessageManager.GetCaptionValueByKey("btnLogin")</p>
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "", role = "form" }))
+            {
+                    <fieldset>
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <div class="form-group has-feedback input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = MessageManager.GetCaptionValueByKey("lblUserName") })
+                            @Html.ValidationMessageFor(m => m.UserName)
+                        </div>
+                        <div class="form-group has-feedback input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = MessageManager.GetCaptionValueByKey("lblPassword") })
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+
+                        <div>
+                            @Html.Hidden("atempt", Session["atempt"])
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-7">
+                                <ul class="languageLogin">
+                                    <li class="dropdown language">
+
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <img width="24" src="~/Content/Images/flags/@ViewBag.Icon" />
+                                            <span class="font-weigh-bold">@ViewBag.LanguageName</span>
+                                            <i class="fa fa-caret-down"></i>
+                                        </a>
+
+                                        <ul class="dropdown-menu">
+
+                                            <li>
+                                                <ul class="menu">
+                                                    @if (Model.Languages != null && Model.Languages.Count > 0)
+                                                    {
+                                                        foreach (var l in Model.Languages)
+                                                        {
+                                                            <li class="itemlanguage" onclick="GetLanguagetSelected(@l.Id)">
+                                                                <img width="24" src="~/Content/Images/flags/@l.Icon" />
+                                                                @l.Name
+                                                            </li>
+                                                        }
+                                                    }
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-xs-5">
+                                <button type="submit" class="btn btn-info cursor-pointer btn-login">@MessageManager.GetCaptionValueByKey("btnLogin")</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </fieldset>
+                }
+            </div>
+
+            <div class="col-md-4">
+                <div>
+                    <p>
+                        <span class="font-weigh-bold">
+                            @MessageManager.GetCaptionValueByKey("lblSupportCenter")
+                        </span>
+                    </p>
+                    <p>
+                        <div>
+                            <span class="font-size-12px">
+                                @MessageManager.GetCaptionValueByKey("lblNaNoSupportTeam")
+                            </span>
+                        </div>
+                        <div>
+                            <a class="font-size-12px">
+                                nano@gmail.com
+                            </a>
+                        </div>
+                    </p>
+                    <p>
+                        <span class="font-size-12px">
+                            @MessageManager.GetCaptionValueByKey("lblVersion") : 1.0
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- /.login-box-body -->
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery 3 -->
+    <script src="~/Content/AdminTemplateV2/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/Content/AdminTemplateV2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/TMSScripts/homepage.min.js"></script>
+</body>
+</html>

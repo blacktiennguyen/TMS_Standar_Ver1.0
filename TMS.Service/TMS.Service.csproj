@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F811DE9C-E89E-4A0D-A2F4-2F5CAFBE5A8F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TMS.Service</RootNamespace>
+    <AssemblyName>TMS.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\Dlls\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CaptionTranslations\CaptionTranslationService.cs" />
+    <Compile Include="CaptionTranslations\ICaptionTranslationService.cs" />
+    <Compile Include="Companys\CompanyService.cs" />
+    <Compile Include="Companys\ICompanyService.cs" />
+    <Compile Include="FIXs\ILengthTypeService.cs" />
+    <Compile Include="FIXs\ITransportationMethodService.cs" />
+    <Compile Include="FIXs\IPayerPostageServiceService.cs" />
+    <Compile Include="FIXs\LengthTypeService.cs" />
+    <Compile Include="FIXs\TransportationMethodService.cs" />
+    <Compile Include="FIXs\PayerPostageServiceService.cs" />
+    <Compile Include="MasterDatas\ICurrencyService.cs" />
+    <Compile Include="MasterDatas\CurrencyService.cs" />
+    <Compile Include="MasterDatas\IRouteService.cs" />
+    <Compile Include="MasterDatas\ITransporterService.cs" />
+    <Compile Include="MasterDatas\RouteService.cs" />
+    <Compile Include="MasterDatas\TransporterService.cs" />
+    <Compile Include="MasterDatas\VehicleTypeService.cs" />
+    <Compile Include="MasterDatas\IVehicleTypeService.cs" />
+    <Compile Include="MasterDatas\WardService.cs" />
+    <Compile Include="MasterDatas\ICountryService.cs" />
+    <Compile Include="MasterDatas\IWardService.cs" />
+    <Compile Include="MasterDatas\IDistrictService.cs" />
+    <Compile Include="MasterDatas\IProvinceService.cs" />
+    <Compile Include="MasterDatas\IItemUnitService.cs" />
+    <Compile Include="MasterDatas\CountryService.cs" />
+    <Compile Include="MasterDatas\DistrictService.cs" />
+    <Compile Include="MasterDatas\ProvinceService.cs" />
+    <Compile Include="MasterDatas\ItemUnitService.cs" />
+    <Compile Include="MasterDataTranslations\MasterDataTranslationService.cs" />
+    <Compile Include="MasterDataTranslations\IMasterDataTranslationService.cs" />
+    <Compile Include="FIXs\IWeightTypeService.cs" />
+    <Compile Include="FIXs\IOrderShippingStatusService.cs" />
+    <Compile Include="FIXs\WeightTypeService.cs" />
+    <Compile Include="FIXs\OrderShippingStatusService.cs" />
+    <Compile Include="FIXs\OrderStatusService.cs" />
+    <Compile Include="FIXs\IOrderStatusService.cs" />
+    <Compile Include="Functions\FunctionService.cs" />
+    <Compile Include="Functions\IFunctionService.cs" />
+    <Compile Include="FixDataTranslations\FixDataTranslationService.cs" />
+    <Compile Include="FixDataTranslations\IFixDataTranslationService.cs" />
+    <Compile Include="FunctionTranslations\FunctionTranslationService.cs" />
+    <Compile Include="FunctionTranslations\IFunctionTranslationService.cs" />
+    <Compile Include="Languages\ILanguageService.cs" />
+    <Compile Include="Languages\LanguageService.cs" />
+    <Compile Include="MasterDatas\IItemTypeService.cs" />
+    <Compile Include="MasterDatas\ItemTypeService.cs" />
+    <Compile Include="Orders\IOrderService.cs" />
+    <Compile Include="Orders\IOrderItemDetailService.cs" />
+    <Compile Include="Orders\OrderItemDetailService.cs" />
+    <Compile Include="Orders\OrderService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Customers\CustomerService.cs" />
+    <Compile Include="Customers\ICustomerService.cs" />
+    <Compile Include="SystemSettings\ISystemSettingService.cs" />
+    <Compile Include="SystemSettings\SystemSettingService.cs" />
+    <Compile Include="UserGroups\GroupService.cs" />
+    <Compile Include="UserGroups\IGroupService.cs" />
+    <Compile Include="Users\IUserService.cs" />
+    <Compile Include="Users\UserService.cs" />
+    <Compile Include="Workflows\IWorkflowSettingService.cs" />
+    <Compile Include="Workflows\WorkflowSettingService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TMS.Core\TMS.Core.csproj">
+      <Project>{765A7DD6-40BC-4347-9470-6BF860A97D59}</Project>
+      <Name>TMS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TMS.Library\TMS.Library.csproj">
+      <Project>{ba5cfe46-729c-4777-8e86-daf082e87033}</Project>
+      <Name>TMS.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TMS.Shared\TMS.Shared.csproj">
+      <Project>{294057FC-316F-44D8-953B-7B029B7F9CD4}</Project>
+      <Name>TMS.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

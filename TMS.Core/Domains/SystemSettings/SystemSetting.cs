@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace TMS.Core.Domains
+{
+    public class SystemSetting : BaseEntity
+    {
+        public string Key { get; set; }
+
+        public string Value { get; set; }
+
+        public int CompanyId { get; set; }
+
+        public int TenantId { get; set; }
+
+        public int? CreatedById { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public int? UpdatedById { get; set; }
+
+        public DateTime UpdatedDate { get; set; }
+    }
+}

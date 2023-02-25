@@ -1,0 +1,20 @@
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\TMS.Core.dll.config
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\TMS.Core.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\TMS.Core.pdb
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\EntityFramework.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\EntityFramework.SqlServer.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\EntityFramework.xml
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\EntityFramework.SqlServer.xml
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\obj\Debug\TMS.Core.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\obj\Debug\TMS.Core.pdb
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\obj\Debug\TMS.Core.csprojResolveAssemblyReference.cache
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\TMS.Core.dll.config
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\TMS.Core.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\TMS.Core.pdb
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\EntityFramework.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\EntityFramework.SqlServer.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\EntityFramework.xml
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\bin\Debug\EntityFramework.SqlServer.xml
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\obj\Debug\TMS.Core.csprojResolveAssemblyReference.cache
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\obj\Debug\TMS.Core.dll
+E:\HETHONG_LOGISTIC\QUAN LY VAN TAI HANG HOA GIAO NHAN DUONG BO\SOURCE WEB APP\TransportationManagementSystems\TMS.Core\obj\Debug\TMS.Core.pdb

@@ -1,0 +1,284 @@
+﻿@model TMS.WebAPP.Models.OrderModel
+@using Kendo.Mvc.UI
+
+<div class="row border-top margin-top-10px">
+    <div class="form-group col-md-4">
+        <div class="form-group row">
+        </div>
+    </div>
+
+    <div class="form-group col-md-8 margin-top-10px">
+        <div class="form-group row">
+            <label class="col-md-5 control-label margin-top-8px">
+                @MessageManager.GetCaptionValueByKey("lblTotalWeight") <span class="star">(*)</span>
+            </label>
+            <div class="col-md-4">
+                @Html.Kendo().NumericTextBoxFor(model => model.TotalWeight).Min(0).HtmlAttributes(new { maxlength = 30, @style = "text-align:right; padding-right: 2px" }).Format("0,0.00")
+            </div>
+            <div class="col-md-3">
+                @(Html.Kendo().DropDownListFor(x => x.WeightTypeId)
+                            .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                            .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                            .Filter(FilterType.Contains)
+                            .HtmlAttributes(new { style = "width:100%;" })
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("LoadWeightTypeForDropDownList", "FIXTable"); //Set the Action and Controller name
+                                })
+                                .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                            })
+                )
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="row">
+        <div class="form-group col-md-4">
+            <div class="form-group row">
+            </div>
+        </div>
+
+        <div class="form-group col-md-8">
+            <div class="form-group row">
+                <label class="col-md-5 control-label margin-top-8px">
+                    @MessageManager.GetCaptionValueByKey("lblPayerPostageService") <span class="star">(*)</span>
+                </label>
+
+                <div class="col-md-4">
+                    @(Html.Kendo().DropDownListFor(x => x.PayerPostageServiceId)
+                                        .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                        .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                        .Filter(FilterType.Contains)
+                                        .HtmlAttributes(new { style = "width:100%;" })
+                                        .DataSource(source =>
+                                        {
+                                            source.Read(read =>
+                                            {
+                                                read.Action("LoadPayerPostageServiceForDropDownList", "FIXTable"); //Set the Action and Controller name
+                                            })
+                                            .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                        })
+                    )
+                </div>
+
+                <div class="col-md-3">
+                    <label class="control-label margin-top-8px underline">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div class="row">
+    <div class="form-group col-md-4">
+        <div class="form-group row">
+        </div>
+    </div>
+
+    <div class="form-group col-md-8">
+        <div class="form-group row">
+            <label class="col-md-5 control-label margin-top-8px">
+                @MessageManager.GetCaptionValueByKey("lblTotalOrderValue") <span class="star">(*)</span>
+            </label>
+
+            <div class="col-md-4">
+                @Html.Kendo().NumericTextBoxFor(model => model.TotalOrderValue).Min(0).HtmlAttributes(new { maxlength = 20, @style = "text-align:right; padding-right: 2px" }).Format("0,0.00")
+            </div>
+
+            <div class="col-md-3">
+                <label class="control-label margin-top-8px underline">
+                    @Model.LocalCurrency
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-4">
+        <div class="form-group row">
+        </div>
+    </div>
+
+    <div class="form-group col-md-8">
+        <div class="form-group row">
+            <label class="col-md-5 control-label margin-top-8px">
+                @MessageManager.GetCaptionValueByKey("lblPayerPostageService")
+            </label>
+
+            <div class="col-md-4">
+                @(Html.Kendo().DropDownListFor(x => x.PayerPostageServiceId)
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadPayerPostageServiceForDropDownList", "FIXTable"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                )
+            </div>
+
+            <div class="col-md-3">
+                <label class="control-label margin-top-8px underline">
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4">
+        <div class="form-group row">
+        </div>
+    </div>
+
+    <div class="form-group col-md-8">
+        <div class="form-group row">
+            <label class="col-md-5 control-label margin-top-8px">
+                @MessageManager.GetCaptionValueByKey("lblTotalService")
+            </label>
+
+            <div class="col-md-4">
+                @Html.Kendo().NumericTextBoxFor(model => model.TotalService).Min(0).HtmlAttributes(new { maxlength = 20, @style = "text-align:right; padding-right: 2px" }).Format("0,0.00")
+            </div>
+
+            <div class="col-md-3">
+                <label class="control-label margin-top-8px underline">
+                    @Model.LocalCurrency
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4">
+        <div class="form-group row">
+        </div>
+    </div>
+
+    <div class="form-group col-md-8">
+        <div class="form-group row">
+            <label class="col-md-5 control-label margin-top-8px">
+                @MessageManager.GetCaptionValueByKey("lblTotalPostage")
+            </label>
+
+            <div class="col-md-4">
+                @Html.Kendo().NumericTextBoxFor(model => model.TotalPostage).Min(0).HtmlAttributes(new { maxlength = 20, @style = "text-align:right; padding-right: 2px" }).Format("0,0.00")
+            </div>
+
+            <div class="col-md-3">
+                <label class="control-label margin-top-8px underline">
+                    @Model.LocalCurrency
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4">
+        <div class="form-group row">
+        </div>
+    </div>
+
+    <div class="form-group col-md-8">
+        <div class="form-group row">
+            <label class="col-md-5 control-label margin-top-8px">
+                @MessageManager.GetCaptionValueByKey("lblTotalTax")
+            </label>
+
+            <div class="col-md-4">
+                @Html.Kendo().NumericTextBoxFor(model => model.TotalTax).Min(0).HtmlAttributes(new { maxlength = 20, @style = "text-align:right; padding-right: 2px" }).Format("0,0.00")
+            </div>
+
+            <div class="col-md-3">
+                <label class="control-label margin-top-8px underline">
+                    @Model.LocalCurrency
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4">
+        <div class="form-group row">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4">
+        <div class="form-group row">
+        </div>
+    </div>
+
+    <div class="form-group col-md-8">
+        <div class="form-group row line-height-5px">
+            <label class="col-md-5 control-label margin-top-8px">
+                @MessageManager.GetCaptionValueByKey("lblIsCollectingMoney")
+            </label>
+            <div class="col-md-1">
+                @Html.EditorFor(m => m.IsCollectingMoney, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblIsCollectingMoney") })
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4">
+        <div class="form-group row">
+        </div>
+    </div>
+
+    <div class="form-group col-md-8">
+        <div class="form-group row">
+            <label class="col-md-5 control-label margin-top-8px">
+                @MessageManager.GetCaptionValueByKey("lblTotalCollectingMoney")
+            </label>
+
+            <div class="col-md-4">
+                @Html.Kendo().NumericTextBoxFor(model => model.TotalCollectingMoney).Min(0).HtmlAttributes(new { maxlength = 20, @style = "text-align:right; padding-right: 2px" }).Format("0,0.00")
+            </div>
+
+            <div class="col-md-3">
+                <label class="control-label margin-top-8px underline">
+                    @Model.LocalCurrency
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4">
+        <div class="form-group row">
+        </div>
+    </div>
+
+    <div class="form-group col-md-8">
+        <div class="form-group row">
+            <label class="col-md-5 control-label margin-top-8px font-size-20px">
+                @MessageManager.GetCaptionValueByKey("lblTotalReceivable") <span class="star">(*)</span>
+            </label>
+
+            <div class="col-md-4">
+                @Html.Kendo().NumericTextBoxFor(model => model.TotalReceivable).Min(0).HtmlAttributes(new { maxlength = 20, @style = "text-align:right; padding-right: 2px" }).Format("0,0.00")
+            </div>
+
+            <div class="col-md-3">
+                <label class="control-label margin-top-8px underline">
+                    @Model.LocalCurrency
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+2022-07-25 20:47:38,331 ERROR: An error occurred while executing the command definition. See the inner exception for details.
+2022-07-25 20:48:03,006 ERROR: An error occurred while executing the command definition. See the inner exception for details.
+2022-07-25 20:48:09,781 ERROR: An error occurred while executing the command definition. See the inner exception for details.
+2022-07-25 20:49:24,239 ERROR: An error occurred while executing the command definition. See the inner exception for details.
+2022-07-25 20:49:34,989 ERROR: An error occurred while executing the command definition. See the inner exception for details.
+2022-07-25 20:50:51,269 ERROR: An error occurred while executing the command definition. See the inner exception for details.
+2022-07-25 20:51:08,738 ERROR: An error occurred while executing the command definition. See the inner exception for details.
+2022-07-25 20:51:14,718 ERROR: An error occurred while executing the command definition. See the inner exception for details.
+2022-07-25 20:51:23,338 ERROR: An error occurred while executing the command definition. See the inner exception for details.
+2022-07-25 20:51:29,498 ERROR: An error occurred while executing the command definition. See the inner exception for details.
+2022-07-25 21:42:08,889 ERROR: The 'CountryId' property on 'Customer' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Int32'. 
+2022-07-25 21:42:08,896 ERROR: The 'CountryId' property on 'Customer' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Int32'. 

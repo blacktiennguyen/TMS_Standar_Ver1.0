@@ -1,0 +1,10 @@
+2022-07-30 16:38:48,724 ERROR: The 'TranslationId' property on 'Country' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2022-07-30 16:38:50,530 ERROR: The 'TranslationId' property on 'Country' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2022-07-30 16:38:59,548 ERROR: The 'TranslationId' property on 'Country' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2022-07-30 16:38:59,743 ERROR: The 'TranslationId' property on 'Country' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2022-07-30 16:39:01,082 ERROR: The 'TranslationId' property on 'Country' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2022-07-30 16:39:08,508 ERROR: The 'TranslationId' property on 'Country' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2022-07-30 17:24:19,475 ERROR: The 'VAT' property on 'Order' could not be set to a 'System.Int32' value. You must set this property to a non-null value of type 'System.Double'. 
+2022-07-30 17:24:19,481 ERROR: The 'VAT' property on 'Order' could not be set to a 'System.Int32' value. You must set this property to a non-null value of type 'System.Double'. 
+2022-07-30 17:25:40,550 ERROR: The 'VAT' property on 'Order' could not be set to a 'System.Int32' value. You must set this property to a non-null value of type 'System.Double'. 
+2022-07-30 17:25:40,582 ERROR: The 'VAT' property on 'Order' could not be set to a 'System.Int32' value. You must set this property to a non-null value of type 'System.Double'. 

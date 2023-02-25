@@ -1,0 +1,546 @@
+﻿@model TMS.WebAPP.Models.OrderModel
+@using Kendo.Mvc.UI
+@using TMS.WebAPP.HtmlExtension
+
+<div class="row">
+    <div class="form-group col-md-6">
+        <!-- Address From -->
+        <div class="box box-solid box-border-customer-order">
+            <div class="box-header background-block">
+                <i class="fa fa-map-marker"></i>
+                <h3 class="box-title">@MessageManager.GetCaptionValueByKey("lblAddressFrom")</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-default btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblCountry") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownListFor(model => model.CountryFromId)
+                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblCountry"))
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadCountryForDropDownList", "Country"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                    //.SelectedIndex(0) //Select first item.
+                                    //.AutoBind(false)
+                                    .Events(e =>
+                                    {
+                                        e.Change("CountryFromOnchange");
+                                    })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblProvince") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownListFor(model => model.ProvinceFromId)
+                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblProvince"))
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadProvinceForDropDownList", "Province").Data("DataProvinceFrom"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                //.SelectedIndex(0) //Select first item.
+                                //.AutoBind(false)
+                                .Events(e =>
+                                {
+                                    e.Change("ProvinceFromOnchange");
+                                })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblDistrict") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownListFor(model => model.DistrictFromId)
+                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblDistrict"))
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadDistrictForDropDownList", "District").Data("DataDistrictFrom"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                //.SelectedIndex(0) //Select first item.
+                                .Events(e =>
+                                {
+                                    e.Change("DistrictFromOnchange");
+                                })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblWard") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownListFor(model => model.WardFromId)
+                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblWard"))
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadWardForDropDownList", "Ward").Data("DataWardFrom"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                //.SelectedIndex(0) //Select first item.
+                                .Events(e =>
+                                {
+                                    e.Change("WardFromOnchange");
+                                })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblAddress") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(m => m.AddressFrom, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblAddress") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    <div class="form-group col-md-6">
+        <!-- Address From -->
+        <div class="box box-solid box-border-customer-order">
+            <div class="box-header background-block">
+                <i class="fa fa-map-marker"></i>
+                <h3 class="box-title">@MessageManager.GetCaptionValueByKey("lblAddressTo")</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-default btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblCountry") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownListFor(model => model.CountryToId)
+                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblCountry"))
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadCountryForDropDownList", "Country"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                    .SelectedIndex(0) //Select first item.
+                                    .Events(e =>
+                                    {
+                                        e.Change("CountryToOnchange");
+                                    })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblProvince") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownListFor(model => model.ProvinceToId)
+                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblProvince"))
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadProvinceForDropDownList", "Province").Data("DataProvinceTo"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                //.SelectedIndex(0) //Select first item.
+                                .Events(e =>
+                                {
+                                    e.Change("ProvinceToOnchange");
+                                })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblDistrict") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownListFor(model => model.DistrictToId)
+                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblDistrict"))
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadDistrictForDropDownList", "District").Data("DataDistrictTo"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                //.SelectedIndex(0) //Select first item.
+                                .Events(e =>
+                                {
+                                    e.Change("DistrictToOnchange");
+                                })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblWard") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownListFor(model => model.WardToId)
+                                    //.Placeholder(MessageManager.GetCaptionValueByKey("lblWard"))
+                                    .DataTextField("Name") //Specifies which property of the Product to be used by the combobox as a text.
+                                    .DataValueField("Id") //Specifies which property of the Product to be used by the combobox as a value.
+                                    .Filter(FilterType.Contains)
+                                    .HtmlAttributes(new { style = "width:100%;" })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("LoadWardForDropDownList", "Ward").Data("DataWardTo"); //Set the Action and Controller name
+                                        })
+                                        .ServerFiltering(false); //If true the DataSource will not filter the data on the client.
+                                    })
+                                 //.SelectedIndex(0) //Select first item.
+                                 .Events(e =>
+                                 {
+                                     e.Change("WardToOnchange");
+                                 })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label margin-top-8px">
+                                @MessageManager.GetCaptionValueByKey("lblAddress") <span class="star">(*)</span>
+                            </label>
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(m => m.AddressTo, new { @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblAddress") })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+<!-- On change combobox Address From-->
+<script type="text/javascript">
+
+    var addressFrom = $('#@Html.FieldIdFor(m=>m.AddressFrom)');
+
+    function CountryFromOnchange() {
+
+        var countryFrom = $('#CountryFromId').data('kendoDropDownList');
+        var provinceFrom = $('#ProvinceFromId').data('kendoDropDownList');
+        var districtFrom = $('#DistrictFromId').data('kendoDropDownList');
+        var wardFrom = $('#WardFromId').data('kendoDropDownList');
+
+        provinceFrom.text("");
+        provinceFrom.dataSource.read();
+
+        districtFrom.text("");
+        districtFrom.value("");
+        districtFrom.dataSource.data([]);
+
+        wardFrom.text("");
+        wardFrom.value("");
+        wardFrom.dataSource.data([]);
+
+        addressFrom.val(bindingAddress(wardFrom.text(), districtFrom.text(), provinceFrom.text(), countryFrom.text()));
+    }
+
+    function DataProvinceFrom() {
+        var countryId = $('#@Html.FieldIdFor(m=>m.CountryFromId)').val();
+        if (countryId == "")
+            countryId = 0;
+
+        return {
+            countryId: countryId,
+
+        };
+    }
+
+    function ProvinceFromOnchange() {
+        var countryFrom = $('#CountryFromId').data('kendoDropDownList');
+        var provinceFrom = $('#ProvinceFromId').data('kendoDropDownList');
+        var districtFrom = $('#DistrictFromId').data('kendoDropDownList');
+        var wardFrom = $('#WardFromId').data('kendoDropDownList');
+
+        districtFrom.text("");
+        districtFrom.dataSource.read();
+
+        wardFrom.text("");
+        wardFrom.value("");
+        wardFrom.dataSource.data([]);
+
+        addressFrom.val(bindingAddress(wardFrom.text(), districtFrom.text(), provinceFrom.text(), countryFrom.text()));
+    }
+
+    function DataDistrictFrom() {
+        var provinceId = $('#@Html.FieldIdFor(m=>m.ProvinceFromId)').val();
+
+        if (provinceId == "") {
+            provinceId = 0;
+        }
+
+        return {
+            provinceId: provinceId,
+        };
+    }
+
+    function DistrictFromOnchange() {
+        var countryFrom = $('#CountryFromId').data('kendoDropDownList');
+        var provinceFrom = $('#ProvinceFromId').data('kendoDropDownList');
+        var districtFrom = $('#DistrictFromId').data('kendoDropDownList');
+        var wardFrom = $('#WardFromId').data('kendoDropDownList');
+
+        wardFrom.text("");
+        wardFrom.dataSource.read();
+
+        addressFrom.val(bindingAddress(wardFrom.text(), districtFrom.text(), provinceFrom.text(), countryFrom.text()));
+    }
+
+    function DataWardFrom() {
+        var districtId = $('#@Html.FieldIdFor(m=>m.DistrictFromId)').val();
+
+        if (districtId == "")
+            districtId = 0;
+
+        return {
+            districtId: districtId,
+
+        };
+    }
+
+    function WardFromOnchange() {
+        var countryFrom = $('#CountryFromId').data('kendoDropDownList');
+        var provinceFrom = $('#ProvinceFromId').data('kendoDropDownList');
+        var districtFrom = $('#DistrictFromId').data('kendoDropDownList');
+        var wardFrom = $('#WardFromId').data('kendoDropDownList');
+
+        addressFrom.val(bindingAddress(wardFrom.text(), districtFrom.text(), provinceFrom.text(), countryFrom.text()));
+    }
+</script>
+
+<!-- On change combobox Address To-->
+<script type="text/javascript">
+    var addressTo = $('#@Html.FieldIdFor(m=>m.AddressTo)');
+
+    function CountryToOnchange() {
+
+        var countryTo = $('#CountryToId').data('kendoDropDownList');
+        var provinceTo = $('#ProvinceToId').data('kendoDropDownList');
+        var districtTo = $('#DistrictToId').data('kendoDropDownList');
+        var wardTo = $('#WardToId').data('kendoDropDownList');
+
+        provinceTo.text("");
+        provinceTo.dataSource.read();
+
+        districtTo.text("");
+        districtTo.value("");
+        districtTo.dataSource.data([]);
+
+        wardTo.text("");
+        wardTo.value("");
+        wardTo.dataSource.data([]);
+
+        addressTo.val(bindingAddress(wardTo.text(), districtTo.text(), provinceTo.text(), countryTo.text()));
+    }
+
+    function DataProvinceTo() {
+        var countryId = $('#@Html.FieldIdFor(m=>m.CountryToId)').val();
+        if (countryId == "")
+            countryId = 0;
+
+        return {
+            countryId: countryId,
+
+        };
+    }
+
+    function ProvinceToOnchange() {
+
+        var countryTo = $('#CountryToId').data('kendoDropDownList');
+        var provinceTo = $('#ProvinceToId').data('kendoDropDownList');
+        var districtTo = $('#DistrictToId').data('kendoDropDownList');
+        var wardTo = $('#WardToId').data('kendoDropDownList');
+
+        districtTo.text("");
+        districtTo.dataSource.read();
+
+        wardTo.text("");
+        wardTo.value("");
+        wardTo.dataSource.data([]);
+
+        addressTo.val(bindingAddress(wardTo.text(), districtTo.text(), provinceTo.text(), countryTo.text()));
+    }
+
+    function DataDistrictTo() {
+        var provinceId = $('#@Html.FieldIdFor(m=>m.ProvinceToId)').val();
+        if (provinceId == "")
+            provinceId = 0;
+
+        return {
+            provinceId: provinceId,
+
+        };
+    }
+
+    function DistrictToOnchange() {
+
+        var countryTo = $('#CountryToId').data('kendoDropDownList');
+        var provinceTo = $('#ProvinceToId').data('kendoDropDownList');
+        var districtTo = $('#DistrictToId').data('kendoDropDownList');
+        var wardTo = $('#WardToId').data('kendoDropDownList');
+
+        wardTo.text("");
+        wardTo.dataSource.read();
+
+        addressTo.val(bindingAddress(wardTo.text(), districtTo.text(), provinceTo.text(), countryTo.text()));
+    }
+
+    function DataWardTo() {
+        var districtId = $('#@Html.FieldIdFor(m=>m.DistrictToId)').val();
+        if (districtId == "")
+            districtId = 0;
+
+        return {
+            districtId: districtId,
+
+        };
+    }
+
+    function WardToOnchange() {
+        var countryTo = $('#CountryToId').data('kendoDropDownList');
+        var provinceTo = $('#ProvinceToId').data('kendoDropDownList');
+        var districtTo = $('#DistrictToId').data('kendoDropDownList');
+        var wardTo = $('#WardToId').data('kendoDropDownList');
+
+        addressTo.val(bindingAddress(wardTo.text(), districtTo.text(), provinceTo.text(), countryTo.text()));
+    }
+</script>
+
+<!-- Bind Address-->
+<script type="text/javascript">
+    function bindingAddress(ward, district, province, country) {
+
+        if (ward != "") {
+            ward += ", ";
+        }
+
+        if (district != "") {
+            district += ", ";
+        }
+
+        if (province != "") {
+            province += ", ";
+        }
+
+        var address = ward + district + province + country;
+        return address;
+    }
+</script>
+<!-- End Bind Address-->
