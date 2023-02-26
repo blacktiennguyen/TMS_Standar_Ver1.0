@@ -249,6 +249,7 @@
     <Compile Include="Models\HomePageModel\HomePageModel.cs" />
     <Compile Include="Models\HtmlExtension.cs" />
     <Compile Include="Models\LanguageModel\LanguageModel.cs" />
+    <Compile Include="Models\MasterDataModel\ItemTypeModel.cs" />
     <Compile Include="Models\Order\OrderItemDetailModel.cs" />
     <Compile Include="Models\Order\OrderModel.cs" />
     <Compile Include="Models\UserGroupModel\GroupModel.cs" />
