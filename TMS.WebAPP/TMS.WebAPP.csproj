@@ -9818,6 +9818,7 @@
     <Content Include="Views\Function\FunctionDataSetupAndReport.cshtml" />
     <Content Include="Views\Shared\_TSMMasterDataSetupAndReportLayout_Detail.cshtml" />
     <Content Include="Views\Function\ShowFunctionDataSetupAndReport.cshtml" />
+    <Content Include="Views\ItemType\_CreateOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
