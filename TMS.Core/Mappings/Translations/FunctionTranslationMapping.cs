@@ -7,7 +7,7 @@ namespace TMS.Core.Mappings
     {
         public FunctionTranslationMapping()
         {
-            this.ToTable("TRANS_FunctionTranslations");
+            this.ToTable("Localization_FunctionTranslations");
             this.HasKey(a => a.Id);
         }
     }

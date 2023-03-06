@@ -15,7 +15,7 @@
         <button type="button" class="btn btn-success backlist"><i class="fa fa-arrow-circle-left"></i> @Html.ActionLink(MessageManager.GetCaptionValueByKey("btnBackToList"), "List")</button>
     </h1>
     <div class="pull-right">
-        <button type="button" id="buttonUpdate" name="save" class="btn bg-blue">
+        <button type="button" id="buttonUpdate" name="save" class="btn btn-primary">
             <i class="fa fa-floppy-o"></i>
             @MessageManager.GetCaptionValueByKey("btnSave")
         </button>
@@ -37,7 +37,7 @@
         var _id = @Model.Id;
         $('#modalDelete').modal('show');
 
-        $("#btnConfirmDeleteYes").click(function () {
+        $("#delete-one-btnYes").click(function () {
             var postData = {
                 id: _id
             };
@@ -60,7 +60,7 @@
                     window.location.href = '../../Order/List';
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    show(false, "@MessageManager.GetMessageInfoByMessageCode("MS005")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                    show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
 
                     waitingDialog.hide();
                 },
@@ -68,7 +68,7 @@
             });
         });
 
-        $("#btnConfirmDeleteCancel").click(function () {
+        $("#delete-one-btnCancel").click(function () {
             _id = 0;
             $('#modalDelete').modal('hide');
         })

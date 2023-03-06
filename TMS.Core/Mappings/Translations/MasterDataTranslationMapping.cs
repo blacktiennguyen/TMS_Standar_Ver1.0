@@ -7,7 +7,7 @@ namespace TMS.Core.Mappings
     {
         public MasterDataTranslationMapping()
         {
-            this.ToTable("TRANS_MasterDataTranslations");
+            this.ToTable("Localization_MasterDataTranslations");
             this.HasKey(a => a.Id);
         }
     }

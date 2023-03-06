@@ -10,108 +10,7 @@
     <h1 class="float-left">
         @MessageManager.GetCaptionValueByKey("lblItemType")
     </h1>
-
-    <div class="float-right">
-        <a class="btn btn-primary margin-bottom-5px" href="@Url.Action("Create")">
-            <i class="fa fa-plus-square"></i>
-            @MessageManager.GetCaptionValueByKey("btnAddnew")
-        </a>
-        <button type="submit" name="download-catalog-pdf" class="display-none btn bg-purple margin-bottom-5px" formaction="/Admin/Product/DownloadCatalogPDF">
-            <i class="fa fa-file-pdf-o"></i>
-            @MessageManager.GetCaptionValueByKey("btnDownloadPDF")
-        </button>
-        <div class="btn-group display-none">
-            <button type="button" class="btn btn-success margin-bottom-5px">
-                <i class="fa fa-download"></i>
-                @MessageManager.GetCaptionValueByKey("btnExport")
-            </button>
-            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span class="caret"></span>
-                <span class="sr-only">&nbsp;</span>
-            </button>
-
-            <ul class="dropdown-menu" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="fa fa-file-code-o"></i>
-                        @MessageManager.GetCaptionValueByKey("btnExportXML") (@MessageManager.GetCaptionValueByKey("lblAll"))
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-file-code-o"></i>
-                        @MessageManager.GetCaptionValueByKey("btnExportXML") (@MessageManager.GetCaptionValueByKey("lblSelected"))
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-file-excel-o"></i>
-                        @MessageManager.GetCaptionValueByKey("btnExportExcel") (@MessageManager.GetCaptionValueByKey("lblAll"))
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-file-excel-o"></i>
-                        @MessageManager.GetCaptionValueByKey("btnExportExcel") (@MessageManager.GetCaptionValueByKey("lblSelected"))
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <button type="button" name="importexcel" class="display-none btn bg-olive margin-bottom-5px" data-toggle="modal" data-target="#importexcel-window">
-            <i class="fa fa-upload"></i>
-            @MessageManager.GetCaptionValueByKey("btnImport")
-        </button>
-        <button type="button" disabled id="delete-selected" class="btn btn-danger margin-bottom-5px" data-toggle="modal" data-target="#delete-selected-action-confirmation" name="">
-            <i class="fa fa-trash"></i>
-
-            @MessageManager.GetCaptionValueByKey("btnDelete") (@MessageManager.GetCaptionValueByKey("lblSelected"))
-        </button>
-
-        <!-- Modal Poup Delete Multiple -->
-        <div id="delete-selected-action-confirmation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-selected-action-confirmation-title">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="delete-selected-action-confirmation-title">@MessageManager.GetCaptionValueByKey("lblDeleteConfirm")</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    </div>
-                    <div class="modal-body">
-                        @MessageManager.GetCaptionValueByKey("lblAreYouSure")
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" id="delete-selected-action-confirmation-submit-button" class="btn btn-primary">
-                            @MessageManager.GetCaptionValueByKey("btnYes")
-                        </button>
-                        <span id="canceldelete" class="btn btn-default float-right margin-r-5" data-dismiss="modal">@MessageManager.GetCaptionValueByKey("btnCancel")</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Poup Delete One -->
-        <div class="modal fade" id="modalDelete" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">@MessageManager.GetCaptionValueByKey("lblDeleteConfirm")</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>@MessageManager.GetCaptionValueByKey("lblAreYouSure")</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" id="btnYes" class="btn btn-primary">
-                            @MessageManager.GetCaptionValueByKey("btnYes")
-                        </button>
-                        <button id="btnCancel" type="button" class="btn btn-default" data-dismiss="modal">@MessageManager.GetCaptionValueByKey("btnCancel")</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @Html.Partial("_Delete")
 </section>
 
 <!-- Main content -->
@@ -174,6 +73,21 @@
     <!-- Grid Data-->
     <div class="panel panel-default">
         <div class="panel-body">
+
+            <!-- Button action-->
+            <div class="row">
+                <button class="btn btn-primary margin-bottom-5px" onclick="popupDetail(0)">
+                    <i class="fa fa-plus-square"></i>
+                    @MessageManager.GetCaptionValueByKey("btnAddnew")
+                </button>
+
+                <button type="button" disabled id="delete-selected" class="btn btn-danger margin-bottom-5px" data-toggle="modal" data-target="#delete-selected-action-confirmation" name="">
+                    <i class="fa fa-trash"></i>
+                    @MessageManager.GetCaptionValueByKey("btnDelete") (@MessageManager.GetCaptionValueByKey("lblSelected"))
+                </button>
+            </div>
+
+            <!-- End button action-->
             <div id="itemtype-grid" class="row margin-left-0px margin-right-0px">
             </div>
             <script>
@@ -241,13 +155,12 @@
                                 width: 95,
                                 headerAttributes: { style: "text-align:center" },
                                 attributes: { style: "text-align:center" },
-                                template: '<a class="btn btn-info cursor-pointer" href="Edit/#=Id#"><i class="fa fa-pencil"></i></a>'
+                                template: '<a class="btn btn-primary cursor-pointer" onClick="popupDetail(#=Id#)"><i class="fa fa-pencil"></i></a>'
                             },
                             {
                                 field: "Code",
                                 headerAttributes: { style: "text-align:center" },
                                 title: "@MessageManager.GetCaptionValueByKey("lblCode")",
-                                template: '<a href="Edit/#=Id#">#=Code#</a>',
                                 width: 100
                             },
                             {
@@ -307,29 +220,49 @@
                         }
                     });
 
-                    $("#delete-selected-action-confirmation-submit-button").click(function () {
+                    $("#delete-selected-btnYes").click(function () {
                         var postData = {
                             selectedIds: selectedIds
                         };
-                        //addAntiForgeryToken(postData);
+                        addAntiForgeryToken(postData);
+
+                        if (selectedIds.length == 0) {
+                            show(true, "@Html.Raw(@MessageManager.GetMessageInfoByMessageCode("MS010"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+
+                            return;
+                        }
 
                         $.ajax({
                             cache: false,
                             type: "POST",
                             url: "@(Url.Action("DeleteSelected", "ItemType"))",
                             data: postData,
-                            complete: function (data) {
-                                //reload grid
-                                var grid = $('#itemtype-grid').data('kendoGrid');
-                                grid.dataSource.read();
+                            beforeSend: function () {
+                                waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
+                            },
+                            success: function (result) {
+                                if (result.isDeleted) {
+                                    //window.location.href = '../../Order/Edit?OrderCode=' + result.orderCode; // call method GET: Creat (Reload Form Data)
+                                    show(true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS007"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+
+                                    //reload grid
+                                    var grid = $('#itemtype-grid').data('kendoGrid');
+                                    grid.dataSource.read();
+
+                                    selectedIds = [];
+                                } else { //
+                                    show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                                }
+                                waitingDialog.hide();
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
-                                //alert(thrownError);
+                                show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                                waitingDialog.hide();
                             },
                             traditional: true
                         });
 
-                        $("#canceldelete").trigger("click");
+                        $("#delete-selected-btnCancel").trigger("click");
                     })
 
                     //$('#mastercheckbox').click(function () {
@@ -397,7 +330,7 @@
                     var numChkBoxesChecked = $('#itemtype-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
                     $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
 
-                    console.log(selectedIds);
+                    //console.log(selectedIds);
 
                     if (selectedIds.length > 0)
                         $("#delete-selected").removeAttr("disabled");
@@ -406,10 +339,13 @@
                 }
 
                 function additionalData() {
-                    return {
+                    var data = {
                         Name: $('#search_name').val(),
                         Code: $('#search_code').val(),
                     };
+
+                    addAntiForgeryToken(data);
+                    return data;
                 }
             </script>
 
@@ -422,23 +358,37 @@
                     $('#modalDelete').modal('show');
                 }
 
-                $("#btnYes").click(function () {
+                $("#delete-one-btnYes").click(function () {
                     var postData = {
-                        Id: _id
+                        id: _id
                     };
+
+                    addAntiForgeryToken(postData);
 
                     $.ajax({
                         cache: false,
                         type: "POST",
                         url: "@(Url.Action("Delete", "ItemType"))",
                         data: postData,
-                        complete: function (data) {
-                            //reload grid
-                            var grid = $('#itemtype-grid').data('kendoGrid');
-                            grid.dataSource.read();
+                        beforeSend: function () {
+                            waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
+                        },
+                        success: function (result) {
+                            if (result.saveSuccess) {
+                                //window.location.href = '../../Order/Edit?OrderCode=' + result.orderCode; // call method GET: Creat (Reload Form Data)
+                                show(true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS007"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+
+                                //reload grid
+                                var grid = $('#itemtype-grid').data('kendoGrid');
+                                grid.dataSource.read();
+                            } else { //
+                                show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                            }
+                            waitingDialog.hide();
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
-                            alert(thrownError);
+                            show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                            waitingDialog.hide();
                         },
                         traditional: true
                     });
@@ -447,10 +397,28 @@
                     $('#modalDelete').modal('hide');
                 });
 
-                $("#btnCancel").click(function () {
+                $("#delete-one-btnCancel").click(function () {
                     _id = 0;
                     $('#modalDelete').modal('hide');
                 })
+            </script>
+
+            <script type="text/javascript">
+                function popupDetail(id) {
+                    $('#detailitemtype').modal('show');
+
+                    $('#@Html.FieldIdFor(m => m.Id)').val(0);
+                    $('#@Html.FieldIdFor(m => m.Code)').val('');
+                    $('#@Html.FieldIdFor(m => m.Name)').val('');
+                    $('#@Html.FieldIdFor(m => m.NameLL)').val('');
+                    $('#@Html.FieldIdFor(m => m.Remark)').val('');
+
+                    if (id > 0) {
+                        $('#@Html.FieldIdFor(m => m.Id)').val(id);
+                        getDetail(id);
+                    }
+
+                }
             </script>
         </div>
     </div>

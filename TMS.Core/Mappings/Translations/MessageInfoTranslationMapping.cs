@@ -7,7 +7,7 @@ namespace TMS.Core.Mappings
     {
         public MessageInfoTranslationMapping()
         {
-            this.ToTable("TRANS_MassageInfoTranslations");
+            this.ToTable("Localization_MassageInfoTranslations");
             this.HasKey(a => a.Id);
         }
     }

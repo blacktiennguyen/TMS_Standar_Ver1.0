@@ -16,65 +16,7 @@
         @MessageManager.GetCaptionValueByKey("lblOrderManagement")
     </h1>
 
-    <div class="float-right">
-        <a class="btn btn-primary margin-bottom-5px" href="@Url.Action("Create")">
-            <i class="fa fa-plus-square"></i>
-            @MessageManager.GetCaptionValueByKey("btnAddnew")
-        </a>
-        <button type="submit" name="download-catalog-pdf" class="btn bg-purple margin-bottom-5px" formaction="/Admin/Product/DownloadCatalogPDF">
-            <i class="fa fa-file-pdf-o"></i>
-            @MessageManager.GetCaptionValueByKey("btnDownloadPDF")
-        </button>
-        <div class="btn-group">
-            <button type="button" class="btn btn-success margin-bottom-5px">
-                <i class="fa fa-download"></i>
-                @MessageManager.GetCaptionValueByKey("btnExport")
-            </button>
-            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span class="caret"></span>
-                <span class="sr-only">&nbsp;</span>
-            </button>
-
-            <ul class="dropdown-menu" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="fa fa-file-code-o"></i>
-                        @MessageManager.GetCaptionValueByKey("btnExportXML") (@MessageManager.GetCaptionValueByKey("lblAll"))
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-file-code-o"></i>
-                        @MessageManager.GetCaptionValueByKey("btnExportXML") (@MessageManager.GetCaptionValueByKey("lblSelected"))
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-file-excel-o"></i>
-                        @MessageManager.GetCaptionValueByKey("btnExportExcel") (@MessageManager.GetCaptionValueByKey("lblAll"))
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-file-excel-o"></i>
-                        @MessageManager.GetCaptionValueByKey("btnExportExcel") (@MessageManager.GetCaptionValueByKey("lblSelected"))
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <button type="button" name="importexcel" class="btn bg-olive margin-bottom-5px" data-toggle="modal" data-target="#importexcel-window">
-            <i class="fa fa-upload"></i>
-            @MessageManager.GetCaptionValueByKey("btnImport")
-        </button>
-        <button type="button" disabled id="delete-selected" class="btn btn-danger margin-bottom-5px" data-toggle="modal" data-target="#delete-selected-action-confirmation" name="">
-            <i class="fa fa-trash"></i>
-
-            @MessageManager.GetCaptionValueByKey("btnDelete") (@MessageManager.GetCaptionValueByKey("lblSelected"))
-        </button>
-
-        @Html.Partial("_Delete")
-    </div>
+    @Html.Partial("_Delete")
 </section>
 
 <!-- Modal Poup Order Status TimeLine -->
@@ -896,6 +838,67 @@
     <!-- Grid Data-->
     <div class="panel panel-default">
         <div class="panel-body">
+            <!-- Button action-->
+
+            <div class="row">
+                <a class="btn btn-primary margin-bottom-5px" href="@Url.Action("Create")">
+                    <i class="fa fa-plus-square"></i>
+                    @MessageManager.GetCaptionValueByKey("btnAddnew")
+                </a>
+                <button type="submit" name="download-catalog-pdf" class="btn bg-purple margin-bottom-5px" formaction="/Admin/Product/DownloadCatalogPDF">
+                    <i class="fa fa-file-pdf-o"></i>
+                    @MessageManager.GetCaptionValueByKey("btnDownloadPDF")
+                </button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success margin-bottom-5px">
+                        <i class="fa fa-download"></i>
+                        @MessageManager.GetCaptionValueByKey("btnExport")
+                    </button>
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">&nbsp;</span>
+                    </button>
+
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-file-code-o"></i>
+                                @MessageManager.GetCaptionValueByKey("btnExportXML") (@MessageManager.GetCaptionValueByKey("lblAll"))
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-file-code-o"></i>
+                                @MessageManager.GetCaptionValueByKey("btnExportXML") (@MessageManager.GetCaptionValueByKey("lblSelected"))
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-file-excel-o"></i>
+                                @MessageManager.GetCaptionValueByKey("btnExportExcel") (@MessageManager.GetCaptionValueByKey("lblAll"))
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-file-excel-o"></i>
+                                @MessageManager.GetCaptionValueByKey("btnExportExcel") (@MessageManager.GetCaptionValueByKey("lblSelected"))
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button type="button" name="importexcel" class="btn bg-olive margin-bottom-5px" data-toggle="modal" data-target="#importexcel-window">
+                    <i class="fa fa-upload"></i>
+                    @MessageManager.GetCaptionValueByKey("btnImport")
+                </button>
+                <button type="button" disabled id="delete-selected" class="btn btn-danger margin-bottom-5px" data-toggle="modal" data-target="#delete-selected-action-confirmation" name="">
+                    <i class="fa fa-trash"></i>
+
+                    @MessageManager.GetCaptionValueByKey("btnDelete") (@MessageManager.GetCaptionValueByKey("lblSelected"))
+                </button>
+            </div>
+
+            <!-- End button action-->
             <div id="order-grid" class="row margin-left-0px margin-right-0px">
             </div>
             <script>
@@ -971,7 +974,7 @@
                                 width: 125,
                                 headerAttributes: { style: "text-align:center" },
                                 attributes: { style: "text-align:center" },
-                                template: '<a class="btn btn-info cursor-pointer" href="../../Order/Edit?OrderCode=#=OrderCode#"><i class="fa fa-pencil"></i></a>'
+                                template: '<a class="btn btn-primary cursor-pointer" href="../../Order/Edit?OrderCode=#=OrderCode#"><i class="fa fa-pencil"></i></a>'
                                 //template: "<a onclick=\"javascript:OpenWindow('../../Order/Edit?OrderCode=#=OrderCode#', 800, 320, true); return false;\"><i class=\"fa fa-pencil\"></i></a>"
                             },
                             {
@@ -1249,11 +1252,17 @@
                         }
                     });
 
-                    $("#delete-selected-action-confirmation-submit-button").click(function () {
+                    $("#delete-selected-btnYes").click(function () {
                         var postData = {
                             selectedIds: selectedIds
                         };
                         addAntiForgeryToken(postData);
+
+                        if (selectedIds.length == 0) {
+                            show(true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS010"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+
+                            return;
+                        }
 
                         $.ajax({
                             cache: false,
@@ -1268,18 +1277,18 @@
                                 //reload grid
                                 var grid = $('#order-grid').data('kendoGrid');
                                 grid.dataSource.read();
-
+                                selectedIds = [];
                                 waitingDialog.hide();
 
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
-                                show(false, "@MessageManager.GetMessageInfoByMessageCode("MS005")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                                show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
 
                                 waitingDialog.hide();
                             },
                             traditional: true
                         });
-                        $("#canceldelete").trigger("click");
+                        $("#delete-selected-btnCancel").trigger("click");
                     })
 
                     //$('#mastercheckbox').click(function () {
@@ -1347,7 +1356,7 @@
                     var numChkBoxesChecked = $('#order-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
                     $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
 
-                    console.log(selectedIds);
+                    //console.log(selectedIds);
 
                     if (selectedIds.length > 0)
                         $("#delete-selected").removeAttr("disabled");
@@ -1402,7 +1411,7 @@
                     $('#modalDelete').modal('show');
                 }
 
-                $("#btnConfirmDeleteYes").click(function () {
+                $("#delete-one-btnYes").click(function () {
                     var postData = {
                         id: _id
                     };
@@ -1418,7 +1427,7 @@
                             waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
                         },
                         success: function (result) {
-                            show(true, "@MessageManager.GetMessageInfoByMessageCode("MS007")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                            show(true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS007"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
                             //reload grid
                             var grid = $('#order-grid').data('kendoGrid');
                             grid.dataSource.read();
@@ -1426,7 +1435,7 @@
                             waitingDialog.hide();
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
-                            show(false, "@MessageManager.GetMessageInfoByMessageCode("MS005")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                            show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
 
                             waitingDialog.hide();
                         },
@@ -1437,7 +1446,7 @@
                     $('#modalDelete').modal('hide');
                 });
 
-                $("#btnConfirmDeleteCancel").click(function () {
+                $("#delete-one-btnCancel").click(function () {
                     _id = 0;
                     $('#modalDelete').modal('hide');
                 })

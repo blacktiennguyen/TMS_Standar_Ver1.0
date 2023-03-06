@@ -13,20 +13,22 @@ using TMS.WebAPP.Models.MasterDataModel;
 
 namespace TMS.WebAPP.Controllers
 {
-    public class ItemTypeController : TMSBaseController
+    public class ItemUnitController : TMSBaseController
     {
+        // GET: ItemUnit
+
         #region Fields
 
-        private readonly IItemTypeService _itemTypeService;
+        private readonly IItemUnitService _itemUnitService;
         private readonly IMasterDataTranslationService _masterDataTranslationService;
 
         #endregion Fields
 
         #region Constructors
 
-        public ItemTypeController(IItemTypeService itemTypeService, IMasterDataTranslationService masterDataTranslationService)
+        public ItemUnitController(IItemUnitService itemUnitService, IMasterDataTranslationService masterDataTranslationService)
         {
-            this._itemTypeService = itemTypeService;
+            this._itemUnitService = itemUnitService;
             this._masterDataTranslationService = masterDataTranslationService;
         }
 
@@ -34,28 +36,28 @@ namespace TMS.WebAPP.Controllers
 
         #region List
 
-        // GET: ItemType
+        // GET: ItemUnit
         public ActionResult List()
         {
             SetActiveFunction(FunctionConst.OrderDataSetupUrl);
-            SetActiveFunctionDataSetup(FunctionConst.ItemTypeOrderDataSetupUrl);
+            SetActiveFunctionDataSetup(FunctionConst.ItemUnitOrderDataSetupUrl);
 
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ItemTypeList(DataSourceRequest command, ItemTypeModel model)
+        public ActionResult ItemUnitList(DataSourceRequest command, ItemUnitModel model)
         {
             try
             {
-                var items = _itemTypeService.Search(model.Code, model.Name, command.Page - 1, command.PageSize, CompanyCurrent.Id, CompanyCurrent.TenantId);
+                var items = _itemUnitService.Search(model.Code, model.Name, command.Page - 1, command.PageSize, CompanyCurrent.Id, CompanyCurrent.TenantId);
 
                 var gridModel = new DataSourceResult
                 {
                     Data = items.Select(x =>
                     {
-                        return new ItemTypeModel
+                        return new ItemUnitModel
                         {
                             Id = x.Id,
                             Code = x.Code,
@@ -84,7 +86,7 @@ namespace TMS.WebAPP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public virtual ActionResult SaveOrUpdate(ItemTypeModel model)
+        public virtual ActionResult SaveOrUpdate(ItemUnitModel model)
         {
             try
             {
@@ -95,43 +97,43 @@ namespace TMS.WebAPP.Controllers
 
                 if (model.Id > 0)
                 {
-                    var updateItemType = _itemTypeService.GetById(model.Id, CompanyCurrent.Id, CompanyCurrent.TenantId);
+                    var updateItemUnit = _itemUnitService.GetById(model.Id, CompanyCurrent.Id, CompanyCurrent.TenantId);
 
-                    if (updateItemType != null)
+                    if (updateItemUnit != null)
                     {
-                        updateItemType.Code = model.Code;
-                        updateItemType.Name = model.Name;
-                        updateItemType.NameLL = model.NameLL;
-                        updateItemType.Remark = model.Remark;
-                        updateItemType.UpdatedById = UserCurrent.UserId;
-                        updateItemType.UpdatedDate = DateTime.Now;
+                        updateItemUnit.Code = model.Code;
+                        updateItemUnit.Name = model.Name;
+                        updateItemUnit.NameLL = model.NameLL;
+                        updateItemUnit.Remark = model.Remark;
+                        updateItemUnit.UpdatedById = UserCurrent.UserId;
+                        updateItemUnit.UpdatedDate = DateTime.Now;
 
-                        resultId = _itemTypeService.SaveOrUpdate(updateItemType);
+                        resultId = _itemUnitService.SaveOrUpdate(updateItemUnit);
 
                         //Save Master Data Translation
-                        SaveOrUpdateMasterDataTranslation(_masterDataTranslationService, model.NameLL, updateItemType.TranslationId, "MasterData_ItemTypes");
+                        SaveOrUpdateMasterDataTranslation(_masterDataTranslationService, model.NameLL, updateItemUnit.TranslationId, "MasterData_ItemUnits");
                     }
                 }
                 else
                 {
-                    var itemTypeEntity = new ItemType();
-                    itemTypeEntity.Id = model.Id;
-                    itemTypeEntity.Code = model.Code;
-                    itemTypeEntity.Name = model.Name;
-                    itemTypeEntity.NameLL = model.NameLL;
-                    itemTypeEntity.Remark = model.Remark;
-                    itemTypeEntity.TranslationId = Guid.NewGuid();
-                    itemTypeEntity.CreatedById = UserCurrent.UserId;
-                    itemTypeEntity.CreatedDate = DateTime.Now;
-                    itemTypeEntity.UpdatedById = null;
-                    itemTypeEntity.UpdatedDate = null;
-                    itemTypeEntity.CompanyId = CompanyCurrent.Id;
-                    itemTypeEntity.TenantId = CompanyCurrent.TenantId;
+                    var itemUnitEntity = new ItemUnit();
+                    itemUnitEntity.Id = model.Id;
+                    itemUnitEntity.Code = model.Code;
+                    itemUnitEntity.Name = model.Name;
+                    itemUnitEntity.NameLL = model.NameLL;
+                    itemUnitEntity.Remark = model.Remark;
+                    itemUnitEntity.TranslationId = Guid.NewGuid();
+                    itemUnitEntity.CreatedById = UserCurrent.UserId;
+                    itemUnitEntity.CreatedDate = DateTime.Now;
+                    itemUnitEntity.UpdatedById = null;
+                    itemUnitEntity.UpdatedDate = null;
+                    itemUnitEntity.CompanyId = CompanyCurrent.Id;
+                    itemUnitEntity.TenantId = CompanyCurrent.TenantId;
 
-                    resultId = _itemTypeService.SaveOrUpdate(itemTypeEntity);
+                    resultId = _itemUnitService.SaveOrUpdate(itemUnitEntity);
 
                     //Save Master Data Translation
-                    SaveOrUpdateMasterDataTranslation(_masterDataTranslationService, model.NameLL, itemTypeEntity.TranslationId, "MasterData_ItemTypes");
+                    SaveOrUpdateMasterDataTranslation(_masterDataTranslationService, model.NameLL, itemUnitEntity.TranslationId, "MasterData_ItemUnits");
                 }
 
                 return Json(new { saveSuccess = true, id = resultId }, JsonRequestBehavior.AllowGet);
@@ -140,11 +142,11 @@ namespace TMS.WebAPP.Controllers
             {
                 logger.Error(ex.Message);
                 //ErrorNotification(MessageManager.GetMessageInfoByMessageCode("MS005"));
-                if (ex.InnerException.InnerException.Message.Contains("UC_ItemTypeCode"))
+                if (ex.InnerException.InnerException.Message.Contains("UC_ItemUnitCode"))
                 {
                     return Json(new { saveSuccess = false, isDuplicateCode = true, isDuplicate = true }, JsonRequestBehavior.AllowGet);
                 }
-                else if (ex.InnerException.InnerException.Message.Contains("UC_ItemTypeName"))
+                else if (ex.InnerException.InnerException.Message.Contains("UC_ItemUnitName"))
                 {
                     return Json(new { saveSuccess = false, isDuplicateName = true, isDuplicate = true }, JsonRequestBehavior.AllowGet);
                 }
@@ -167,18 +169,18 @@ namespace TMS.WebAPP.Controllers
                 //if (!_permissionService.Authorize(StandardPermissionProvider.ManageManufacturers))
                 //    return AccessDeniedView();
 
-                var dataResult = new ItemTypeModel();
+                var dataResult = new ItemUnitModel();
 
-                var itemType = _itemTypeService.GetById(id, CompanyCurrent.Id, CompanyCurrent.TenantId);
-                if (itemType == null)
+                var itemUnit = _itemUnitService.GetById(id, CompanyCurrent.Id, CompanyCurrent.TenantId);
+                if (itemUnit == null)
                     return RedirectToAction("List");
                 else
                 {
-                    dataResult.Id = itemType.Id;
-                    dataResult.Code = itemType.Code;
-                    dataResult.Name = itemType.Name;
-                    dataResult.NameLL = _masterDataTranslationService.GetName(LanguageCurrent.Id, itemType.TranslationId);
-                    dataResult.Remark = itemType.Remark;
+                    dataResult.Id = itemUnit.Id;
+                    dataResult.Code = itemUnit.Code;
+                    dataResult.Name = itemUnit.Name;
+                    dataResult.NameLL = _masterDataTranslationService.GetName(LanguageCurrent.Id, itemUnit.TranslationId);
+                    dataResult.Remark = itemUnit.Remark;
                 }
 
                 return Json(new { saveSuccess = true, messageId = "MS003", data = dataResult }, JsonRequestBehavior.AllowGet);
@@ -203,16 +205,16 @@ namespace TMS.WebAPP.Controllers
                 //if (!_permissionService.Authorize(StandardPermissionProvider.ManageManufacturers))
                 //    return AccessDeniedView();
 
-                var itemType = _itemTypeService.GetById(id, CompanyCurrent.Id, CompanyCurrent.TenantId);
-                if (itemType == null)
+                var itemUnit = _itemUnitService.GetById(id, CompanyCurrent.Id, CompanyCurrent.TenantId);
+                if (itemUnit == null)
                     return RedirectToAction("List");
 
-                _itemTypeService.Delete(itemType);
+                _itemUnitService.Delete(itemUnit);
 
                 ////activity log
                 //_customerActivityService.InsertActivity("DeleteManufacturer", _localizationService.GetResource("ActivityLog.DeleteManufacturer"), manufacturer.Name);
 
-                DeleteMasterDataTranslation(_masterDataTranslationService, itemType.TranslationId);
+                DeleteMasterDataTranslation(_masterDataTranslationService, itemUnit.TranslationId);
                 return Json(new { saveSuccess = true }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -236,12 +238,12 @@ namespace TMS.WebAPP.Controllers
                 {
                     foreach (var id in selectedIds)
                     {
-                        var itemType = _itemTypeService.GetById(id, CompanyCurrent.Id, CompanyCurrent.TenantId);
+                        var itemUnit = _itemUnitService.GetById(id, CompanyCurrent.Id, CompanyCurrent.TenantId);
 
-                        if (itemType != null)
+                        if (itemUnit != null)
                         {
-                            _itemTypeService.Delete(itemType);
-                            DeleteMasterDataTranslation(_masterDataTranslationService, itemType.TranslationId);
+                            _itemUnitService.Delete(itemUnit);
+                            DeleteMasterDataTranslation(_masterDataTranslationService, itemUnit.TranslationId);
                         }
                         else
                             continue;

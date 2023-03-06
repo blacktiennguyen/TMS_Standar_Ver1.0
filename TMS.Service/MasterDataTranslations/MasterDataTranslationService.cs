@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Caching;
 using System.Web.Configuration;
@@ -33,37 +34,82 @@ namespace TMS.Service.MasterDataTranslations
             {
                 var resultName = "";
 
-                if (translationID != null)
+                using (var db = new TMSContext())
                 {
-                    if (System.Web.HttpContext.Current.Cache[translationID.ToString() + LanguageCurrent.Id] == null)
-                    {
-                        using (var db = new TMSContext())
-                        {
-                            var query = db.MasterDataTranslations
-                                .Where(x => x.LanguageId == languageID && x.TranslationId == translationID)
-                                .FirstOrDefault();
-                            resultName = query != null ? query.Name : null;
-                        }
+                    var query = db.MasterDataTranslations
+                        .Where(x => x.LanguageId == languageID && x.TranslationId == translationID)
+                        .FirstOrDefault();
+                    resultName = query != null ? query.Name : "";
+                }
 
-                        System.Web.HttpContext.Current.Cache.Add(translationID.ToString() + LanguageCurrent.Id, resultName, null, DateTime.Now.AddMinutes(CacheMasterDataExpireMinute), Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.AboveNormal, null);
-                    }
-                    else
+                //if (translationID != null)
+                //{
+                //    if (System.Web.HttpContext.Current.Cache[translationID.ToString() + LanguageCurrent.Id] == null)
+                //    {
+                //        using (var db = new TMSContext())
+                //        {
+                //            var query = db.MasterDataTranslations
+                //                .Where(x => x.LanguageId == languageID && x.TranslationId == translationID)
+                //                .FirstOrDefault();
+                //            resultName = query != null ? query.Name : "";
+                //        }
+
+                //        System.Web.HttpContext.Current.Cache.Add(translationID.ToString() + LanguageCurrent.Id, resultName, null, DateTime.Now.AddMinutes(CacheMasterDataExpireMinute), Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.AboveNormal, null);
+                //    }
+                //    else
+                //    {
+                //        resultName = System.Web.HttpContext.Current.Cache[translationID.ToString() + LanguageCurrent.Id] as string;
+                //    }
+                //}
+                //else
+                //{
+                //    using (var db = new TMSContext())
+                //    {
+                //        var query = db.MasterDataTranslations
+                //            .Where(x => x.LanguageId == languageID && x.TranslationId == translationID)
+                //            .FirstOrDefault();
+                //        resultName = query != null ? query.Name : "";
+                //    }
+                //}
+
+                return resultName;
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return "";
+            }
+        }
+
+        public void SaveOrUpdate(MasterDataTranslation masterDataTranslation)
+        {
+            try
+            {
+                if (masterDataTranslation.Id > 0)
+                {
+                    using (var db = new TMSContext())
                     {
-                        resultName = System.Web.HttpContext.Current.Cache[translationID.ToString() + LanguageCurrent.Id] as string;
+                        db.Entry(masterDataTranslation).State = EntityState.Modified;
+                        db.SaveChanges();
                     }
                 }
                 else
                 {
-                    using (var db = new TMSContext())
-                    {
-                        var query = db.MasterDataTranslations
-                            .Where(x => x.LanguageId == languageID && x.TranslationId == translationID)
-                            .FirstOrDefault();
-                        resultName = query != null ? query.Name : null;
-                    }
+                    _masterDataTranslationnRepository.Insert(masterDataTranslation);
                 }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                throw;
+            }
+        }
 
-                return resultName;
+        public void Delete(MasterDataTranslation masterDataTranslation)
+        {
+            try
+            {
+                _masterDataTranslationnRepository.Delete(masterDataTranslation);
             }
             catch (Exception ex)
             {

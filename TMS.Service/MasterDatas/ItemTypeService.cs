@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,14 +29,14 @@ namespace TMS.Service.MasterDatas
 
         #endregion Ctor
 
-        public ItemType GetById(int Id)
+        public ItemType GetById(int id, int companyId = 0, int tenantId = 0)
         {
             try
             {
                 using (var db = new TMSContext())
                 {
                     var itemType = db.ItemTypes
-                        .Where(x => x.Id == Id)
+                        .Where(x => x.Id == id && x.CompanyId == companyId && x.TenantId == tenantId)
                         .FirstOrDefault();
 
                     return itemType;
@@ -64,7 +65,7 @@ namespace TMS.Service.MasterDatas
 
                     if (!String.IsNullOrEmpty(name))
                         query = query.Where(x => x.Name != null && !String.IsNullOrEmpty(x.Name) &&
-                                            (Ultil.ConvertToUnSign(x.Name).IndexOf(name.Trim(), StringComparison.CurrentCultureIgnoreCase) >= 0 || x.Name.Contains(name.Trim()))
+                                                                                                 (Ultil.ConvertToUnSign(x.Name).IndexOf(name.Trim(), StringComparison.CurrentCultureIgnoreCase) >= 0 || x.Name.Contains(name.Trim()))
                                             )
                                 .ToList();
 
@@ -72,6 +73,47 @@ namespace TMS.Service.MasterDatas
 
                     return new PagedList<ItemType>(query, pageIndex, pageSize);
                 }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                throw;
+            }
+        }
+
+        public int SaveOrUpdate(ItemType itemType)
+        {
+            try
+            {
+                if (itemType.Id > 0)
+                {
+                    using (var db = new TMSContext())
+                    {
+                        db.Entry(itemType).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+
+                    return itemType.Id;
+                }
+                else
+                {
+                    _itemTypeRepository.Insert(itemType);
+
+                    return itemType.Id;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                throw;
+            }
+        }
+
+        public void Delete(ItemType itemType)
+        {
+            try
+            {
+                _itemTypeRepository.Delete(itemType);
             }
             catch (Exception ex)
             {

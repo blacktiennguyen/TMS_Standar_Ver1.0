@@ -40,7 +40,7 @@ namespace TMS.Service.FixDataTranslations
                         var query = db.FixDataTranslations
                             .Where(x => x.LanguageId == languageID && x.TranslationId == translationID)
                             .FirstOrDefault();
-                        resultName = query != null ? query.Name : null;
+                        resultName = query != null ? query.Name : "";
                     }
 
                     System.Web.HttpContext.Current.Cache.Add(translationID.ToString() + LanguageCurrent.Id, resultName, null, DateTime.Now.AddMinutes(CacheFixDataExpireMinute), Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.AboveNormal, null);
@@ -55,7 +55,7 @@ namespace TMS.Service.FixDataTranslations
             catch (Exception ex)
             {
                 logger.Error(ex.Message);
-                throw;
+                return "";
             }
         }
     }

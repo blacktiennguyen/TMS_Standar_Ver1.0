@@ -828,7 +828,7 @@ namespace TMS.WebAPP.Controllers
                         var itemUnit = "";
                         if (orderItem.ItemUnitId != null)
                         {
-                            var getItemUnit = _itemUnitService.GetById(Convert.ToInt32(orderItem.ItemUnitId));
+                            var getItemUnit = _itemUnitService.GetById(Convert.ToInt32(orderItem.ItemUnitId), CompanyCurrent.Id, CompanyCurrent.TenantId);
 
                             if (getItemUnit != null)
                             {

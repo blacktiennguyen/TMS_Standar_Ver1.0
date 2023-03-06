@@ -7,7 +7,7 @@ namespace TMS.Core.Mappings
     {
         public CaptionTranslationMapping()
         {
-            this.ToTable("TRANS_CaptionTranslations");
+            this.ToTable("Localization_CaptionTranslations");
             this.HasKey(a => a.Id);
         }
     }

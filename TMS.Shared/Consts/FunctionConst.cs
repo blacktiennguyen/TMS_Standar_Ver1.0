@@ -32,6 +32,8 @@ namespace TMS.Shared.Const
 
         public const string ItemTypeOrderDataSetupUrl = "/ItemType/List";
 
+        public const string ItemUnitOrderDataSetupUrl = "/ItemUnit/List";
+
         #endregion Order Data Setup
 
         #endregion Url Function

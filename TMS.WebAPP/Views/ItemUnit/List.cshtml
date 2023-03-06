@@ -1,58 +1,16 @@
-﻿@model TMS.WebAPP.Models.GroupModel
+﻿@model TMS.WebAPP.Models.MasterDataModel.ItemUnitModel
 @using TMS.WebAPP.HtmlExtension
 @{
-    ViewBag.Title = @MessageManager.GetCaptionValueByKey("lblUserGroup");
+    Layout = "~/Views/Shared/_TSMMasterDataSetupAndReportLayout_Detail.cshtml";
 }
 
+@Html.AntiForgeryToken()
 <!-- Content Header (Page header) -->
 <section class="content-header margin-bottom-10px heigh-30px">
     <h1 class="float-left">
-        @MessageManager.GetCaptionValueByKey("lblUserGroup")
+        @MessageManager.GetCaptionValueByKey("lblItemUnit")
     </h1>
-
-    <!-- Modal Poup Delete Multiple -->
-    <div id="delete-selected-action-confirmation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-selected-action-confirmation-title">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="delete-selected-action-confirmation-title">@MessageManager.GetCaptionValueByKey("lblDeleteConfirm")</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                    @MessageManager.GetCaptionValueByKey("lblAreYouSure")
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" id="delete-selected-action-confirmation-submit-button" class="btn btn-primary">
-                        @MessageManager.GetCaptionValueByKey("btnYes")
-                    </button>
-                    <span id="canceldelete" class="btn btn-default float-right margin-r-5" data-dismiss="modal">@MessageManager.GetCaptionValueByKey("btnCancel")</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Poup Delete One -->
-    <div class="modal fade" id="modalDelete" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">@MessageManager.GetCaptionValueByKey("lblDeleteConfirm")</h4>
-                </div>
-                <div class="modal-body">
-                    <p>@MessageManager.GetCaptionValueByKey("lblAreYouSure")</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" id="btnYes" class="btn btn-primary">
-                        @MessageManager.GetCaptionValueByKey("btnYes")
-                    </button>
-                    <button id="btnCancel" type="button" class="btn btn-default" data-dismiss="modal">@MessageManager.GetCaptionValueByKey("btnCancel")</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    @Html.Partial("_Delete")
 </section>
 
 <!-- Main content -->
@@ -77,19 +35,21 @@
                         <div class="form-group col-md-6">
                             <div class="form-group row">
                                 <label class="col-md-4 control-label margin-top-8px">
-                                    @MessageManager.GetCaptionValueByKey("lblUserGroup")
+                                    @MessageManager.GetCaptionValueByKey("lblCode")
                                 </label>
                                 <div class="col-md-8">
-                                    @Html.TextBoxFor(m => m.Name, new { @id = "search_groupname", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblUserGroup") })
-                                    @*<input type="text" class="form-control" id="usergroupname" placeholder="@MessageManager.GetCaptionValueByKey("lblUserGroup")">*@
+                                    @Html.TextBoxFor(m => m.Code, new { @id = "search_code", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblCode") })
                                 </div>
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             <div class="form-group row">
-                                <label class="col-md-4 control-label ">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblNameDefault")
                                 </label>
                                 <div class="col-md-8">
+                                    @Html.TextBoxFor(m => m.Name, new { @id = "search_name", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblNameDefault") })
+                                    @*<input type="text" class="form-control" id="ItemTypename" placeholder="@MessageManager.GetCaptionValueByKey("lblItemUnit")">*@
                                 </div>
                             </div>
                         </div>
@@ -113,77 +73,31 @@
     <!-- Grid Data-->
     <div class="panel panel-default">
         <div class="panel-body">
-            <!-- Button action-->
 
+            <!-- Button action-->
             <div class="row">
-                <a class="btn btn-primary margin-bottom-5px" href="@Url.Action("Create")">
+                <button class="btn btn-primary margin-bottom-5px" onclick="popupDetail(0)">
                     <i class="fa fa-plus-square"></i>
                     @MessageManager.GetCaptionValueByKey("btnAddnew")
-                </a>
-                <button type="submit" name="download-catalog-pdf" class="btn bg-purple margin-bottom-5px" formaction="/Admin/Product/DownloadCatalogPDF">
-                    <i class="fa fa-file-pdf-o"></i>
-                    @MessageManager.GetCaptionValueByKey("btnDownloadPDF")
                 </button>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-success margin-bottom-5px">
-                        <i class="fa fa-download"></i>
-                        @MessageManager.GetCaptionValueByKey("btnExport")
-                    </button>
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <span class="caret"></span>
-                        <span class="sr-only">&nbsp;</span>
-                    </button>
 
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-code-o"></i>
-                                @MessageManager.GetCaptionValueByKey("btnExportXML") (@MessageManager.GetCaptionValueByKey("lblAll"))
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-code-o"></i>
-                                @MessageManager.GetCaptionValueByKey("btnExportXML") (@MessageManager.GetCaptionValueByKey("lblSelected"))
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-excel-o"></i>
-                                @MessageManager.GetCaptionValueByKey("btnExportExcel") (@MessageManager.GetCaptionValueByKey("lblAll"))
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-excel-o"></i>
-                                @MessageManager.GetCaptionValueByKey("btnExportExcel") (@MessageManager.GetCaptionValueByKey("lblSelected"))
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <button type="button" name="importexcel" class="btn bg-olive margin-bottom-5px" data-toggle="modal" data-target="#importexcel-window">
-                    <i class="fa fa-upload"></i>
-                    @MessageManager.GetCaptionValueByKey("btnImport")
-                </button>
                 <button type="button" disabled id="delete-selected" class="btn btn-danger margin-bottom-5px" data-toggle="modal" data-target="#delete-selected-action-confirmation" name="">
                     <i class="fa fa-trash"></i>
-
                     @MessageManager.GetCaptionValueByKey("btnDelete") (@MessageManager.GetCaptionValueByKey("lblSelected"))
                 </button>
             </div>
 
             <!-- End button action-->
-            <div id="usergroup-grid" class="row margin-left-0px margin-right-0px">
+            <div id="itemunit-grid" class="row margin-left-0px margin-right-0px">
             </div>
             <script>
                 $(document).ready(function () {
-                    $("#usergroup-grid").kendoGrid({
+                    $("#itemunit-grid").kendoGrid({
                         dataSource: {
                             type: "json",
                             transport: {
                                 read: {
-                                    url: "@Html.Raw(Url.Action("GroupList", "UserGroup"))",
+                                    url: "@Html.Raw(Url.Action("ItemUnitList", "ItemUnit"))",
                                     type: "POST",
                                     dataType: "json",
                                     data: additionalData
@@ -225,7 +139,7 @@
                                 headerAttributes: { style: "text-align:center" },
                                 attributes: { style: "text-align:center" },
                                 template: "<input type='checkbox' value='#=Id#' class='checkboxGroups' />",
-                                width: 60
+                                width: 80
                             },
                             {
                                 field: "Id",
@@ -241,43 +155,33 @@
                                 width: 95,
                                 headerAttributes: { style: "text-align:center" },
                                 attributes: { style: "text-align:center" },
-                                template: '<a class="btn btn-primary cursor-pointer" href="Edit/#=Id#"><i class="fa fa-pencil"></i></a>'
+                                template: '<a class="btn btn-primary cursor-pointer" onClick="popupDetail(#=Id#)"><i class="fa fa-pencil"></i></a>'
+                            },
+                            {
+                                field: "Code",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblCode")",
+                                width: 100
                             },
                             {
                                 field: "Name",
                                 headerAttributes: { style: "text-align:center" },
-                                title: "@MessageManager.GetCaptionValueByKey("lblUserGroup")",
-                                template: '<a href="Edit/#=Id#">#=Name#</a>',
+                                title: "@MessageManager.GetCaptionValueByKey("lblNameDefault")",
                                 width: 350
 
                             },
                             {
-                                field: "IsActive",
+                                field: "NameLL",
                                 headerAttributes: { style: "text-align:center" },
-                                title: "@MessageManager.GetCaptionValueByKey("lblActive")",
-                                template: '<img src="@Url.Content("~/Content/Images/")active-#=IsActive#.gif" />',
-                                width: 100,
-                                attributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblNameLocalLanguage")",
+                                width: 350
+
                             },
                             {
                                 field: "Remark",
                                 headerAttributes: { style: "text-align:center" },
                                 title: "@MessageManager.GetCaptionValueByKey("lblRemark")",
                                 width: 250
-                            },
-                            {
-                                field: "CreatedBy",
-                                headerAttributes: { style: "text-align:center" },
-                                title: "@MessageManager.GetCaptionValueByKey("lblCreatedBy")",
-                                width: 150,
-
-                            },
-                            {
-                                field: "CreateDate",
-                                headerAttributes: { style: "text-align:center" },
-                                title: "@MessageManager.GetCaptionValueByKey("lblCreatedDate")",
-                                width: 150,
-                                attributes: { style: "text-align:center" },
                             }
                         ]
                     });
@@ -292,7 +196,7 @@
                     //search button
                     $('#btnSearch').click(function () {
                         //search
-                        var grid = $('#usergroup-grid').data('kendoGrid');
+                        var grid = $('#itemunit-grid').data('kendoGrid');
                         grid.dataSource.page(1); //new search. Set page size to 1
                         //grid.dataSource.read(); we already loaded the grid above using "page" function
                         //clear selected checkboxes
@@ -302,36 +206,63 @@
 
                     });
 
-                    $("#search_groupname").keydown(function (event) {
+                    $("#search_code").keydown(function (event) {
                         if (event.keyCode === 13) {
                             $("#btnSearch").click();
                             return false;
                         }
                     });
 
-                    $("#delete-selected-action-confirmation-submit-button").click(function () {
+                    $("#search_name").keydown(function (event) {
+                        if (event.keyCode === 13) {
+                            $("#btnSearch").click();
+                            return false;
+                        }
+                    });
+
+                    $("#delete-selected-btnYes").click(function () {
                         var postData = {
                             selectedIds: selectedIds
                         };
-                        //addAntiForgeryToken(postData);
+                        addAntiForgeryToken(postData);
+
+                        if (selectedIds.length == 0) {
+                            show(true, "@Html.Raw(@MessageManager.GetMessageInfoByMessageCode("MS010"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+
+                            return;
+                        }
 
                         $.ajax({
                             cache: false,
                             type: "POST",
-                            url: "@(Url.Action("DeleteSelected", "UserGroup"))",
+                            url: "@(Url.Action("DeleteSelected", "ItemUnit"))",
                             data: postData,
-                            complete: function (data) {
-                                //reload grid
-                                var grid = $('#usergroup-grid').data('kendoGrid');
-                                grid.dataSource.read();
+                            beforeSend: function () {
+                                waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
+                            },
+                            success: function (result) {
+                                if (result.isDeleted) {
+                                    //window.location.href = '../../Order/Edit?OrderCode=' + result.orderCode; // call method GET: Creat (Reload Form Data)
+                                    show(true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS007"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+
+                                    //reload grid
+                                    var grid = $('#itemunit-grid').data('kendoGrid');
+                                    grid.dataSource.read();
+
+                                    selectedIds = [];
+                                } else { //
+                                    show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                                }
+                                waitingDialog.hide();
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
-                                //alert(thrownError);
+                                show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                                waitingDialog.hide();
                             },
                             traditional: true
                         });
 
-                        $("#canceldelete").trigger("click");
+                        $("#delete-selected-btnCancel").trigger("click");
                     })
 
                     //$('#mastercheckbox').click(function () {
@@ -362,7 +293,7 @@
                     });
 
                     //wire up checkboxes.
-                    $('#usergroup-grid').on('change', 'input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]', function (e) {
+                    $('#itemunit-grid').on('change', 'input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]', function (e) {
                         var $check = $(this);
                         if ($check.is(":checked") == true) {
                             var checked = jQuery.inArray($check.val(), selectedIds);
@@ -384,7 +315,7 @@
                 });
 
                 function onDataBound(e) {
-                    $('#usergroup-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').each(function () {
+                    $('#itemunit-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').each(function () {
                         var currentId = $(this).val();
                         var checked = jQuery.inArray(currentId, selectedIds);
                         //set checked based on if current checkbox's value is in selectedIds.
@@ -395,11 +326,11 @@
                 }
 
                 function updateMasterCheckbox() {
-                    var numChkBoxes = $('#usergroup-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').length;
-                    var numChkBoxesChecked = $('#usergroup-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
+                    var numChkBoxes = $('#itemunit-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').length;
+                    var numChkBoxesChecked = $('#itemunit-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
                     $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
 
-                    console.log(selectedIds);
+                    //console.log(selectedIds);
 
                     if (selectedIds.length > 0)
                         $("#delete-selected").removeAttr("disabled");
@@ -408,9 +339,13 @@
                 }
 
                 function additionalData() {
-                    return {
-                        Name: $('#search_groupname').val(),
+                    var data = {
+                        Name: $('#search_name').val(),
+                        Code: $('#search_code').val(),
                     };
+
+                    addAntiForgeryToken(data);
+                    return data;
                 }
             </script>
 
@@ -423,23 +358,37 @@
                     $('#modalDelete').modal('show');
                 }
 
-                $("#btnYes").click(function () {
+                $("#delete-one-btnYes").click(function () {
                     var postData = {
-                        Id: _id
+                        id: _id
                     };
+
+                    addAntiForgeryToken(postData);
 
                     $.ajax({
                         cache: false,
                         type: "POST",
-                        url: "@(Url.Action("Delete", "UserGroup"))",
+                        url: "@(Url.Action("Delete", "ItemUnit"))",
                         data: postData,
-                        complete: function (data) {
-                            //reload grid
-                            var grid = $('#usergroup-grid').data('kendoGrid');
-                            grid.dataSource.read();
+                        beforeSend: function () {
+                            waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
+                        },
+                        success: function (result) {
+                            if (result.saveSuccess) {
+                                //window.location.href = '../../Order/Edit?OrderCode=' + result.orderCode; // call method GET: Creat (Reload Form Data)
+                                show(true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS007"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+
+                                //reload grid
+                                var grid = $('#itemunit-grid').data('kendoGrid');
+                                grid.dataSource.read();
+                            } else { //
+                                show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                            }
+                            waitingDialog.hide();
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
-                            alert(thrownError);
+                            show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                            waitingDialog.hide();
                         },
                         traditional: true
                     });
@@ -448,11 +397,31 @@
                     $('#modalDelete').modal('hide');
                 });
 
-                $("#btnCancel").click(function () {
+                $("#delete-one-btnCancel").click(function () {
                     _id = 0;
                     $('#modalDelete').modal('hide');
                 })
             </script>
+
+            <script type="text/javascript">
+                function popupDetail(id) {
+                    $('#detailitemunit').modal('show');
+
+                    $('#@Html.FieldIdFor(m => m.Id)').val(0);
+                    $('#@Html.FieldIdFor(m => m.Code)').val('');
+                    $('#@Html.FieldIdFor(m => m.Name)').val('');
+                    $('#@Html.FieldIdFor(m => m.NameLL)').val('');
+                    $('#@Html.FieldIdFor(m => m.Remark)').val('');
+
+                    if (id > 0) {
+                        $('#@Html.FieldIdFor(m => m.Id)').val(id);
+                        getDetail(id);
+                    }
+
+                }
+            </script>
         </div>
     </div>
 </section>
+
+@Html.Partial("_CreateOrUpdate", Model)

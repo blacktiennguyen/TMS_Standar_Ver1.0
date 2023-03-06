@@ -7,7 +7,7 @@ namespace TMS.Core.Mappings
     {
         public FixDataTranslationMapping()
         {
-            this.ToTable("TRANS_FixDataTranslations");
+            this.ToTable("Localization_FixDataTranslations");
             this.HasKey(a => a.Id);
         }
     }

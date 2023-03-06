@@ -534,7 +534,7 @@
                     if (result.saveSuccess) {
                         var a = result.messageId;
                         //window.location.href = '../../Order/Edit?OrderCode=' + result.orderCode; // call method GET: Creat (Reload Form Data)
-                        show(false, "@MessageManager.GetMessageInfoByMessageCode("result.messageId")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                        show(true, "@MessageManager.GetMessageInfoByMessageCode("result.messageId")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
                     } else { // show message check valid on server
 
                     }
@@ -583,7 +583,7 @@
                     if (result.saveSuccess) {
                         var a = result.messageId;
                         //window.location.href = '../../Order/Edit?OrderCode=' + result.orderCode; // call method GET: Creat (Reload Form Data)
-                        show(false, "@MessageManager.GetMessageInfoByMessageCode("MS003")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
+                        show(true, "@MessageManager.GetMessageInfoByMessageCode("MS003")", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
                     } else { // show message check valid on server
 
                     }

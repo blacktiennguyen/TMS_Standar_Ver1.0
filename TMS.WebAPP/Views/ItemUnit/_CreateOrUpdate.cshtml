@@ -1,21 +1,21 @@
-﻿@model TMS.WebAPP.Models.MasterDataModel.ItemTypeModel
+﻿@model TMS.WebAPP.Models.MasterDataModel.ItemUnitModel
 @using Kendo.Mvc.UI
 @using TMS.WebAPP.HtmlExtension
 
 @{
     Layout = null;
-    ViewBag.Title = @MessageManager.GetCaptionValueByKey("lblItemType");
+    ViewBag.Title = @MessageManager.GetCaptionValueByKey("lblItemUnit");
 }
 
 @Html.HiddenFor(x => x.Id)
 
 <!-- Modal -->
-<div class="modal fade" id="detailitemtype" role="dialog">
+<div class="modal fade" id="detailitemunit" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">@MessageManager.GetCaptionValueByKey("lblItemType")</h4>
+                <h4 class="modal-title">@MessageManager.GetCaptionValueByKey("lblItemUnit")</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -89,7 +89,7 @@
         $.ajax({
             cache: false,
             type: "GET",
-            url: "@(Url.Action("Detail", "ItemType"))",
+            url: "@(Url.Action("Detail", "ItemUnit"))",
             data: postData,
             beforeSend: function () {
                 waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
@@ -152,7 +152,7 @@
             show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS009"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
         } else {
 
-            function ItemTypeModel() {
+            function ItemUnitModel() {
                 return {
                     Id: $('#@Html.FieldIdFor(model => model.Id)').val(),
                     Code: $('#@Html.FieldIdFor(model => model.Code)').val(),
@@ -163,12 +163,12 @@
             }
 
             var postSaveData = {
-                model: ItemTypeModel()
+                model: ItemUnitModel()
             };
             addAntiForgeryToken(postSaveData);
 
             $.ajax({
-                url: '@(Url.Action("SaveOrUpdate", "ItemType"))',
+                url: '@(Url.Action("SaveOrUpdate", "ItemUnit"))',
                 type: 'POST',
                 dataType: 'json',
                 data: postSaveData,
@@ -183,7 +183,7 @@
                         show(true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS003"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
 
                         //reload grid
-                        var grid = $('#itemtype-grid').data('kendoGrid');
+                        var grid = $('#itemunit-grid').data('kendoGrid');
                         grid.dataSource.read();
 
                         $('#@Html.FieldIdFor(m => m.Id)').val(result.id);

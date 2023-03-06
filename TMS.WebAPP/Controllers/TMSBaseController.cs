@@ -14,6 +14,7 @@ using TMS.Core.Extend;
 using System.Text;
 using System.Web.Caching;
 using System.Web.Configuration;
+using TMS.Service.MasterDataTranslations;
 
 namespace TMS.WebAPP.Controllers
 {
@@ -112,6 +113,86 @@ namespace TMS.WebAPP.Controllers
         }
 
         #endregion Set Active Function Menu
+
+        #region Save Or Update, Delete MasterDataTranslation
+
+        public virtual void SaveOrUpdateMasterDataTranslation(IMasterDataTranslationService _masterDataTranslationService, string nameLL,
+            Guid translationId, string tableName)
+        {
+            try
+            {
+                if (translationId != Guid.Empty && translationId != null)
+                {
+                    var updateMasterDataTranslation = new MasterDataTranslation();
+
+                    using (var db = new TMSContext())
+                    {
+                        updateMasterDataTranslation = db.MasterDataTranslations
+                            .Where(x => x.LanguageId == LanguageCurrent.Id && x.TranslationId == translationId)
+                            .FirstOrDefault();
+                    }
+
+                    if (updateMasterDataTranslation != null)
+                    {
+                        updateMasterDataTranslation.Name = nameLL;
+                        updateMasterDataTranslation.TableName = tableName;
+                        updateMasterDataTranslation.UpdatedById = UserCurrent.UserId;
+                        updateMasterDataTranslation.UpdatedDate = DateTime.Now;
+
+                        _masterDataTranslationService.SaveOrUpdate(updateMasterDataTranslation);
+                    }
+                    else
+                    {
+                        var masterDataTranslation = new MasterDataTranslation();
+                        masterDataTranslation.Name = nameLL;
+                        masterDataTranslation.TranslationId = translationId;
+                        masterDataTranslation.LanguageId = LanguageCurrent.Id;
+                        masterDataTranslation.TableName = tableName;
+                        masterDataTranslation.CreatedById = UserCurrent.UserId;
+                        masterDataTranslation.CreatedDate = DateTime.Now;
+                        masterDataTranslation.UpdatedById = null;
+                        masterDataTranslation.UpdatedDate = null;
+
+                        _masterDataTranslationService.SaveOrUpdate(masterDataTranslation);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return;
+            }
+        }
+
+        public virtual void DeleteMasterDataTranslation(IMasterDataTranslationService _masterDataTranslationService, Guid translationId)
+        {
+            try
+            {
+                if (translationId != Guid.Empty && translationId != null)
+                {
+                    var updateMasterDataTranslation = new MasterDataTranslation();
+
+                    using (var db = new TMSContext())
+                    {
+                        updateMasterDataTranslation = db.MasterDataTranslations
+                            .Where(x => x.LanguageId == LanguageCurrent.Id && x.TranslationId == translationId)
+                            .FirstOrDefault();
+                    }
+
+                    if (updateMasterDataTranslation != null)
+                    {
+                        _masterDataTranslationService.Delete(updateMasterDataTranslation);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return;
+            }
+        }
+
+        #endregion Save Or Update, Delete MasterDataTranslation
     }
 
     public class SessionExpireFilterAttribute : ActionFilterAttribute
@@ -487,7 +568,6 @@ public class MessageManager
         catch (Exception ex)
         {
             return string.Empty;
-            throw ex;
         }
     }
 
@@ -519,7 +599,7 @@ public class MessageManager
         }
         catch (Exception ex)
         {
-            throw ex;
+            return string.Empty;
         }
     }
 
@@ -555,7 +635,7 @@ public class MessageManager
         }
         catch (Exception ex)
         {
-            throw ex;
+            return string.Empty;
         }
     }
 
@@ -592,7 +672,7 @@ public class MessageManager
         }
         catch (Exception ex)
         {
-            throw ex;
+            return string.Empty;
         }
     }
 

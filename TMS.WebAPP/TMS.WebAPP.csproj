@@ -225,6 +225,7 @@
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ItemTypeController.cs" />
+    <Compile Include="Controllers\ItemUnitController.cs" />
     <Compile Include="Controllers\OrderDataSetupController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Controllers\TransporterController.cs" />
@@ -249,6 +250,7 @@
     <Compile Include="Models\HomePageModel\HomePageModel.cs" />
     <Compile Include="Models\HtmlExtension.cs" />
     <Compile Include="Models\LanguageModel\LanguageModel.cs" />
+    <Compile Include="Models\MasterDataModel\ItemUnitModel.cs" />
     <Compile Include="Models\MasterDataModel\ItemTypeModel.cs" />
     <Compile Include="Models\Order\OrderItemDetailModel.cs" />
     <Compile Include="Models\Order\OrderModel.cs" />
@@ -9819,6 +9821,8 @@
     <Content Include="Views\Shared\_TSMMasterDataSetupAndReportLayout_Detail.cshtml" />
     <Content Include="Views\Function\ShowFunctionDataSetupAndReport.cshtml" />
     <Content Include="Views\ItemType\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\ItemUnit\List.cshtml" />
+    <Content Include="Views\ItemUnit\_CreateOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

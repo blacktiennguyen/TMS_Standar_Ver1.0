@@ -1,4 +1,4 @@
-﻿<!-- Modal Poup Delete Multiple -->
+﻿    <!-- Modal Poup Delete Multiple -->
 <div id="delete-selected-action-confirmation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-selected-action-confirmation-title">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -10,10 +10,10 @@
                 @MessageManager.GetCaptionValueByKey("lblAreYouSure")
             </div>
             <div class="modal-footer">
-                <button type="submit" id="delete-selected-action-confirmation-submit-button" class="btn btn-primary">
+                <button type="button" id="delete-selected-btnYes" class="btn btn-primary">
                     @MessageManager.GetCaptionValueByKey("btnYes")
                 </button>
-                <span id="canceldelete" class="btn btn-default float-right margin-r-5" data-dismiss="modal">@MessageManager.GetCaptionValueByKey("btnCancel")</span>
+                <span id="delete-selected-btnCancel" class="btn btn-default float-right margin-r-5" data-dismiss="modal">@MessageManager.GetCaptionValueByKey("btnCancel")</span>
             </div>
         </div>
     </div>
@@ -33,10 +33,10 @@
                 <p>@MessageManager.GetCaptionValueByKey("lblAreYouSure")</p>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnConfirmDeleteYes" class="btn btn-primary">
+                <button type="button" id="delete-one-btnYes" class="btn btn-primary">
                     @MessageManager.GetCaptionValueByKey("btnYes")
                 </button>
-                <button id="btnConfirmDeleteCancel" type="button" class="btn btn-default" data-dismiss="modal">@MessageManager.GetCaptionValueByKey("btnCancel")</button>
+                <button id="delete-one-btnCancel" type="button" class="btn btn-default" data-dismiss="modal">@MessageManager.GetCaptionValueByKey("btnCancel")</button>
             </div>
         </div>
     </div>

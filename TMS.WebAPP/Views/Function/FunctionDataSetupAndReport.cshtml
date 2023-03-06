@@ -13,7 +13,7 @@
         foreach (var group in Model.SubFunctions)
         {
             <div class="box box-solid  margin-bottom-1px">
-                <div class="box-header with-border">
+                <div class="box-header with-border box-header-datasetupgroup">
                     <h3 class="box-title">@group.Name</h3>
                     <div class="box-tools">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -28,11 +28,23 @@
                         {
                             foreach (var menuChild in group.SubFunctions)
                             {
-                                <li class="active">
-                                    <a href="@Url.Action(menuChild.Action, menuChild.Controller)">
-                                        <i class="fa fa-inbox"></i> @menuChild.Name
-                                    </a>
-                                </li>
+                                if (Url.Content(Request.Url.PathAndQuery) == Url.Action(menuChild.Action, menuChild.Controller))
+                                {
+                                    <li class="active datasetup-active">
+                                        <a href="@Url.Action(menuChild.Action, menuChild.Controller)">
+                                            <i class="fa fa-server"></i> @menuChild.Name
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@Url.Action(menuChild.Action, menuChild.Controller)">
+                                            <i class="fa fa-server"></i> @menuChild.Name
+                                        </a>
+                                    </li>
+                                }
+
                             }
                         }
                         @*<li class="active">
