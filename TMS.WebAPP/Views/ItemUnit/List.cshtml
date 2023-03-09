@@ -59,6 +59,10 @@
                             <i class="fa fa-search"></i>
                             @MessageManager.GetCaptionValueByKey("lblSearch")
                         </button>
+                        <button type="button" id="btnClear" class="btn btn-default margin-top-8px">
+                            <i class="fa fa-refresh"></i>
+                            @MessageManager.GetCaptionValueByKey("lblClear")
+                        </button>
                     </div>
 
                     <p></p>
@@ -419,6 +423,13 @@
                     }
 
                 }
+
+                $("#btnClear").click(function () {
+                    $('#search_code').val('');
+                    $('#search_name').val('');
+
+                    $("#btnSearch").click();
+                });
             </script>
         </div>
     </div>

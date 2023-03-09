@@ -6,3 +6,21 @@
 2023-03-06 00:17:25,000 ERROR: An error occurred while updating the entries. See the inner exception for details.
 2023-03-06 00:17:30,522 ERROR: An error occurred while updating the entries. See the inner exception for details.
 2023-03-06 00:17:30,523 ERROR: An error occurred while updating the entries. See the inner exception for details.
+2023-03-06 10:08:39,022 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2023-03-06 10:08:39,029 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2023-03-06 10:08:56,607 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2023-03-06 10:08:56,608 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2023-03-06 10:09:01,341 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2023-03-06 10:09:01,341 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2023-03-06 10:15:54,465 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2023-03-06 10:15:54,465 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2023-03-06 10:15:59,621 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2023-03-06 10:15:59,621 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2023-03-06 10:16:09,546 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2023-03-06 10:16:09,546 ERROR: The 'TranslationId' property on 'Transporter' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+2023-03-06 15:11:27,135 ERROR: An error occurred while updating the entries. See the inner exception for details.
+2023-03-06 15:11:27,142 ERROR: An error occurred while updating the entries. See the inner exception for details.
+2023-03-06 15:11:33,915 ERROR: An error occurred while updating the entries. See the inner exception for details.
+2023-03-06 15:11:33,915 ERROR: An error occurred while updating the entries. See the inner exception for details.
+2023-03-06 17:56:30,750 ERROR: An error occurred while updating the entries. See the inner exception for details.
+2023-03-06 17:56:30,758 ERROR: An error occurred while updating the entries. See the inner exception for details.

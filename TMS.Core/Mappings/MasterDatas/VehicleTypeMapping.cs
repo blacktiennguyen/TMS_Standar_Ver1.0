@@ -14,6 +14,7 @@ namespace TMS.Core.Mappings.MasterDatas
         {
             this.ToTable("MasterData_VehicleTypes");
             this.HasKey(a => a.Id);
+            this.Ignore(a => a.NameLL);
         }
     }
 }

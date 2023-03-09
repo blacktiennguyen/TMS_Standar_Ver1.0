@@ -226,6 +226,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ItemTypeController.cs" />
     <Compile Include="Controllers\ItemUnitController.cs" />
+    <Compile Include="Controllers\VehicleDataSetupController.cs" />
     <Compile Include="Controllers\OrderDataSetupController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Controllers\TransporterController.cs" />
@@ -250,6 +251,9 @@
     <Compile Include="Models\HomePageModel\HomePageModel.cs" />
     <Compile Include="Models\HtmlExtension.cs" />
     <Compile Include="Models\LanguageModel\LanguageModel.cs" />
+    <Compile Include="Models\MasterDataModel\RouteModel.cs" />
+    <Compile Include="Models\MasterDataModel\VihicleTypeModel.cs" />
+    <Compile Include="Models\MasterDataModel\TransporterModel.cs" />
     <Compile Include="Models\MasterDataModel\ItemUnitModel.cs" />
     <Compile Include="Models\MasterDataModel\ItemTypeModel.cs" />
     <Compile Include="Models\Order\OrderItemDetailModel.cs" />
@@ -9823,6 +9827,13 @@
     <Content Include="Views\ItemType\_CreateOrUpdate.cshtml" />
     <Content Include="Views\ItemUnit\List.cshtml" />
     <Content Include="Views\ItemUnit\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Transporter\List.cshtml" />
+    <Content Include="Views\Transporter\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\VehicleDataSetup\Index.cshtml" />
+    <Content Include="Views\VehicleType\List.cshtml" />
+    <Content Include="Views\VehicleType\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Route\List.cshtml" />
+    <Content Include="Views\Route\_CreateOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

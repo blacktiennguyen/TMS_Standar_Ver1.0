@@ -7,15 +7,15 @@ using TMS.Shared.Const;
 
 namespace TMS.WebAPP.Controllers
 {
-    public class OrderDataSetupController : TMSBaseController
+    public class VehicleDataSetupController : TMSBaseController
     {
         // GET: OrderDataSetup
         public ActionResult Index()
         {
-            SetActiveFunction(FunctionConst.OrderDataSetupUrl);
+            SetActiveFunction(FunctionConst.VehicleDataSetupUrl);
 
-            // Load List Menu Data setup
-            return Redirect(FunctionConst.ItemTypeOrderDataSetupUrl);
+            // Load List Menu Data setup -- Load default first
+            return Redirect(FunctionConst.VehicleTypeDataSetupUrl);
         }
     }
 }

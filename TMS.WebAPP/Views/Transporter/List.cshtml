@@ -1,4 +1,4 @@
-﻿@model TMS.WebAPP.Models.MasterDataModel.ItemTypeModel
+﻿@model TMS.WebAPP.Models.MasterDataModel.TransporterModel
 @using TMS.WebAPP.HtmlExtension
 @{
     Layout = "~/Views/Shared/_TSMMasterDataSetupAndReportLayout_Detail.cshtml";
@@ -8,7 +8,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header margin-bottom-10px heigh-30px">
     <h1 class="float-left">
-        @MessageManager.GetCaptionValueByKey("lblItemType")
+        @MessageManager.GetCaptionValueByKey("lblTransporter")
     </h1>
     @Html.Partial("_Delete")
 </section>
@@ -49,9 +49,22 @@
                                 </label>
                                 <div class="col-md-8">
                                     @Html.TextBoxFor(m => m.Name, new { @id = "search_name", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblNameDefault") })
-                                    @*<input type="text" class="form-control" id="ItemTypename" placeholder="@MessageManager.GetCaptionValueByKey("lblItemType")">*@
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row filter-status">
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label margin-top-8px">
+                                    @MessageManager.GetCaptionValueByKey("lblPhone")
+                                </label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(m => m.Phone, new { @id = "search_phone", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblPhone") })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
                         </div>
                     </div>
                     <div class="row  text-center">
@@ -92,16 +105,16 @@
             </div>
 
             <!-- End button action-->
-            <div id="itemtype-grid" class="row margin-left-0px margin-right-0px">
+            <div id="transporter-grid" class="row margin-left-0px margin-right-0px">
             </div>
             <script>
                 $(document).ready(function () {
-                    $("#itemtype-grid").kendoGrid({
+                    $("#transporter-grid").kendoGrid({
                         dataSource: {
                             type: "json",
                             transport: {
                                 read: {
-                                    url: "@Html.Raw(Url.Action("ItemTypeList", "ItemType"))",
+                                    url: "@Html.Raw(Url.Action("TransporterList", "Transporter"))",
                                     type: "POST",
                                     dataType: "json",
                                     data: additionalData
@@ -182,6 +195,13 @@
 
                             },
                             {
+                                field: "Phone",
+                                headerAttributes: { style: "text-align:center" },
+                                title: "@MessageManager.GetCaptionValueByKey("lblPhone")",
+                                width: 350
+
+                            },
+                            {
                                 field: "Remark",
                                 headerAttributes: { style: "text-align:center" },
                                 title: "@MessageManager.GetCaptionValueByKey("lblRemark")",
@@ -200,7 +220,7 @@
                     //search button
                     $('#btnSearch').click(function () {
                         //search
-                        var grid = $('#itemtype-grid').data('kendoGrid');
+                        var grid = $('#transporter-grid').data('kendoGrid');
                         grid.dataSource.page(1); //new search. Set page size to 1
                         //grid.dataSource.read(); we already loaded the grid above using "page" function
                         //clear selected checkboxes
@@ -224,6 +244,13 @@
                         }
                     });
 
+                    $("#search_phone").keydown(function (event) {
+                        if (event.keyCode === 13) {
+                            $("#btnSearch").click();
+                            return false;
+                        }
+                    });
+
                     $("#delete-selected-btnYes").click(function () {
                         var postData = {
                             selectedIds: selectedIds
@@ -239,7 +266,7 @@
                         $.ajax({
                             cache: false,
                             type: "POST",
-                            url: "@(Url.Action("DeleteSelected", "ItemType"))",
+                            url: "@(Url.Action("DeleteSelected", "Transporter"))",
                             data: postData,
                             beforeSend: function () {
                                 waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
@@ -250,7 +277,7 @@
                                     show(true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS007"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
 
                                     //reload grid
-                                    var grid = $('#itemtype-grid').data('kendoGrid');
+                                    var grid = $('#transporter-grid').data('kendoGrid');
                                     grid.dataSource.read();
 
                                     selectedIds = [];
@@ -297,7 +324,7 @@
                     });
 
                     //wire up checkboxes.
-                    $('#itemtype-grid').on('change', 'input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]', function (e) {
+                    $('#transporter-grid').on('change', 'input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]', function (e) {
                         var $check = $(this);
                         if ($check.is(":checked") == true) {
                             var checked = jQuery.inArray($check.val(), selectedIds);
@@ -319,7 +346,7 @@
                 });
 
                 function onDataBound(e) {
-                    $('#itemtype-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').each(function () {
+                    $('#transporter-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').each(function () {
                         var currentId = $(this).val();
                         var checked = jQuery.inArray(currentId, selectedIds);
                         //set checked based on if current checkbox's value is in selectedIds.
@@ -330,8 +357,8 @@
                 }
 
                 function updateMasterCheckbox() {
-                    var numChkBoxes = $('#itemtype-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').length;
-                    var numChkBoxesChecked = $('#itemtype-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
+                    var numChkBoxes = $('#transporter-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').length;
+                    var numChkBoxesChecked = $('#transporter-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
                     $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
 
                     //console.log(selectedIds);
@@ -346,6 +373,7 @@
                     var data = {
                         Name: $('#search_name').val(),
                         Code: $('#search_code').val(),
+                        Phone: $('#search_phone').val(),
                     };
 
                     addAntiForgeryToken(data);
@@ -372,7 +400,7 @@
                     $.ajax({
                         cache: false,
                         type: "POST",
-                        url: "@(Url.Action("Delete", "ItemType"))",
+                        url: "@(Url.Action("Delete", "Transporter"))",
                         data: postData,
                         beforeSend: function () {
                             waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
@@ -383,7 +411,7 @@
                                 show(true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS007"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
 
                                 //reload grid
-                                var grid = $('#itemtype-grid').data('kendoGrid');
+                                var grid = $('#transporter-grid').data('kendoGrid');
                                 grid.dataSource.read();
                             } else { //
                                 show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
@@ -409,13 +437,14 @@
 
             <script type="text/javascript">
                 function popupDetail(id) {
-                    $('#detailitemtype').modal('show');
+                    $('#detailtransporter').modal('show');
 
                     $('#@Html.FieldIdFor(m => m.Id)').val(0);
                     $('#@Html.FieldIdFor(m => m.Code)').val('');
                     $('#@Html.FieldIdFor(m => m.Name)').val('');
                     $('#@Html.FieldIdFor(m => m.NameLL)').val('');
                     $('#@Html.FieldIdFor(m => m.Remark)').val('');
+                    $('#@Html.FieldIdFor(m => m.Phone)').val('');
 
                     if (id > 0) {
                         $('#@Html.FieldIdFor(m => m.Id)').val(id);
@@ -427,6 +456,7 @@
                 $("#btnClear").click(function () {
                     $('#search_code').val('');
                     $('#search_name').val('');
+                    $('#search_phone').val('');
 
                     $("#btnSearch").click();
                 });

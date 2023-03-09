@@ -1,4 +1,4 @@
-﻿@model TMS.WebAPP.Models.MasterDataModel.ItemTypeModel
+﻿@model TMS.WebAPP.Models.MasterDataModel.VehicleTypeModel
 @using TMS.WebAPP.HtmlExtension
 @{
     Layout = "~/Views/Shared/_TSMMasterDataSetupAndReportLayout_Detail.cshtml";
@@ -8,7 +8,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header margin-bottom-10px heigh-30px">
     <h1 class="float-left">
-        @MessageManager.GetCaptionValueByKey("lblItemType")
+        @MessageManager.GetCaptionValueByKey("lblVehicleType")
     </h1>
     @Html.Partial("_Delete")
 </section>
@@ -49,7 +49,7 @@
                                 </label>
                                 <div class="col-md-8">
                                     @Html.TextBoxFor(m => m.Name, new { @id = "search_name", @class = "form-control", @placeholder = @MessageManager.GetCaptionValueByKey("lblNameDefault") })
-                                    @*<input type="text" class="form-control" id="ItemTypename" placeholder="@MessageManager.GetCaptionValueByKey("lblItemType")">*@
+                                    @*<input type="text" class="form-control" id="VehicleTypename" placeholder="@MessageManager.GetCaptionValueByKey("lblVehicleType")">*@
                                 </div>
                             </div>
                         </div>
@@ -92,16 +92,16 @@
             </div>
 
             <!-- End button action-->
-            <div id="itemtype-grid" class="row margin-left-0px margin-right-0px">
+            <div id="vehicletype-grid" class="row margin-left-0px margin-right-0px">
             </div>
             <script>
                 $(document).ready(function () {
-                    $("#itemtype-grid").kendoGrid({
+                    $("#vehicletype-grid").kendoGrid({
                         dataSource: {
                             type: "json",
                             transport: {
                                 read: {
-                                    url: "@Html.Raw(Url.Action("ItemTypeList", "ItemType"))",
+                                    url: "@Html.Raw(Url.Action("VehicleTypeList", "VehicleType"))",
                                     type: "POST",
                                     dataType: "json",
                                     data: additionalData
@@ -200,7 +200,7 @@
                     //search button
                     $('#btnSearch').click(function () {
                         //search
-                        var grid = $('#itemtype-grid').data('kendoGrid');
+                        var grid = $('#vehicletype-grid').data('kendoGrid');
                         grid.dataSource.page(1); //new search. Set page size to 1
                         //grid.dataSource.read(); we already loaded the grid above using "page" function
                         //clear selected checkboxes
@@ -239,7 +239,7 @@
                         $.ajax({
                             cache: false,
                             type: "POST",
-                            url: "@(Url.Action("DeleteSelected", "ItemType"))",
+                            url: "@(Url.Action("DeleteSelected", "VehicleType"))",
                             data: postData,
                             beforeSend: function () {
                                 waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
@@ -250,7 +250,7 @@
                                     show(true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS007"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
 
                                     //reload grid
-                                    var grid = $('#itemtype-grid').data('kendoGrid');
+                                    var grid = $('#vehicletype-grid').data('kendoGrid');
                                     grid.dataSource.read();
 
                                     selectedIds = [];
@@ -297,7 +297,7 @@
                     });
 
                     //wire up checkboxes.
-                    $('#itemtype-grid').on('change', 'input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]', function (e) {
+                    $('#vehicletype-grid').on('change', 'input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]', function (e) {
                         var $check = $(this);
                         if ($check.is(":checked") == true) {
                             var checked = jQuery.inArray($check.val(), selectedIds);
@@ -319,7 +319,7 @@
                 });
 
                 function onDataBound(e) {
-                    $('#itemtype-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').each(function () {
+                    $('#vehicletype-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').each(function () {
                         var currentId = $(this).val();
                         var checked = jQuery.inArray(currentId, selectedIds);
                         //set checked based on if current checkbox's value is in selectedIds.
@@ -330,8 +330,8 @@
                 }
 
                 function updateMasterCheckbox() {
-                    var numChkBoxes = $('#itemtype-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').length;
-                    var numChkBoxesChecked = $('#itemtype-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
+                    var numChkBoxes = $('#vehicletype-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').length;
+                    var numChkBoxesChecked = $('#vehicletype-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
                     $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
 
                     //console.log(selectedIds);
@@ -372,7 +372,7 @@
                     $.ajax({
                         cache: false,
                         type: "POST",
-                        url: "@(Url.Action("Delete", "ItemType"))",
+                        url: "@(Url.Action("Delete", "VehicleType"))",
                         data: postData,
                         beforeSend: function () {
                             waitingDialog.show('@Html.Raw(MessageManager.GetCaptionValueByKey("lblSystemInprogress"))');
@@ -383,7 +383,7 @@
                                 show(true, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS007"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
 
                                 //reload grid
-                                var grid = $('#itemtype-grid').data('kendoGrid');
+                                var grid = $('#vehicletype-grid').data('kendoGrid');
                                 grid.dataSource.read();
                             } else { //
                                 show(false, "@Html.Raw(MessageManager.GetMessageInfoByMessageCode("MS005"))", "@Html.Raw(MessageManager.GetCaptionValueByKey("lblAlert"))");
@@ -409,7 +409,7 @@
 
             <script type="text/javascript">
                 function popupDetail(id) {
-                    $('#detailitemtype').modal('show');
+                    $('#detailvehicletype').modal('show');
 
                     $('#@Html.FieldIdFor(m => m.Id)').val(0);
                     $('#@Html.FieldIdFor(m => m.Code)').val('');

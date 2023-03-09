@@ -13,6 +13,7 @@ namespace TMS.Shared.Const
         public const int Order = 9;
         public const int OrderDataSetup = 69;
         public const int ShippingPlan = 14;
+        public const int VehicleDataSetup = 76;
 
         #endregion Function Id
 
@@ -33,6 +34,16 @@ namespace TMS.Shared.Const
         public const string ItemTypeOrderDataSetupUrl = "/ItemType/List";
 
         public const string ItemUnitOrderDataSetupUrl = "/ItemUnit/List";
+
+        public const string TransporterOrderDataSetupUrl = "/Transporter/List";
+
+        #endregion Order Data Setup
+
+        #region Order Data Setup
+
+        public const string VehicleDataSetupUrl = "/VehicleDataSetup/Index";
+
+        public const string VehicleTypeDataSetupUrl = "/VehicleType/List";
 
         #endregion Order Data Setup
 

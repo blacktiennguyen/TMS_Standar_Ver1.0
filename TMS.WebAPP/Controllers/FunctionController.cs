@@ -284,6 +284,9 @@ namespace TMS.WebAPP.Controllers
             if (functionUrl == FunctionConst.OrderDataSetupUrl)
                 id = FunctionConst.OrderDataSetup;
 
+            if (functionUrl == FunctionConst.VehicleDataSetupUrl)
+                id = FunctionConst.VehicleDataSetup;
+
             return id;
         }
 

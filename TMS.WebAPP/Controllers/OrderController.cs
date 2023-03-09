@@ -263,7 +263,7 @@ namespace TMS.WebAPP.Controllers
             {
                 logger.Error(ex.Message);
                 ErrorNotification(MessageManager.GetMessageInfoByMessageCode("MS005"));
-                throw;
+                return null;
             }
         }
 
@@ -902,7 +902,7 @@ namespace TMS.WebAPP.Controllers
             {
                 logger.Error(ex.Message);
                 ErrorNotification(MessageManager.GetMessageInfoByMessageCode("MS005"));
-                throw;
+                return "";
             }
         }
 
@@ -1153,7 +1153,7 @@ namespace TMS.WebAPP.Controllers
             {
                 logger.Error(ex.Message);
                 ErrorNotification(MessageManager.GetMessageInfoByMessageCode("MS005"));
-                throw;
+                return null;
             }
         }
 
@@ -1184,7 +1184,7 @@ namespace TMS.WebAPP.Controllers
             {
                 logger.Error(ex.Message);
                 ErrorNotification(MessageManager.GetMessageInfoByMessageCode("MS005"));
-                throw;
+                return null;
             }
         }
 
@@ -1202,7 +1202,9 @@ namespace TMS.WebAPP.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                logger.Error(ex.Message);
+                ErrorNotification(MessageManager.GetMessageInfoByMessageCode("MS005"));
+                return "";
             }
         }
 
