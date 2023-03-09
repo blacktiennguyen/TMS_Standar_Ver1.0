@@ -10,11 +10,11 @@
     "inputFiles": [
       "Scripts/TMSScripts/homepage.js"
     ]
-  },
-  {
-    "outputFileName": "Content/KendoUICSS/kendo.material.min.css",
-    "inputFiles": [
-      "Content/KendoUICSS/kendo.material.css"
-    ]
-  }
+  } //,
+  //{
+  //  "outputFileName": "Content/KendoUICSS/kendo.material.min.css",
+  //  "inputFiles": [
+  //    "Content/KendoUICSS/kendo.material.min.css"
+  //  ]
+  //}
 ]
